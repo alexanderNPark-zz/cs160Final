@@ -2,12 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/assets/vendor/paper/paper-full.min.js"></script>
+
     <title>Testing</title>
 </head>
 <body>
 
-Hello
-<img src="/assets/screen.png" width=500 height="600">
+    <div id="outer">
+
+    </div>
+
+    <!--<img src="/assets/screen.png" width=500 height="600"> -->
+
+    <script type="text/javascript">
+
+        var socket = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/aserver');
+        window.onload = function() {
+            socket.send("Try ME")
+        }
+
+
+        socket.onmessage = function(receivedMessage) {
+            ("#outer").html(""+receivedMessage);
+        }
+
+        socket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        }
+
+
+    </script>
 
 </body>
 </html>
