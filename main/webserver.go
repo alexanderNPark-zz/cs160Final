@@ -32,6 +32,7 @@ func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 	connection,err:=upgrader.Upgrade(w,r,nil)
 	if(err!=nil){
 		fmt.Println("Failed to make connection to server")
+		fmt.Println(err)
 		return
 	}
 	address:=strings.Split(r.Header.Get("X-Forwarded-For"),",")
