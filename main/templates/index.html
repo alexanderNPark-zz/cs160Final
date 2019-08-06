@@ -29,6 +29,7 @@
         var socket = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/aserver');
         socket.onopen = function() { this.send("TryMe");};
         socket.onmessage = function(receivedMessage) {
+            console.log(receivedMessage)
             $( "body" ).append( receivedMessage );
         }
 
