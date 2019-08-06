@@ -77,7 +77,11 @@ func author(w http.ResponseWriter, r *http.Request, ){
 
 func true_index(w http.ResponseWriter, r *http.Request, ){
 	//private_tmpl_files := []string{"templates/index.html"}
-	t, _ := template.ParseFiles("templates/index.html")
+	t, err := template.ParseFiles("templates/index.html")
+	if(err!=nil){
+		fmt.Println("Failed");
+		return
+	}
 	t.Execute(w,""); //change when template is generated
 }
 
