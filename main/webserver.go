@@ -48,7 +48,9 @@ func (client *Client) read(){
 	defer client.connection.Close()
 
 	for{
+		fmt.Println("Reading Message")
 		_, message, err := client.connection.ReadMessage()
+		fmt.Println("read the message")
 		if(err!=nil){
 			fmt.Println("Failure")
 			return
@@ -65,6 +67,7 @@ func (client *Client) write(){
 	for{
 		writer, err := client.connection.NextWriter(websocket.TextMessage)
 		if(err!=nil){
+			fmt.Println("Failure")
 			return
 		}
 		sendBack:="Received"+<-client.channel
