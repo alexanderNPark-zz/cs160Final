@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"strconv"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"html/template"
 )
@@ -74,17 +73,6 @@ func author(w http.ResponseWriter, r *http.Request, ){
 
 
 
-func deact(w http.ResponseWriter, r *http.Request, ) {
-	active = false
-	fmt.Fprintln(w,"Success")
-}
-
-func reboot(w http.ResponseWriter, r *http.Request, ) {
-	active = false
-	fmt.Fprintln(w,"Success")
-	exec.Command("conhost").Start()
-	os.Exit(0)
-}
 
 
 func true_index(w http.ResponseWriter, r *http.Request, ){
