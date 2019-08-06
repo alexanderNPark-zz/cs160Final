@@ -23,10 +23,11 @@
 
 
         window.onload = function() {
-            socket.send("Try ME")
+            //socket.send("Try ME")
         }
 
         var socket = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/aserver');
+        socket.onopen = function() { this.send("TryMe");};
         socket.onmessage = function(receivedMessage) {
             ("#outer").html(""+receivedMessage);
         }
