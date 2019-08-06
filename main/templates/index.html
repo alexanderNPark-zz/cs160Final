@@ -36,7 +36,7 @@
             loaded = true;
             this.send("TryMe");
         };
-        
+
         socket.onmessage = function(receivedMessage) {
             console.log(receivedMessage.data)
             $( "body" ).append( receivedMessage.data );
