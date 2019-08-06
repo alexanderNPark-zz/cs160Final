@@ -25,13 +25,16 @@ func author(w http.ResponseWriter, r *http.Request, ){
 
 }
 
+func index(w http.ResponseWriter, r *http.Request){
+
+}
 
 
 
 
-func index(w http.ResponseWriter, r *http.Request, ){
-	//private_tmpl_files := []string{"templates/index.html"}
-	t, err := template.ParseFiles("templates/index.html")
+func clientWebServer(w http.ResponseWriter, r *http.Request){
+	//private_tmpl_files := []string{"templates/client.html"}
+	t, err := template.ParseFiles("templates/client.html")
 	if(err!=nil){
 
 		fmt.Println(err);
@@ -41,9 +44,11 @@ func index(w http.ResponseWriter, r *http.Request, ){
 }
 
 
+
 func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-	handleMultiplex.HandleFunc("/", index)
+	handleMultiplex.HandleFunc("/author", clientWebServer)
+	handleMultiplex.HandleFunc("/",index)
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
 }
 
