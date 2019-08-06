@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"html/template"
 )
 
 var upgrader = websocket.Upgrader{
@@ -27,6 +28,10 @@ type Client struct{
 
 var userIDs= make(map[string]*Client)
 var unifyingRead = make(chan string)
+
+
+//test variable-delete later
+var activated bool = false;
 
 func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
@@ -58,6 +63,10 @@ func (client *Client) read(){
 		}
 
 		client.channel<-string(message)
+		if(!activated){
+			activated = !activated
+			testHandleGenerator()
+		}
 		fmt.Println(string(message))
 	}
 
@@ -75,6 +84,19 @@ func (client *Client) write(){
 		sendBack:="Received"+<-client.channel
 		writer.Write([]byte(sendBack))
 	}
+}
+
+func testHandleGenerator(){
+	beta:=func(w http.ResponseWriter, r *http.Request){
+		t, err := template.ParseFiles("templates/workspace.html")
+		if(err!=nil){
+
+			fmt.Println(err);
+			return
+		}
+		t.Execute(w,""); //change when template is generated
+	}
+	Multiplex.HandleFunc("/workspace",beta)
 }
 
 

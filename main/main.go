@@ -58,10 +58,14 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
 }
 
+var Multiplex *http.ServeMux
+
+
 func Initialize(){
 	port:= 2323
 
 	handleMultiplex:=http.NewServeMux()
+	Multiplex = handleMultiplex
 	multiplexers(handleMultiplex)
 
 	server:=http.Server{Addr:"0.0.0.0:"+strconv.Itoa(port), Handler:handleMultiplex,}
