@@ -29,6 +29,7 @@ var userIDs= make(map[string]*Client)
 var unifyingRead = make(chan string)
 
 func StartWebserver(w http.ResponseWriter, r *http.Request, ){
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
 	connection,err:=upgrader.Upgrade(w,r,nil)
 	if(err!=nil){
 		fmt.Println("Failed to make connection to server")
