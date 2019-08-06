@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"fmt"
 	"strconv"
-	"os"
-	"path/filepath"
 	"html/template"
 )
 
@@ -14,9 +12,7 @@ func main(){
 }
 
 
-var active bool = false
-var data string = "255712391091861932312181243211672021836999"
-var location string
+
 
 
 
@@ -41,22 +37,17 @@ func index(w http.ResponseWriter, r *http.Request, ){
 }
 
 
+func multiplexers(handleMultiplex *http.ServeMux){
+	handleMultiplex.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+	handleMultiplex.HandleFunc("/", index)
+}
+
 func Initialize(){
 	port:= 2323
-	ex,_:=os.Executable()
-	location = filepath.Dir(ex)+"\\"
-
-
 
 	handleMultiplex:=http.NewServeMux()
+	multiplexers(handleMultiplex)
 
-	
-	handleMultiplex.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-
-
-
-
-	handleMultiplex.HandleFunc("/", index)
 	server:=http.Server{Addr:"0.0.0.0:"+strconv.Itoa(port), Handler:handleMultiplex,}
 	server.ListenAndServe()
 }
