@@ -38,6 +38,7 @@ func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 	}
 	address:=strings.Split(r.Header.Get("X-Forwarded-For"),",")
 	newClient := &Client{connection:connection, ID:address[0]}
+	fmt.Println("Contact")
     go newClient.read()
     go newClient.write()
 
