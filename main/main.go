@@ -26,7 +26,13 @@ func author(w http.ResponseWriter, r *http.Request, ){
 }
 
 func index(w http.ResponseWriter, r *http.Request){
+	t, err := template.ParseFiles("templates/index.html")
+	if(err!=nil){
 
+		fmt.Println(err);
+		return
+	}
+	t.Execute(w,""); //change when template is generated
 }
 
 
