@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"html/template"
+
+
 )
 
 func main(){
@@ -18,6 +20,7 @@ func main(){
 
 
 func author(w http.ResponseWriter, r *http.Request, ){
+
 
 
 }
@@ -40,6 +43,7 @@ func index(w http.ResponseWriter, r *http.Request, ){
 func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 	handleMultiplex.HandleFunc("/", index)
+	handleMultiplex.HandleFunc("/aserver", StartWebserver)
 }
 
 func Initialize(){
