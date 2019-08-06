@@ -21,12 +21,12 @@
 
     <script type="text/javascript">
 
-        var socket = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/aserver');
+
         window.onload = function() {
             socket.send("Try ME")
         }
 
-
+        var socket = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/aserver');
         socket.onmessage = function(receivedMessage) {
             ("#outer").html(""+receivedMessage);
         }
