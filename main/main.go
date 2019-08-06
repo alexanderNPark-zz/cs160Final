@@ -79,7 +79,7 @@ func true_index(w http.ResponseWriter, r *http.Request, ){
 	//private_tmpl_files := []string{"templates/index.html"}
 	t, err := template.ParseFiles("/templates/index.html")
 	if(err!=nil){
-		fmt.Println("Failed");
+		fmt.Println(err);
 		return
 	}
 	t.Execute(w,""); //change when template is generated
