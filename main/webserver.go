@@ -37,7 +37,7 @@ func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 	address:=strings.Split(r.Header.Get("X-Forwarded-For"),",")
-	newClient := &Client{connection:connection, ID:address[0]}
+	newClient := &Client{connection:connection, ID:address[0], channel:make(chan string)}
 	fmt.Println("Contact")
     go newClient.read()
     go newClient.write()
@@ -55,6 +55,7 @@ func (client *Client) read(){
 			fmt.Println("Failure")
 			return
 		}
+
 		client.channel<-string(message)
 		fmt.Println(string(message))
 	}
