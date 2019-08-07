@@ -18,5 +18,8 @@ body
     -webkit-border-radius: 50px;
     padding-left:15px;
     padding-right:15px;
-    overflow:hidden
+    overflow:hidden;
+    resize:none;
+    margin-top:50px;
+    margin-bottom:50px;
 }
