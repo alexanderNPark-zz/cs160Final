@@ -20,7 +20,7 @@ body
     padding-right:15px;
     overflow:hidden;
     resize:none;
-    margin-top:100px;
+    margin-top:50px;
     margin-bottom:50px;
     border-width:5px;
     border-style: solid;
@@ -32,4 +32,5 @@ body
     font-size: 80px;
     color: #3f3dff;
     margin-bottom: 0px;
+    -webkit-user-select: none;
 }
