@@ -16,5 +16,6 @@ body
     height:50px;
     font-size: 30px;
     -webkit-border-radius: 50px;
+    padding:30px;
     overflow:hidden
 }
