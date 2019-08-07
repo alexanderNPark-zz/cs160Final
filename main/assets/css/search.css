@@ -20,7 +20,7 @@ body
     padding-right:15px;
     overflow:hidden;
     resize:none;
-    margin-top:50px;
+    margin-top:30px;
     margin-bottom:50px;
     border-width:5px;
     border-style: solid;
@@ -33,5 +33,5 @@ body
     color: #3f3dff;
     margin-bottom: 0px;
     -webkit-user-select: none;
-    font-size: 25.5vw;
+    font-size: 4.3vw;
 }
