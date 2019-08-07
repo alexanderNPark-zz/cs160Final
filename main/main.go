@@ -16,7 +16,13 @@ func main(){
 
 
 func search(w http.ResponseWriter, r *http.Request){
+	t, err := template.ParseFiles("templates/search.html")
+	if(err!=nil){
 
+		fmt.Println(err);
+		return
+	}
+	t.Execute(w,""); //change when template is generated
 }
 
 
@@ -58,6 +64,7 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/author", clientWebServer)
 	handleMultiplex.HandleFunc("/",index)
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
+	handleMultiplex.HandleFunc("/search", search)
 }
 
 var Multiplex *http.ServeMux
