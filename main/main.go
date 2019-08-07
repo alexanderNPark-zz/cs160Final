@@ -15,11 +15,13 @@ func main(){
 
 
 
+func search(w http.ResponseWriter, r *http.Request){
+
+}
 
 
 
-
-func author(w http.ResponseWriter, r *http.Request, ){
+func makeClientRequest(w http.ResponseWriter, r *http.Request ){
 
 
 
