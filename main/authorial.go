@@ -2,10 +2,19 @@ package main
 
 type Architect struct{
 	Name string
-	Sessions map[string]*Session
+	Stars int
+	Projects map[string]*Project
 }
 
-type Session struct{
+type Project struct{
+   Client *Client
+}
 
+
+var Architects = make(map[string]*Architect)
+
+func LoadArchitects(){
+	Architects["Bob"] = &Architect{Name:"Bob", Stars:3, Projects:make(map[string]*Project)}
+	Architects["Jar-Jar"] = &Architect{Name:"Jar-Jar",Stars:1, Projects:make(map[string]*Project)}
 }
 

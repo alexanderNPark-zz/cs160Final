@@ -18,13 +18,32 @@
         Start Searching For Architects
     </div>
     <textarea rows="1" cols="30" id="searchbar" maxlength="30" placeholder="Search..."></textarea>
+    <div id="archPane" class="row prof">
+        <div class="col">
+            Bob
+        </div>
+    </div>
 
+    <div id="buttonPane">
+
+    </div>
+
+    <div id="numerical">
+
+    </div>
 
 </div>
   
   
 <script>
-  
+  window.onload = function () {
+
+      ("#searchBar").change(function (){
+
+          var content=this.val()
+      });
+
+  }
   
   
 </script>
