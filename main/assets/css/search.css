@@ -29,9 +29,9 @@ body
 }
 
 #infoText{
-    font-size: 80px;
     width:100%;
     color: #3f3dff;
     margin-bottom: 0px;
     -webkit-user-select: none;
+    font-size: 25.5vw;
 }
