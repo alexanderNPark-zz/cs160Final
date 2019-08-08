@@ -25,7 +25,7 @@ var delimter string = "</Delim>"
 
 
 func LookupServer(w http.ResponseWriter, r *http.Request, ){
-	upgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
+	lookupUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
 	connection,err:=lookupUpgrader.Upgrade(w,r,nil)
 	if(err!=nil){
 		fmt.Println("Failed to make connection to server")
