@@ -28,17 +28,17 @@ func search(w http.ResponseWriter, r *http.Request){
 
 
 func makeClientRequest(w http.ResponseWriter, r *http.Request ){
-
+	/*
 	architectNames, provided := r.URL.Query()["architect"]
-	var architectName string;
+	//var architectName string;
 	if(!provided || len(architectNames) < 1){
 		architectName = "bob";
 	}else{
 		architectName=architectNames[0]
 	}
 
-	profile,_:=Architects[architectName]
-
+	//profile,_:=Architects[architectName]
+*/
 
 }
 
