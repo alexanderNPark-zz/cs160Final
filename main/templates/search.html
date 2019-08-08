@@ -39,7 +39,7 @@
   window.onload = function () {
 
       $("#searchbar").on('input', function() {
-          if(prevQuery===$("#searchbar").val()){
+          if(prevQuery==$("#searchbar").val()){
               return
           }else{
               prevQuery=$("#searchbar").val()
@@ -54,6 +54,10 @@
           connection.onmessage = function(receivedMessage) {
 
               content = receivedMessage.data
+              if(content=="null"){
+                  $("#archPane").html("<div>No Results Found</div>")
+                  return
+              }
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
               $("#archPane").html(packet["name"])

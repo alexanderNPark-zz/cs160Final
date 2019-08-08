@@ -34,7 +34,11 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 	}
 
 	query:=accept(connection)
+
 	fmt.Println(query)
+	if(query=="") {
+		query="null"
+	}
 	write(query, connection)
 
 	connection.Close()
@@ -59,6 +63,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 			if(err!=nil){
 				break;
 			}
+			fmt.Println("Found Query:",string(content))
 			resultQuery+=string(content)+delimter
 		}
 	}
