@@ -38,7 +38,9 @@
   window.onload = function () {
 
       $("#searchBar").on('input', function() {
+          console.log()
           text = $("#searchBar").val();
+          console.log(text)
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onopen = function(){
               connection.send(text)
