@@ -1,3 +1,8 @@
+body{
+
+}
+
+
 .fieldComps{
     background-color: #020a01;
     width:100%;
@@ -14,9 +19,5 @@
     border-style: solid;
     border-color: #ffffff;
     color:white;
-    opacity: 1;
 }
 
-body{
-    
-}
