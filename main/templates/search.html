@@ -50,6 +50,7 @@
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
               $("#archPane").html(packet["name"])
+              console.log(packet["name"])
           }
       });
 
