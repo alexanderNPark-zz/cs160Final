@@ -76,6 +76,7 @@
               console.log("Received "+content)
               if(content==""){
                   $("#archPane").html("")
+                  return
               }
               if(content=="null"){
                   $("#archPane").html("<div>No Results Found</div>")
