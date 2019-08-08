@@ -42,6 +42,16 @@ func makeClientRequest(w http.ResponseWriter, r *http.Request ){
 
 }
 
+func formFill(w http.ResponseWriter, r *http.Request){
+	t, err := template.ParseFiles("templates/requestForm.html")
+	if(err!=nil){
+
+		fmt.Println(err);
+		return
+	}
+	t.Execute(w,""); //change when template is generated
+}
+
 func index(w http.ResponseWriter, r *http.Request){
 	t, err := template.ParseFiles("templates/index.html")
 	if(err!=nil){
@@ -74,6 +84,7 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/",index)
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
 	handleMultiplex.HandleFunc("/lookup", LookupServer)
+	handleMultiplex.HandleFunc("/requestForm",formFill)
 	handleMultiplex.HandleFunc("/search", search)
 }
 

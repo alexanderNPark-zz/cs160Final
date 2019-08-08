@@ -1,0 +1,22 @@
+.fieldComps{
+    background-color: #020a01;
+    width:100%;
+    height:50px;
+    font-size: 30px;
+    -webkit-border-radius: 50px;
+    padding-left:15px;
+    padding-right:15px;
+    overflow:hidden;
+    resize:none;
+    margin-top:30px;
+    margin-bottom:50px;
+    border-width:5px;
+    border-style: solid;
+    border-color: #ffffff;
+    color:white;
+    opacity: 1;
+}
+
+body{
+    
+}
