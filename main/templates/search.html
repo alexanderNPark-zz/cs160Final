@@ -48,7 +48,7 @@
           connection.onmessage = function(receivedMessage) {
 
               this.send("<Finished>")
-
+              //var data = JSON.parse(receivedMessage.json_value);
               content = receivedMessage.data
               console.log("Received "+content)
               if(content=="null"){
@@ -56,7 +56,7 @@
                   return
               }
               queries = content.split("</Delim>")
-              packet = JSON.stringify(queries[0])
+              packet = JSON.parse(queries[0])
               console.log("Received "+packet["name"]+" "+packet)
               $("#archPane").html("<div>"+packet["name"]+"</div>")
 
