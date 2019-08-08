@@ -33,58 +33,65 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 
-	query:=accept(connection)
-
-
-	if(query=="") {
-		query="null"
-	}
-	fmt.Println(query)
-	writeIt(query, connection)
-
-
+	response:=make(chan string)
+	go readUntilClose(connection, response)
+	go writeUntilClose(connection,response)
 
 
 
 }
 
-func accept(connection *websocket.Conn) (resultQuery string) {
+func readUntilClose(connection *websocket.Conn, response chan string){
+	defer connection.Close()
 
-	_, message, err := connection.ReadMessage()
-	fmt.Println(string(message))
-	if(err!=nil){
-		fmt.Println(err)
-		return
-	}
-	resultQuery=""
-	for key := range Architects {
-		if(strings.Contains(key,string(message))){
-			profile:=Architects[key]
-			fmt.Println(profile)
-			content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:"/fake"})
-			if(err!=nil){
-				break;
-			}
-			fmt.Println("Found Query:",string(content))
-			resultQuery+=string(content)+delimter
+	for{
+
+		_, message, err := connection.ReadMessage()
+		querySearch:=string(message)
+		if(querySearch=="<Finished>"){
+			break;
 		}
+		if(err!=nil){
+			fmt.Println("Failure in lookup reading")
+			return
+		}
+
+		resultQuery:=""
+		for key := range Architects {
+			if(strings.Contains(key,querySearch)){
+				profile:=Architects[key]
+				fmt.Println(profile)
+				content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:"/fake"})
+				if(err!=nil){
+					break;
+				}
+				fmt.Println("Found Query:",string(content))
+				resultQuery+=string(content)+delimter
+			}
+		}
+		if(resultQuery==""){
+			resultQuery = "null"
+		}
+		response<-resultQuery
 	}
-	return resultQuery
+
 }
 
-func writeIt(queries string, connection *websocket.Conn){
+func writeUntilClose(connection *websocket.Conn, response chan string){
+	defer connection.Close()
 
+	for{
+		writer, err := connection.NextWriter(websocket.TextMessage)
+		if(err!=nil){
+			fmt.Println("Failure in lookup writing")
+			return
+		}
 
-
-	writer, err := connection.NextWriter(websocket.TextMessage)
-	if(err!=nil){
-		fmt.Println(err)
-		return
+		writer.Write([]byte(<-response))
 	}
-
-	writer.Write([]byte(queries))
-
 }
+
+
 
 
 

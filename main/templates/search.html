@@ -44,6 +44,7 @@
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onmessage = function(receivedMessage) {
               console.log("Received ")
+              this.send("<Finished>")
               /*
               content = receivedMessage.data
               console.log("Received "+content)
