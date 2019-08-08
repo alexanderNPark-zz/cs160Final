@@ -74,6 +74,9 @@
 
               content = receivedMessage.data
               console.log("Received "+content)
+              if(content==""){
+                  $("#archPane").html("")
+              }
               if(content=="null"){
                   $("#archPane").html("<div>No Results Found</div>")
                   return
