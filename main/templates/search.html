@@ -36,14 +36,9 @@
   
 <script>
   prevQuery = ""
-  window.onload = function () {
+  window.onload = function () {}
 
       $("#searchbar").on('input', function() {
-          if(prevQuery==$("#searchbar").val()){
-              return
-          }else{
-              prevQuery=$("#searchbar").val()
-          }
 
 
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
@@ -73,7 +68,7 @@
 
       });
 
-  }
+
   
   
 </script>
