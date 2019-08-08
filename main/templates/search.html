@@ -41,9 +41,9 @@
 
       window.onload = function () {
 
-          //$introSegment.fadeIn(2000);
+          $introSegment.fadeIn(2000);
           //$introSegment.show("slide", { direction: "left" }, 1000);
-          $introSegment.slideUp(1000)
+
           $searchBar.slideDown(1000)
 
           setInterval(function(){
@@ -74,6 +74,9 @@
 
               content = receivedMessage.data
               console.log("Received "+content)
+              if(content==""){
+                  $("#archPane").html("")
+              }
               if(content=="null"){
                   $("#archPane").html("<div>No Results Found</div>")
                   return
