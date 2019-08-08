@@ -39,7 +39,7 @@
 
       $("#searchbar").on('input', function() {
           console.log()
-          text = $("#searchbar").val();
+
           console.log(text)
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onopen = function(){
@@ -54,6 +54,8 @@
               $("#archPane").html(packet["name"])
               console.log(packet["name"])
           }
+
+
       });
 
   }

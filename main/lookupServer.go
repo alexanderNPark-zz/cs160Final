@@ -42,7 +42,6 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 }
 
 func accept(connection *websocket.Conn) (resultQuery string) {
-	defer connection.Close()
 
 	_, message, err := connection.ReadMessage()
 	fmt.Println(string(message))
