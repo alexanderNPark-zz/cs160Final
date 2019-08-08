@@ -39,11 +39,11 @@
 
       $("#searchbar").on('input', function() {
 
-          text = $("#searchbar").val();
+
 
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onopen = function(){
-              connection.send(text)
+              this.send($("#searchbar").val())
 
           };
           connection.onmessage = function(receivedMessage) {

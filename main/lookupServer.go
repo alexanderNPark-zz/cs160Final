@@ -47,7 +47,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 	_, message, err := connection.ReadMessage()
 	fmt.Println(string(message))
 	if(err!=nil){
-		fmt.Println("Failure in reading")
+		fmt.Println(err)
 		return
 	}
 	resultQuery=""
@@ -70,7 +70,7 @@ func write(queries string, connection *websocket.Conn){
 
 	writer, err := connection.NextWriter(websocket.TextMessage)
 	if(err!=nil){
-		fmt.Println("Failure in writing")
+		fmt.Println(err)
 		return
 	}
 
