@@ -28,7 +28,7 @@ body
     border-style: solid;
     border-color: #ffffff;
     color:white;
-    opacity: 0.3;
+    opacity: 0.7;
 }
 
 #infoText{
@@ -36,7 +36,7 @@ body
     color: #fdffff;
     margin-bottom: 0px;
     -webkit-user-select: none;
-    font-size: 4vw;
+    font-size: 3.5vw;
     font-family: Verdana;
 }
 
