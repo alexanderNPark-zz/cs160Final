@@ -57,6 +57,7 @@
               }
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
+              console.log("Received "+packet["name"]+" "+packet)
               $("#archPane").html("<div>"+packet["name"]+"</div>")
 
 
