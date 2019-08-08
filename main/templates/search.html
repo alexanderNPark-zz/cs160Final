@@ -19,9 +19,7 @@
     </div>
     <textarea rows="1" cols="30" id="searchbar" maxlength="30" placeholder="Search..."></textarea>
     <div id="archPane" class="row prof">
-        <div class="col">
-            Bob
-        </div>
+
     </div>
 
     <div id="buttonPane">
@@ -38,9 +36,20 @@
 <script>
   window.onload = function () {
 
-      ("#searchBar").change(function (){
+      ("#searchBar").on('input', function() {
+          text = ("#searchBar").val();
+          connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
+          connection.onopen = function(){
+              connection.send(text)
 
-          var content=this.val()
+          };
+          connection.onmessage = function(receivedMessage) {
+
+              content = receivedMessage.data
+              queries = content.split("</Delim>")
+              packet = JSON.stringify(queries[0])
+              ("#archPane").html(packet["name"])
+          }
       });
 
   }

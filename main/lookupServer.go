@@ -15,12 +15,13 @@ var lookupUpgrader = websocket.Upgrader{
 }
 
 type ArchQuery struct{
-     name string `id`
-
+     name string `json:"name"`
+     stars int   `json:"stars"`
+     path string  `json:"path"`
 }
 
 
-
+var delimter string = "</Delim>"
 
 
 func LookupServer(w http.ResponseWriter, r *http.Request, ){
@@ -32,8 +33,8 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 
-	accept(connection)
 
+	write(accept(connection), connection)
 
 
 
@@ -42,8 +43,6 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 
 func accept(connection *websocket.Conn) (resultQuery string) {
 	defer connection.Close()
-
-
 
 	_, message, err := connection.ReadMessage()
 
@@ -55,11 +54,11 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 	for key := range Architects {
 		if(strings.Contains(key,string(message))){
 			profile:=Architects[key]
-			content,err :=json.Marshal(&ArchQuery{})
+			content,err :=json.Marshal(&ArchQuery{name:profile.Name, stars:profile.Stars})
 			if(err!=nil){
 				break;
 			}
-			resultQuery+=string(content)
+			resultQuery+=string(content)+delimter
 		}
 	}
 	return resultQuery
