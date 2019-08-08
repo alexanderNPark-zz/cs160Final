@@ -45,14 +45,15 @@
           $searchBar.slideDown(1000)
 
           setInterval(function(){
-              $introSegment.fadeOut(2000);
-              if(fadeInOrNot){
+              $introSegment.fadeOut(2000, function(){
+                  if(fadeInOrNot){
 
-                  $introSegment.html("Made Easy")
+                      $introSegment.html("Made Easy")
 
-              }else{
-                  $introSegment.html("Find Your Architect")
-              }
+                  }else{
+                      $introSegment.html("Find Your Architect")
+                  }
+              });
               $introSegment.fadeIn(2000);
               fadeInOrNot = !fadeInOrNot
 
