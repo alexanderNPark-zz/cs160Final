@@ -39,7 +39,10 @@
   window.onload = function () {}
 
       $("#searchbar").on('input', function() {
-
+          if($("#searchbar").val()==""){
+              $("#archPane").html("")
+              return
+          }
 
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onmessage = function(receivedMessage) {
@@ -54,7 +57,7 @@
               }
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
-              $("#archPane").html(packet["name"])
+              $("#archPane").html("<div>"+packet["name"]+"</div>")
 
 
           };

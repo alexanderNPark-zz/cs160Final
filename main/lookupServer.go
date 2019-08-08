@@ -51,11 +51,12 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 		if(querySearch=="<Finished>"){
 			break;
 		}
+
 		if(err!=nil){
 			fmt.Println("Failure in lookup reading")
 			return
 		}
-
+		querySearch = strings.ToLower(querySearch)
 		resultQuery:=""
 		for key := range Architects {
 			if(strings.Contains(key,querySearch)){
