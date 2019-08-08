@@ -36,6 +36,7 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 
 	write(accept(connection), connection)
 
+	connection.Close()
 
 
 
@@ -64,7 +65,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 }
 
 func write(queries string, connection *websocket.Conn){
-	defer connection.Close()
+
 
 
 	writer, err := connection.NextWriter(websocket.TextMessage)
