@@ -87,6 +87,8 @@ func Initialize(){
 	Multiplex = handleMultiplex
 	multiplexers(handleMultiplex)
 
+	LoadArchitects()
+
 	server:=http.Server{Addr:"0.0.0.0:"+strconv.Itoa(port), Handler:handleMultiplex,}
 	server.ListenAndServe()
 }
