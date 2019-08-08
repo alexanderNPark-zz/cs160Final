@@ -15,9 +15,9 @@ var lookupUpgrader = websocket.Upgrader{
 }
 
 type ArchQuery struct{
-     name string `json:"name"`
-     stars int   `json:"stars"`
-     path string  `json:"path"`
+     Name string `json:"name"`
+     Stars int   `json:"stars"`
+     Path string  `json:"path"`
 }
 
 
@@ -60,7 +60,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 		if(strings.Contains(key,string(message))){
 			profile:=Architects[key]
 			fmt.Println(profile)
-			content,err :=json.Marshal(ArchQuery{name:profile.Name, stars:profile.Stars, path:"/fake"})
+			content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:"/fake"})
 			if(err!=nil){
 				break;
 			}
