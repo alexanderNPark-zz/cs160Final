@@ -54,6 +54,7 @@
           connection.onmessage = function(receivedMessage) {
 
               content = receivedMessage.data
+              console.log("Received "+content)
               if(content=="null"){
                   $("#archPane").html("<div>No Results Found</div>")
                   return
@@ -61,7 +62,7 @@
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
               $("#archPane").html(packet["name"])
-              console.log(packet["name"])
+
           }
       });
 

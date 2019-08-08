@@ -35,10 +35,11 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 
 	query:=accept(connection)
 
-	fmt.Println(query)
+
 	if(query=="") {
 		query="null"
 	}
+	fmt.Println(query)
 	write(query, connection)
 
 	connection.Close()
