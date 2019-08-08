@@ -64,7 +64,7 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 		resultQuery:=""
 		for key := range Architects {
 			lowerKey:= strings.ToLower(key)
-			if(strings.Contains(lowerKey,querySearch)){
+			if(strings.HasPrefix(lowerKey,querySearch)){
 				profile:=Architects[key]
 				fmt.Println(profile)
 				content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:"/fake"})
