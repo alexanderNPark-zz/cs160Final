@@ -40,7 +40,7 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 		query="null"
 	}
 	fmt.Println(query)
-	write(query, connection)
+	writeIt(query, connection)
 
 
 
@@ -72,7 +72,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 	return resultQuery
 }
 
-func write(queries string, connection *websocket.Conn){
+func writeIt(queries string, connection *websocket.Conn){
 
 
 
