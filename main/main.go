@@ -73,7 +73,7 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/author", clientWebServer)
 	handleMultiplex.HandleFunc("/",index)
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
-	handleMultiplex.HandleFunc("/aserver", LookupServer)
+	handleMultiplex.HandleFunc("/lookup", LookupServer)
 	handleMultiplex.HandleFunc("/search", search)
 }
 
