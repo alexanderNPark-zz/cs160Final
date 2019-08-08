@@ -42,7 +42,10 @@
       window.onload = function () {
 
           //$introSegment.fadeIn(2000);
-          $introSegment.show("slide", { direction: "left" }, 1000);
+          //$introSegment.show("slide", { direction: "left" }, 1000);
+          $introSegment.animate({
+              right: '200px'
+          });
           $searchBar.slideDown(1000)
 
           setInterval(function(){
