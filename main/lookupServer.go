@@ -45,7 +45,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 	defer connection.Close()
 
 	_, message, err := connection.ReadMessage()
-
+	fmt.Println(string(message))
 	if(err!=nil){
 		fmt.Println("Failure in reading")
 		return
