@@ -59,9 +59,13 @@
               packet = JSON.stringify(queries[0])
               $("#archPane").html(packet["name"])
 
-          }
+          };
           connection.onopen = function(){
               this.send($("#searchbar").val())
+
+          };
+          connection.onclose=function(){
+              console.log("Failed");
 
           };
 
