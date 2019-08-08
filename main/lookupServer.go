@@ -59,6 +59,7 @@ func accept(connection *websocket.Conn) (resultQuery string) {
 	for key := range Architects {
 		if(strings.Contains(key,string(message))){
 			profile:=Architects[key]
+			fmt.Println(profile)
 			content,err :=json.Marshal(ArchQuery{name:profile.Name, stars:profile.Stars, path:"/fake"})
 			if(err!=nil){
 				break;
