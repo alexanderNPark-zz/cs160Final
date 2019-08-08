@@ -15,29 +15,35 @@
 
 <div id="contentPane" class="container">
 
-    <input type="text" id="searchbar" maxlength="30" placeholder="Search...">
+   
     <!--<textarea rows="1" cols="30" id="searchbar" maxlength="30" placeholder="Search..."></textarea>-->
-    <div id="archPane" class="row prof">
+    
 
-    </div>
-
-    <div id="buttonPane">
-
-    </div>
-
-    <div id="numerical">
-
-    </div>
-
+   
 </div>
   
   
 <script>
-  prevQuery = ""
-  window.onload = function () {
+      prevQuery = ""
+
       $introSegment = $("<div id='infoText'>Start Searching For Architects</div>")
-      $("#contentPane").prepend($introSegment)
-  }
+      $introSegment.hide()
+
+      $searchBar = $('<input type="text" id="searchbar" maxlength="30" placeholder="Search...">')
+      $searchBar.hide()
+
+      $archPane = $('<div id="archPane" class="row"></div>')
+
+
+      $("#contentPane").append($introSegment)
+      $("#contentPane").append($searchBar)
+      $("#contentPane").append($archPane)
+
+      window.onload = function () {
+
+          $introSegment.fadeIn(2000);
+          $searchBar.slideDown(1000)
+      }
       $("#searchbar").on('input', function() {
           if($("#searchbar").val()==""){
               $("#archPane").html("")
