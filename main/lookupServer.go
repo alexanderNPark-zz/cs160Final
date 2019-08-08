@@ -51,6 +51,10 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 		if(querySearch=="<Finished>"){
 			break;
 		}
+		if(len(querySearch)<=1){
+			response<-""
+			continue;
+		}
 
 		if(err!=nil){
 			fmt.Println("Failure in lookup reading")
