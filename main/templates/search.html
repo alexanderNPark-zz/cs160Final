@@ -43,9 +43,9 @@
 
           connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/lookup');
           connection.onmessage = function(receivedMessage) {
-              console.log("Received ")
+
               this.send("<Finished>")
-              /*
+
               content = receivedMessage.data
               console.log("Received "+content)
               if(content=="null"){
@@ -55,17 +55,14 @@
               queries = content.split("</Delim>")
               packet = JSON.stringify(queries[0])
               $("#archPane").html(packet["name"])
-              */
+
 
           };
           connection.onopen = function(){
               this.send($("#searchbar").val())
 
           };
-          connection.onclose=function(){
-              console.log("Failed");
 
-          };
 
       });
 
