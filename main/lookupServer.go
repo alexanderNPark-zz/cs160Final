@@ -42,7 +42,7 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 	fmt.Println(query)
 	write(query, connection)
 
-	connection.Close()
+
 
 
 
