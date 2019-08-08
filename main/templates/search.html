@@ -13,10 +13,8 @@
 </head>
 <body>
 
-<div class="container">
-    <div id="infoText">
-        Start Searching For Architects
-    </div>
+<div id="contentPane" class="container">
+
     <input type="text" id="searchbar" maxlength="30" placeholder="Search...">
     <!--<textarea rows="1" cols="30" id="searchbar" maxlength="30" placeholder="Search..."></textarea>-->
     <div id="archPane" class="row prof">
@@ -36,8 +34,10 @@
   
 <script>
   prevQuery = ""
-  window.onload = function () {}
-
+  window.onload = function () {
+      $introSegment = $("<div id='infoText'>Start Searching For Architects</div>")
+      $("#contentPane").prepend($introSegment)
+  }
       $("#searchbar").on('input', function() {
           if($("#searchbar").val()==""){
               $("#archPane").html("")
@@ -48,7 +48,7 @@
           connection.onmessage = function(receivedMessage) {
 
               this.send("<Finished>")
-              //var data = JSON.parse(receivedMessage.json_value);
+
               content = receivedMessage.data
               console.log("Received "+content)
               if(content=="null"){
@@ -57,7 +57,7 @@
               }
               queries = content.split("</Delim>")
               packet = JSON.parse(queries[0])
-              console.log("Received "+packet["name"]+" "+packet)
+
               $("#archPane").html("<div>"+packet["name"]+"</div>")
 
 
