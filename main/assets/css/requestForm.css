@@ -24,7 +24,7 @@ body
     background-color: #020a01;
     width:50%;
     height:50px;
-    font-size: 30px;
+    font-size: 20px;
     -webkit-border-radius: 50px;
     padding-left:15px;
     padding-right:15px;
@@ -43,7 +43,7 @@ body
     background-color: #020a01;
     width:50%;
     height:250px;
-    font-size: 30px;
+    font-size: 10px;
     padding-left:15px;
     padding-right:15px;
     resize:none;
@@ -68,6 +68,18 @@ body
     color:white;
     background-color: #020a01;
 
+}
+
+
+#titleLabel{
+    width:100%;
+    color: #fdffff;
+    margin-bottom: 0px;
+    margin-right:0px;
+    -webkit-user-select: none;
+    font-size: 2vw;
+    font-family: Verdana;
+    padding:0px;
 }
 
 

@@ -27,7 +27,7 @@ func search(w http.ResponseWriter, r *http.Request){
 
 
 
-func makeClientRequest(w http.ResponseWriter, r *http.Request ){
+func UserView(w http.ResponseWriter, r *http.Request ){
 	/*
 	architectNames, provided := r.URL.Query()["architect"]
 	//var architectName string;
@@ -39,6 +39,13 @@ func makeClientRequest(w http.ResponseWriter, r *http.Request ){
 
 	//profile,_:=Architects[architectName]
 */
+	t, err := template.ParseFiles("templates/userView.html")
+	if(err!=nil){
+
+		fmt.Println(err);
+		return
+	}
+	t.Execute(w,""); //change when template is generated
 
 }
 
@@ -95,6 +102,8 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/aserver", StartWebserver)
 	handleMultiplex.HandleFunc("/lookup", LookupServer)
 	handleMultiplex.HandleFunc("/requestForm",formFill)
+
+	handleMultiplex.HandleFunc("/architectSetup",UserView)
 	handleMultiplex.HandleFunc("/search", search)
 }
 
