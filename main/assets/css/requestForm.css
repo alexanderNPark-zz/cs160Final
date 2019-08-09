@@ -71,15 +71,17 @@ body
 
 }
 
-#titleText{
+
+
+#nameLabel{
     width:100%;
     color: #fdffff;
     margin-bottom: 0px;
     -webkit-user-select: none;
-    font-size: 2.5vw;
+    font-size: 1vw;
     font-family: Verdana;
 }
 
 #rowContainer{
-    margin-top:30px;
+    margin-top:10px;
 }
