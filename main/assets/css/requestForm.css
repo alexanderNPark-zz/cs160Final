@@ -4,12 +4,19 @@ html, body
     min-height: 100%;
 }
 
+
+
 body
 {
     margin: 0;
     background: url("/assets/imgs/searchBack.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+}
+
+
+#searchContainer{
+    margin:0px;
 }
 
 
