@@ -44,12 +44,22 @@ func makeClientRequest(w http.ResponseWriter, r *http.Request ){
 
 func formFill(w http.ResponseWriter, r *http.Request){
 	t, err := template.ParseFiles("templates/requestForm.html")
+
+	architectNames, provided := r.URL.Query()["architect"]
+	var architectName string;
+	if(!provided || len(architectNames) < 1){
+		architectName = "bob";
+	}else{
+		architectName=architectNames[0]
+	}
+
+
 	if(err!=nil){
 
 		fmt.Println(err);
 		return
 	}
-	t.Execute(w,""); //change when template is generated
+	t.Execute(w,architectName); //change when template is generated
 }
 
 func index(w http.ResponseWriter, r *http.Request){
