@@ -12,58 +12,61 @@
     <title>Request Form</title>
 </head>
 <body>
-        <div class="container" id="searchContainer">
-            <span id="nameLabel">Send {{.}} Your Profile And Dream:</span>
-            <div class="row" id="rowContainer">
-                <div class="col-md-2">
-                    <span id="nameLabel">Name:</span>
+        <form action="/architectSetup">
+
+
+            <div class="container" id="searchContainer">
+                <span id="nameLabel">Send {{.}} Your Profile And Dream:</span>
+                <div class="row" id="rowContainer">
+                    <div class="col-md-2">
+                        <span id="nameLabel">Name:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="fieldText" name="name">
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    <input type="text" class="fieldText">
+
+                <div class="row" id="rowContainer">
+                    <div class="col-md-2">
+                        <span id="nameLabel">Approximate Budget:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="fieldText" name="budget">
+                    </div>
                 </div>
+
+
+                <div class="row" id="rowContainer">
+                    <div class="col-md-2">
+                        <span id="nameLabel">Approximate Budget:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="fieldText" name="budget">
+                    </div>
+                </div>
+
+                <div class="row" id="rowContainer">
+                    <div class="col-md-2">
+                        <span id="nameLabel">Location</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="fieldText" name="location">
+                    </div>
+                </div>
+
+                <div class="row" id="rowContainer">
+                    <span id="nameLabel">Preferences</span>
+                </div>
+
+                <div class="row" id="rowContainer">
+                    <textarea class="fieldPreferences" name="preferences"></textarea>
+                </div>
+
+
+
             </div>
-
-            <div class="row" id="rowContainer">
-                <div class="col-md-2">
-                    <span id="nameLabel">Approximate Budget:</span>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" class="fieldText">
-                </div>
-            </div>
-
-
-            <div class="row" id="rowContainer">
-                <div class="col-md-2">
-                    <span id="nameLabel">Approximate Budget:</span>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" class="fieldText">
-                </div>
-            </div>
-
-            <div class="row" id="rowContainer">
-                <div class="col-md-2">
-                    <span id="nameLabel">Location</span>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" class="fieldText">
-                </div>
-            </div>
-
-            <div class="row" id="rowContainer">
-                <span id="nameLabel">Preferences</span>
-            </div>
-
-            <div class="row" id="rowContainer">
-                <textarea class="fieldPreferences"></textarea>
-            </div>
-
-
-
-        </div>
-        <button id="submitButton">Submit </button>
-
+            <button id="submitButton">Submit </button>
+        </form>
 
 
 </body>
