@@ -43,9 +43,9 @@ body
     background-color: #020a01;
     width:50%;
     height:250px;
-    font-size: 10px;
-    padding-left:15px;
-    padding-right:15px;
+    font-size: 15px;
+    padding-left:5px;
+    padding-right:5px;
     resize:none;
 
     border-width:5px;
@@ -111,4 +111,5 @@ body
     margin-top:20px;
     margin-left:20px;
     background-color: black;
+    width:20%;
 }
