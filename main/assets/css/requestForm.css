@@ -42,13 +42,12 @@ body
 .fieldPreferences{
     background-color: #020a01;
     width:50%;
-    height:200px;
+    height:250px;
     font-size: 30px;
     padding-left:15px;
     padding-right:15px;
     resize:none;
-    margin-top:30px;
-    margin-bottom:50px;
+
     border-width:5px;
     border-style: solid;
     border-color: #ffffff;
@@ -81,6 +80,7 @@ body
     -webkit-user-select: none;
     font-size: 1.3vw;
     font-family: Verdana;
+    padding:0px;
 }
 
 #rowContainer{
@@ -91,4 +91,5 @@ body
 #rowPreferences{
     margin-top:20px;
     margin-left:20px;
+    background-color: black;
 }
