@@ -13,22 +13,53 @@
 </head>
 <body>
         <div class="container" id="searchContainer">
-            <span id="titleText">Send {{.}} your profile and dream:</span>
-            <div class="row">
-                <div class="col">
+            <span id="titleText">Send {{.}} Your Profile And Dream:</span>
+            <div class="row" id="rowContainer">
+                <div class="col-md-4">
                     <span id="titleText">Name:</span>
                 </div>
-                <div class="col">
+                <div class="col-md-8">
                     <input type="text" class="fieldText">
                 </div>
             </div>
 
-            <span id="titleText">Approximate Budget:</span>
-            <input type = "text" class="fieldText">
-            <span id="titleText">Location</span>
-            <input type="text" class="fieldText">
-            <span id="titleText">Preferences</span>
-            <textarea class="fieldPreferences"></textarea>
+            <div class="row" id="rowContainer">
+                <div class="col-md-4">
+                    <span id="titleText">Approximate Budget:</span>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="fieldText">
+                </div>
+            </div>
+
+
+            <div class="row" id="rowContainer">
+                <div class="col-md-4">
+                    <span id="titleText">Approximate Budget:</span>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="fieldText">
+                </div>
+            </div>
+
+            <div class="row" id="rowContainer">
+                <div class="col-md-4">
+                    <span id="titleText">Location</span>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="fieldText">
+                </div>
+            </div>
+
+            <div class="row" id="rowContainer">
+                <span id="titleText">Preferences</span>
+            </div>
+
+            <div class="row" id="rowContainer">
+                <textarea class="fieldPreferences"></textarea>
+            </div>
+
+
 
         </div>
         <button id="submitButton">Submit </button>
