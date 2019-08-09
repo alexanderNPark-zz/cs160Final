@@ -48,7 +48,7 @@ func formFill(w http.ResponseWriter, r *http.Request){
 	architectNames, provided := r.URL.Query()["architect"]
 	var architectName string;
 	if(!provided || len(architectNames) < 1){
-		architectName = "bob";
+		architectName = "God";
 	}else{
 		architectName=architectNames[0]
 	}
