@@ -13,11 +13,22 @@
 </head>
 <body>
         <div class="container" id="searchContainer">
-            <span id="titleText">Send {{.}}} your profile and dream:</span>
-            <input type="text" placeholder="First and Last Name" class="fieldText">
+            <span id="titleText">Send {{.}} your profile and dream:</span>
+            <div class="row">
+                <div class="col">
+                    <span id="titleText">Name:</span>
+                </div>
+                <div class="col">
+                    <input type="text" class="fieldText">
+                </div>
+            </div>
+
+            <span id="titleText">Approximate Budget:</span>
             <input type = "text" class="fieldText">
+            <span id="titleText">Location</span>
             <input type="text" class="fieldText">
-            <textarea name="preferences" class="fieldPreferences"></textarea>
+            <span id="titleText">Preferences</span>
+            <textarea class="fieldPreferences"></textarea>
 
         </div>
         <button id="submitButton">Submit </button>
