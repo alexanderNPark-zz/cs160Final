@@ -50,8 +50,8 @@ body
 .prof{
     margin:10px;
     background-color:white;
-    width:30%;
-    height:30%;
+    width:40%;
+    height:40%;
     border-radius:10px;
     align-items: center;
     text-align: center;
@@ -64,8 +64,11 @@ body
     border-radius:50%;
     border-style: solid;
     border-color: black;
+    margin:30px;
 }
 
 .checked{
+    margin-top:10px;
+    margin-bottom:10px;
     color:orange;
 }
