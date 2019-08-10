@@ -51,11 +51,11 @@
 
 
           for(var i=0;i<architectQuery.stars;i++){
-              $archDiv.append("<span class=\"fa fa star checked\"</span>")
+              $archDiv.append("<span class=\"fa fa-star checked\"</span>")
           }
 
           for(var i=0;i<5-architectQuery.stars;i++){
-              $archDiv.append("<span class=\"fa fa star\"</span>")
+              $archDiv.append("<span class=\"fa fa-star\"</span>")
           }
           $archDiv.append("<div>Comments</div>")
 
@@ -109,6 +109,8 @@
                   return
               }
 
+
+              $("#archPane").html("")
               queries = content.split("</Delim>")
               for(q of queries){
                   if(q==""){
