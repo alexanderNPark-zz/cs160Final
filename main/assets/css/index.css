@@ -17,6 +17,8 @@ body
     font-size: 6vw;
     color:white;
     -webkit-user-select: none;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    text-align: center
 
 }
 
@@ -24,11 +26,16 @@ body
     margin-top:50px;
     font-size: 4.3vw;
     color:white;
-
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     -webkit-user-select: none;
 }
 
-
+#orText{
+    font-size: 4.3vw;
+    color:white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    -webkit-user-select: none;
+}
 
 #innerContainer{
     margin-top: 50px;
