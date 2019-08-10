@@ -1,10 +1,17 @@
 package main
 
+import (
+	"strings"
+	"fmt"
+	"encoding/json"
+)
+
 type Architect struct{
 	Name string
 	Stars int
 	ImgPath string
 	Projects map[string]*Project
+	KeyWordTags []string
 }
 
 type Project struct{
@@ -20,3 +27,24 @@ func LoadArchitects(){
 	Architects["Jar-Jar"] = &Architect{Name:"Jar-Jar",Stars:1, Projects:make(map[string]*Project), ImgPath:"/assets/imgs/profile_jar_jar.jpg"}
 }
 
+func SearchQuery(querySearch string) string{
+	querySearch = strings.ToLower(querySearch)
+	resultQuery:=""
+	for key := range Architects {
+		lowerKey:= strings.ToLower(key)
+		if(strings.HasPrefix(lowerKey,querySearch)){
+			profile:=Architects[key]
+			fmt.Println(profile)
+			content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:profile.ImgPath})
+			if(err!=nil){
+				break;
+			}
+			fmt.Println("Found Query:",string(content))
+			resultQuery+=string(content)+delimter
+		}
+	}
+	if(resultQuery==""){
+		resultQuery = "null"
+	}
+	return resultQuery
+}

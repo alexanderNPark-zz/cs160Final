@@ -4,9 +4,6 @@ import (
 	"github.com/gorilla/websocket"
 	"fmt"
 	"net/http"
-	"strings"
-
-	"encoding/json"
 )
 
 var lookupUpgrader = websocket.Upgrader{
@@ -60,25 +57,8 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 			fmt.Println("Failure in lookup reading")
 			return
 		}
-		querySearch = strings.ToLower(querySearch)
-		resultQuery:=""
-		for key := range Architects {
-			lowerKey:= strings.ToLower(key)
-			if(strings.HasPrefix(lowerKey,querySearch)){
-				profile:=Architects[key]
-				fmt.Println(profile)
-				content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:profile.ImgPath})
-				if(err!=nil){
-					break;
-				}
-				fmt.Println("Found Query:",string(content))
-				resultQuery+=string(content)+delimter
-			}
-		}
-		if(resultQuery==""){
-			resultQuery = "null"
-		}
-		response<-resultQuery
+
+		response<-SearchQuery(querySearch)
 	}
 
 }

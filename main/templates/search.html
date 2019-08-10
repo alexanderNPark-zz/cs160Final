@@ -36,12 +36,18 @@
       $searchBar = $('<input type="text" id="searchbar" maxlength="30" placeholder="Search...">')
       $searchBar.hide()
 
-      $archPane = $('<div id="archPane" class="row"></div>')
+      $archPane = $('<div id="archPane"></div>')
 
 
       $("#contentPane").append($introSegment)
       $("#contentPane").append($searchBar)
       $("#contentPane").append($archPane)
+
+
+      function archClass(architectQuery){
+          $archDiv = $("<div class=\"prof\"> </div>")
+
+      }
 
       window.onload = function () {
 

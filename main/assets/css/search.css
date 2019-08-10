@@ -43,6 +43,12 @@ body
     
 }
 
+#archPane{
+    display:flex;
+}
+
 .prof{
+    margin:10px;
+    background-color:white;
 
 }
