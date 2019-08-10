@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <script type="text/javascript" src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -46,6 +47,20 @@
 
       function archClass(architectQuery){
           $archDiv = $("<div class=\"prof\"> </div>")
+          $archDiv.append("<div>"+architectQuery.name+"</div>")
+
+
+          for(var i=0;i<architectQuery.stars;i++){
+              $archDiv.append("<span class=\"fa fa star checked\"</span>")
+          }
+
+          for(var i=0;i<5-architectQuery.stars;i++){
+              $archDiv.append("<span class=\"fa fa star\"</span>")
+          }
+          $archDiv.append("<div>Comments</div>")
+
+          //$archDiv.hide()
+          return $archDiv
 
       }
 
@@ -99,14 +114,10 @@
                   if(q==""){
                       continue;
                   }
-                  console.log((JSON.parse(q))["name"])
+                  //console.log((JSON.parse(q))["name"])
+                  $("#archPane").append(archClass(JSON.parse(q)))
               }
 
-
-
-              packet = JSON.parse(queries[0])
-
-              $("#archPane").html("<div>"+packet["name"]+"</div>")
 
 
           };

@@ -52,3 +52,7 @@ body
     background-color:white;
 
 }
+
+.checked{
+    color:orange;
+}
