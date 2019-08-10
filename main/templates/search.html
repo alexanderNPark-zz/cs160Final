@@ -87,8 +87,10 @@
                   $("#archPane").html("<div>No Results Found</div>")
                   return
               }
+
               queries = content.split("</Delim>")
-              for(q in queries){
+              for(q of queries){
+
                   console.log((JSON.parse(q))["name"])
               }
 
