@@ -15,7 +15,7 @@ type Project struct{
 var Architects = make(map[string]*Architect)
 
 func LoadArchitects(){
-	Architects["Bob"] = &Architect{Name:"Bob", Stars:3, Projects:make(map[string]*Project)}
+	Architects["Ted Mosby"] = &Architect{Name:"Bob", Stars:3, Projects:make(map[string]*Project), ImgPath:"/assets/imgs/ted_mosby.jpg.png"}
 	Architects["Bob the Builder"] = &Architect{Name:"Bob the Builder", Stars:3, Projects:make(map[string]*Project),ImgPath:"/assets/imgs/bob_builder.png"}
 	Architects["Jar-Jar"] = &Architect{Name:"Jar-Jar",Stars:1, Projects:make(map[string]*Project), ImgPath:"/assets/imgs/profile_jar_jar.jpg"}
 }

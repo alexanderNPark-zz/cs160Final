@@ -88,6 +88,12 @@
                   return
               }
               queries = content.split("</Delim>")
+              for(q in queries){
+                  console.log(JSON.parse(q)["name"])
+              }
+
+
+
               packet = JSON.parse(queries[0])
 
               $("#archPane").html("<div>"+packet["name"]+"</div>")
