@@ -8,19 +8,18 @@
 
 
     <script type="text/javascript" src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/assets/vendor/jquery/jquery-ui.min.css">
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/assets/vendor/paper/paper-full.min.js"></script>
 
     <title>Welcome</title>
 </head>
 <body>
-    <div class="container">
-        <div id="welcomeText">
-            Welcome!
-        </div>
+    <div id="totalPane" class="container">
 
-        <div id="internalText" class="row">
-            Are you a
-        </div>
+
+
 
         <div id="innerContainer"class="row">
 
@@ -41,8 +40,20 @@
     </div>
 
     <script>
-        window.onload=function(){
+        var $welcomeText = $("<div id=\"welcomeText\">Welcome!</div>")
+        $welcomeText.hide()
 
+        var $questionText = $("<div id=\"internalText\" class=\"row\"> Are you a </div>")
+        $questionText.hide()
+
+        $("#totalPane").prepend($questionText)
+        $("#totalPane").prepend($welcomeText)
+
+
+
+        window.onload=function(){
+            $welcomeText.show("slide", { direction: "left" }, 1000);
+            $questionText.show("slide", { direction: "left" }, 1000);
         }
 
     </script>
