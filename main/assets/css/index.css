@@ -24,23 +24,21 @@ body
     margin-top:50px;
     font-size: 4.3vw;
     color:white;
-    border-radius: 30px;
-    border-color:gray;
-    border-style: solid;
+
     -webkit-user-select: none;
 }
 
 
 
 #innerContainer{
-
+    margin-top: 50px;
 
 
 }
 
 #cButton {
 
-    width:100%;
+    width:80%;
     padding:5px;
 
     -webkit-border-radius: 50px;
