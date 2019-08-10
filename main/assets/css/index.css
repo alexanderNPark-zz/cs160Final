@@ -13,14 +13,24 @@ body
 }
 
 #welcomeText{
-
+    font-size: 4.3vw;
+    color:white;
+    -webkit-user-select: none;
 }
+
+#internalText{
+    font-size: 2.3vw;
+    color:white;
+    -webkit-user-select: none;
+}
+
 
 
 #innerContainer{
     border-style:solid;
     border-color:gray;
     border-width:5px;
+    border-radius: 30px;
 
 
 }
@@ -32,7 +42,7 @@ body
     padding:5px;
     margin:20px;
     -webkit-border-radius: 50px;
-    font-size: 30px;
+    font-size: 50px;
     border-width:5px;
     border-style: solid;
     border-color: #ffffff;
