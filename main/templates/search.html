@@ -52,13 +52,13 @@
 
           setInterval(function(){
               $introSegment.fadeOut(2000, function(){
-                  fadeInOrNot = !fadeInOrNot
                   if(fadeInOrNot){
 
                       $introSegment.html("Made Fast and Simple");
                   }else{
-                      $introSegment.html("Find The Architect For You")
+                      $introSegment.html("Find The Right Architect For You")
                   }
+                  fadeInOrNot = !fadeInOrNot
               });
               $introSegment.fadeIn(2000);
 
