@@ -73,6 +73,12 @@ body
 
 }
 
+.prof:hover{
+    background-color: #84fffa;
+
+
+}
+
 .profilePic{
     width:200px;
     height:200px;
