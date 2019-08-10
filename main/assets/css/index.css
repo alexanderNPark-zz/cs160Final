@@ -8,7 +8,7 @@ html, body
 body
 {
     margin: 0;
-    background: url("/assets/imgs/searchBack.png");
+    background: url("/assets/imgs/indexBack.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

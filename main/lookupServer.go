@@ -67,7 +67,7 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 			if(strings.HasPrefix(lowerKey,querySearch)){
 				profile:=Architects[key]
 				fmt.Println(profile)
-				content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:"/fake"})
+				content,err :=json.Marshal(ArchQuery{Name:profile.Name, Stars:profile.Stars, Path:profile.ImgPath})
 				if(err!=nil){
 					break;
 				}
