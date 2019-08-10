@@ -62,6 +62,10 @@
           }
           $archDiv.append("<div>Comments</div>")
 
+
+          $archdiv.on("click", function(){
+              location.href = '/requestForm?architect='+architectQuery.name;
+          })
           //$archDiv.hide()
           return $archDiv
 
