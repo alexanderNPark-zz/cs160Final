@@ -13,13 +13,14 @@ body
 }
 
 #welcomeText{
-    font-size: 4.3vw;
+
     color:white;
     -webkit-user-select: none;
+
 }
 
 #internalText{
-    font-size: 2.3vw;
+
     color:white;
     -webkit-user-select: none;
 }
