@@ -90,7 +90,9 @@
 
               queries = content.split("</Delim>")
               for(q of queries){
-
+                  if(q==""){
+                      continue;
+                  }
                   console.log((JSON.parse(q))["name"])
               }
 
