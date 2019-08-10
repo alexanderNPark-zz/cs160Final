@@ -59,8 +59,11 @@
 
 
         function showQuestion(){
-            $questionText.show("slide", { direction: "left" }, 2000);
-            $internalContainer.fadeIn()
+
+            $questionText.show("slide", { direction: "left" }, 2000,  function(){
+                $internalContainer.fadeIn(2000)
+            });
+
         }
 
         window.onload=function(){
