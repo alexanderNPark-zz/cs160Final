@@ -30,6 +30,7 @@ body
     border-color: #ffffff;
     color:white;
     opacity: 1;
+    outline:none
 }
 
 #infoText{
