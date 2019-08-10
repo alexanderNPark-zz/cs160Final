@@ -13,9 +13,6 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: 4096,
 }
 
-type ExJSON struct{
-
-}
 
 
 type Client struct{

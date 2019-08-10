@@ -70,16 +70,25 @@ func formFill(w http.ResponseWriter, r *http.Request){
 }
 
 func index(w http.ResponseWriter, r *http.Request){
+	if r.URL.Path != "/" {
+		notFound(w, r, http.StatusNotFound)
+		return
+	}
 	t, err := template.ParseFiles("templates/index.html")
 	if(err!=nil){
-
 		fmt.Println(err);
 		return
 	}
+
 	t.Execute(w,""); //change when template is generated
 }
 
-
+func notFound(w http.ResponseWriter, r *http.Request, status int){
+	w.WriteHeader(status)
+	if status == http.StatusNotFound {
+		fmt.Fprint(w, "custom 404")
+	}
+}
 
 
 func clientWebServer(w http.ResponseWriter, r *http.Request){
