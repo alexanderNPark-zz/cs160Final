@@ -21,20 +21,6 @@
 
 
 
-        <div id="innerContainer"class="row">
-
-            <div class="col-md-5">
-                <button id="cButton">Client</button>
-            </div>
-
-            <div id="orText" class="col-md-2">
-                <div class="vertical">or</div>
-            </div>
-
-            <div class="col-md-5">
-                <button id="cButton">Architect</button>
-            </div>
-        </div>
 
 
     </div>
@@ -46,14 +32,39 @@
         var $questionText = $("<div id=\"internalText\" class=\"row\"> Are you a </div>")
         $questionText.hide()
 
-        $("#totalPane").prepend($questionText)
-        $("#totalPane").prepend($welcomeText)
+        var $internalContainer = $("<div id=\"innerContainer\"class=\"row\"> </div>")
+
+        var $clientButton = $("<div class=\"col-md-5\">\n" +
+        "                <button id=\"cButton\">Client</button>\n" +
+        "            </div>")
+
+        var $orText = $("<div id=\"orText\" class=\"col-md-2\">\n" +
+                "                <div class=\"vertical\">or</div>\n" +
+                "            </div>")
+
+        var $archButton = "<div class=\"col-md-5\">\n" +
+                "                <button id=\"cButton\">Architect</button>\n" +
+                "            </div>"
+
+        $internalContainer.append($clientButton)
+        $internalContainer.append($orText)
+        $internalContainer.append($archButton)
+
+        $internalContainer.hide()
 
 
+        $("#totalPane").append($welcomeText)
+        $("#totalPane").append($questionText)
+        $("#totalPane").append($internalContainer)
+
+
+        function showQuestion(){
+            $questionText.show("slide", { direction: "left" }, 2000);
+        }
 
         window.onload=function(){
-            $welcomeText.show("slide", { direction: "left" }, 2000);
-            $questionText.show("slide", { direction: "left" }, 2000);
+            $welcomeText.show("slide", { direction: "left",  done: showQuestion()}, 2000);
+
         }
 
     </script>
