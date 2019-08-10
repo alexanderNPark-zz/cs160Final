@@ -12,6 +12,7 @@ body
     background: url("/assets/imgs/indexBack.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    border: 1px solid transparent;
 }
 
 #welcomeText{
@@ -43,7 +44,7 @@ body
 }
 
 .vertical{
-   
+   padding-bottom:25px;
    font-size: 4.3vw;
     color:white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
