@@ -87,7 +87,7 @@ func SearchQuery(querySearch string) string{
 
 
 /*To work on..*/
-func SendProfile(w http.ResponseWriter, r *http.Request, ){
+func SendProfile(w http.ResponseWriter, r *http.Request ){
 	preferenceUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
 	connection,err:=preferenceUpgrader.Upgrade(w,r,nil)
 	if(err!=nil){

@@ -73,7 +73,7 @@
             $("#submitButton").on("click", function(){
                 connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/sendPreferences');
                 connection.onopen = function(){
-                    packet = JSON.stringify({name:$("#name").val(), budget:$("#budget"), area:$("#sqft"), location:$("#location"), preferences:$("#preferences")})
+                    packet = JSON.stringify({name:$("#name").val(), budget:$("#budget"), area:$("#sqft"), location:$("#location"), preferences:$("#preferences"), architect:"{{.}}"})
                     connection.send(packet)
                 }
 
