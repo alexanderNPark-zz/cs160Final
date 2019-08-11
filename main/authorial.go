@@ -212,6 +212,7 @@ func GenerateProject(client *Client){
 	}
 	newProject.ArchitectEditLink = "/"+hash(client.Profile.Name+client.Profile.ArchitectKey)
 	GlobalProject = newProject.ArchitectEditLink
+	fmt.Println(GlobalProject)
 	Multiplex.HandleFunc(newProject.ArchitectEditLink, editLinkhandler)
 
 }
