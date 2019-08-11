@@ -102,6 +102,7 @@ func SendProfile(w http.ResponseWriter, r *http.Request, ){
 
 	address:=r.Header.Get("X-Forwarded-For")
 	response:=make(chan string)
+
 	go ReadProfileUntilReceived(connection,response, address)
 	go SendUntilRecieved(connection,response)
 
@@ -188,6 +189,7 @@ func GenerateProject(client *Client){
 	newProject.UserViewLink = "/"+string(hash(client.Profile.Name))
 
 	Multiplex.HandleFunc(newProject.UserViewLink, beta)
+
 
 
 	editLinkhandler :=func(w http.ResponseWriter, r *http.Request){
