@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"html/template"
 
-
 )
 
 func main(){
@@ -22,29 +21,25 @@ func search(w http.ResponseWriter, r *http.Request){
 		fmt.Println(err);
 		return
 	}
+
 	t.Execute(w,""); //change when template is generated
 }
 
 
 
 func UserView(w http.ResponseWriter, r *http.Request ){
-	/*
-	architectNames, provided := r.URL.Query()["architect"]
-	//var architectName string;
-	if(!provided || len(architectNames) < 1){
-		architectName = "bob";
-	}else{
-		architectName=architectNames[0]
-	}
 
-	//profile,_:=Architects[architectName]
-*/
 	t, err := template.ParseFiles("templates/userView.html")
 	if(err!=nil){
 
 		fmt.Println(err);
 		return
 	}
+
+	//address:=strings.Split(r.Header.Get("X-Forwarded-For"),",")
+
+
+
 	t.Execute(w,""); //change when template is generated
 
 }
@@ -66,6 +61,9 @@ func formFill(w http.ResponseWriter, r *http.Request){
 		fmt.Println(err);
 		return
 	}
+
+
+
 	t.Execute(w,architectName); //change when template is generated
 }
 
@@ -102,15 +100,22 @@ func clientWebServer(w http.ResponseWriter, r *http.Request){
 	t.Execute(w,""); //change when template is generated
 }
 
-
+func architectEdit(w http.ResponseWriter, r *http.Request){
+	if(GlobalProject==""){
+		fmt.Fprintln(w,"Faliure. No Architects have a project yet");
+	}else{
+		http.Redirect(w,r,GlobalProject,http.StatusSeeOther)
+	}
+}
 
 func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-	handleMultiplex.HandleFunc("/author", clientWebServer)
+	handleMultiplex.HandleFunc("/author", architectEdit)
 	handleMultiplex.HandleFunc("/",index)
-	handleMultiplex.HandleFunc("/aserver", StartWebserver)
+	//handleMultiplex.HandleFunc("/aserver", StartWebserver)
 	handleMultiplex.HandleFunc("/lookup", LookupServer)
 	handleMultiplex.HandleFunc("/requestForm",formFill)
+	handleMultiplex.HandleFunc("/sendPreferences", SendProfile)
 
 	handleMultiplex.HandleFunc("/architectSetup",UserView)
 	handleMultiplex.HandleFunc("/search", search)

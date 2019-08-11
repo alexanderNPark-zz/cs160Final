@@ -31,14 +31,14 @@ func LookupServer(w http.ResponseWriter, r *http.Request, ){
 	}
 
 	response:=make(chan string)
-	go readUntilClose(connection, response)
-	go writeUntilClose(connection,response)
+	go LookUpReadUntilClose(connection, response)
+	go LookupWriteUntilClose(connection,response)
 
 
 
 }
 
-func readUntilClose(connection *websocket.Conn, response chan string){
+func LookUpReadUntilClose(connection *websocket.Conn, response chan string){
 	defer connection.Close()
 
 	for{
@@ -63,7 +63,7 @@ func readUntilClose(connection *websocket.Conn, response chan string){
 
 }
 
-func writeUntilClose(connection *websocket.Conn, response chan string){
+func LookupWriteUntilClose(connection *websocket.Conn, response chan string){
 	defer connection.Close()
 
 	for{

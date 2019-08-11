@@ -2,10 +2,6 @@ package main
 
 import (
 	"github.com/gorilla/websocket"
-	"fmt"
-	"net/http"
-	"strings"
-	"html/template"
 )
 
 var upgrader = websocket.Upgrader{
@@ -15,21 +11,14 @@ var upgrader = websocket.Upgrader{
 
 
 
-type Client struct{
-	connection *websocket.Conn
-	ID string
 
-	channel chan string
-
-}
-
-var userIDs= make(map[string]*Client)
 var unifyingRead = make(chan string)
 
 
 //test variable-delete later
 var activated bool = false;
 
+/*
 func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
 	connection,err:=upgrader.Upgrade(w,r,nil)
@@ -39,8 +28,7 @@ func StartWebserver(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 	address:=strings.Split(r.Header.Get("X-Forwarded-For"),",")
-	newClient := &Client{connection:connection, ID:address[0], channel:make(chan string)}
-	userIDs[address[0]] = newClient
+
 	fmt.Println("Contact")
     go newClient.read()
     go newClient.write()
@@ -95,7 +83,7 @@ func testHandleGenerator(){
 	}
 	Multiplex.HandleFunc("/workspace",beta)
 }
-
+*/
 
 
 

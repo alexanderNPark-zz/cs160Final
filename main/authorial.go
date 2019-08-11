@@ -4,22 +4,56 @@ import (
 	"strings"
 	"fmt"
 	"encoding/json"
+	"net/http"
+	"github.com/gorilla/websocket"
+	"html/template"
+	"hash/fnv"
 )
+
+var preferenceUpgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}
 
 type Architect struct{
 	Name string
 	Stars int
 	ImgPath string
+
 	Projects map[string]*Project
 	KeyWordTags []string
 }
 
 type Project struct{
-   Client *Client
+	ArchitectEditLink string
+	UserViewLink string
+
+    TextSoFar string
+    LinkToProject string
+
+}
+
+var UserIDs= make(map[string]*Client)
+var Architects = make(map[string]*Architect)
+
+type Client struct{
+	ChatLine *websocket.Conn
+	CurrentProject *Project
+	Profile *ClientProfile
 }
 
 
-var Architects = make(map[string]*Architect)
+type ClientProfile struct{
+	Name string `json:"name"`
+	Budget float32 `json:"budget"`
+	Area string `json:"area"`
+	Location string `json:"location"`
+	Preferences string `json:"preferences"`
+	ArchitectKey string`json:"architect"`
+}
+
+
+
 
 func LoadArchitects(){
 	Architects["Ted Mosby"] = &Architect{Name:"Ted Mosby", Stars:5, Projects:make(map[string]*Project), ImgPath:"/assets/imgs/ted_mosby.jpg"}
@@ -48,4 +82,124 @@ func SearchQuery(querySearch string) string{
 		resultQuery = "null"
 	}
 	return resultQuery
+}
+
+
+
+/*To work on..*/
+func SendProfile(w http.ResponseWriter, r *http.Request, ){
+	preferenceUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
+	connection,err:=preferenceUpgrader.Upgrade(w,r,nil)
+	if(err!=nil){
+		fmt.Println("Failed to make connection to server")
+		fmt.Println(err)
+		return
+	}
+
+
+
+	/**Prepare for new Read*/
+
+	address:=r.Header.Get("X-Forwarded-For")
+	response:=make(chan string)
+	go ReadProfileUntilReceived(connection,response, address)
+	go SendUntilRecieved(connection,response)
+
+
+}
+
+
+func ReadProfileUntilReceived(connection *websocket.Conn, response chan string, address string){
+	defer connection.Close()
+
+	for{
+
+		_, message, err := connection.ReadMessage()
+		if(err!=nil){
+			fmt.Println("Failure in lookup reading")
+			return
+		}
+
+		querySearch:=string(message)
+		if(querySearch=="<Finished>"){
+			break;
+		}
+
+		newProfile := &ClientProfile{}
+		json.Unmarshal(message,newProfile)
+
+
+		client,ok:=UserIDs[address]
+		if(!ok){
+			UserIDs[address] = &Client{}
+			client = UserIDs[address]
+		}
+
+		//connection.Close() // check this line later
+
+		client.Profile = newProfile
+		GenerateProject(client)
+
+		response<-client.CurrentProject.UserViewLink
+
+	}
+
+}
+
+func SendUntilRecieved(connection *websocket.Conn, response chan string){
+	defer connection.Close()
+
+	for{
+		writer, err := connection.NextWriter(websocket.TextMessage)
+		if(err!=nil){
+			fmt.Println("Failure in lookup writing")
+			return
+		}
+
+		writer.Write([]byte(<-response))
+	}
+}
+
+
+
+func hash(s string) uint32 {
+	h := fnv.New32a()
+	h.Write([]byte(s))
+	return h.Sum32()
+}
+
+
+var GlobalProject string = ""//this link is tested for a universal user simply a test
+
+func GenerateProject(client *Client){
+	newProject:=&Project{TextSoFar:client.Profile.Preferences}
+	architect:=Architects[client.Profile.ArchitectKey]
+	architect.Projects[client.Profile.Name] = newProject
+
+
+	beta:=func(w http.ResponseWriter, r *http.Request){
+		t, err := template.ParseFiles("templates/userView.html")
+		if(err!=nil){
+			fmt.Println(err);
+			return
+		}
+		t.Execute(w,""); //change when template is generated
+	}
+	newProject.UserViewLink = "/"+string(hash(client.Profile.Name))
+
+	Multiplex.HandleFunc(newProject.UserViewLink,beta)
+
+
+	editLinkhandler :=func(w http.ResponseWriter, r *http.Request){
+		t, err := template.ParseFiles("templates/archedit.html")
+		if(err!=nil){
+			fmt.Println(err);
+			return
+		}
+		t.Execute(w,client.Profile.Name); //change when template is generated
+	}
+	newProject.ArchitectEditLink = "/"+string(hash(client.Profile.Name+client.Profile.ArchitectKey))
+	GlobalProject = newProject.ArchitectEditLink
+	Multiplex.HandleFunc(newProject.ArchitectEditLink, editLinkhandler)
+
 }
