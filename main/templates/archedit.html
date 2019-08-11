@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit-{{.Name}}</title>
+    <title>Edit-{{.Profile.Name}}</title>
 </head>
 <body>
-{{.Name}}
-{{printf "%.2f" .Budget}}
-{{.Area}}
-{{.Location}}
-{{.Preferences}}
+{{.Proile.Name}}
+{{printf "%.2f" .Profile.Budget}}
+{{.Profile.Area}}
+{{.Profile.Location}}
+{{.CurrentProject.TextSoFar}}
 </body>
 </html>

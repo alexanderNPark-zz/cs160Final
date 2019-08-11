@@ -188,7 +188,7 @@ func GenerateProject(client *Client){
 	architect.Projects[client.Profile.Name] = newProject
 	client.CurrentProject=newProject
 
-	beta:=func(w http.ResponseWriter, r *http.Request){
+	viewLinkHandler :=func(w http.ResponseWriter, r *http.Request){
 		t, err := template.ParseFiles("templates/userView.html")
 		if(err!=nil){
 			fmt.Println(err);
@@ -198,7 +198,7 @@ func GenerateProject(client *Client){
 	}
 	newProject.UserViewLink = "/"+hash(client.Profile.Name)
 
-	Multiplex.HandleFunc(newProject.UserViewLink, beta)
+	Multiplex.HandleFunc(newProject.UserViewLink, viewLinkHandler)
 
 
 
@@ -208,7 +208,7 @@ func GenerateProject(client *Client){
 			fmt.Println(err);
 			return
 		}
-		t.Execute(w,client.Profile); //change when template is generated
+		t.Execute(w,client); //change when template is generated
 	}
 	newProject.ArchitectEditLink = "/"+hash(client.Profile.Name+client.Profile.ArchitectKey)
 	GlobalProject = newProject.ArchitectEditLink
