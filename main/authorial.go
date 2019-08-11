@@ -166,8 +166,8 @@ func SendUntilRecieved(connection *websocket.Conn, response chan string){
 
 func hash(s string) string {
 
-	randomChar:=func() int{
-		return int((126-33)*rand.Float64()) +33
+	randomChar:=func() uint{
+		return uint((90-65)*rand.Float64()) + 65
 	}
 
 	for i:=0;i<len(s);i++{
