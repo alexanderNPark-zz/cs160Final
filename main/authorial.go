@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"github.com/gorilla/websocket"
 	"html/template"
-	"hash/fnv"
+	"math/rand"
 )
 
 var preferenceUpgrader = websocket.Upgrader{
@@ -163,11 +163,21 @@ func SendUntilRecieved(connection *websocket.Conn, response chan string){
 
 
 
-func hash(s string) uint32 {
-	h := fnv.New32a()
-	h.Write([]byte(s))
-	return h.Sum32()
+
+func hash(s string) string {
+
+	randomChar:=func() int{
+		return int((126-33)*rand.Float64()) +33
+	}
+
+	for i:=0;i<len(s);i++{
+		s= strings.Replace(s, string(s[i]),string(randomChar()), -1)
+	}
+	return s
+
 }
+
+
 
 
 var GlobalProject string = ""//this link is tested for a universal user simply a test
@@ -186,7 +196,7 @@ func GenerateProject(client *Client){
 		}
 		t.Execute(w,""); //change when template is generated
 	}
-	newProject.UserViewLink = "/"+string(hash(client.Profile.Name))
+	newProject.UserViewLink = "/"+hash(client.Profile.Name)
 
 	Multiplex.HandleFunc(newProject.UserViewLink, beta)
 
@@ -200,7 +210,7 @@ func GenerateProject(client *Client){
 		}
 		t.Execute(w,client.Profile); //change when template is generated
 	}
-	newProject.ArchitectEditLink = "/"+string(hash(client.Profile.Name+client.Profile.ArchitectKey))
+	newProject.ArchitectEditLink = "/"+hash(client.Profile.Name+client.Profile.ArchitectKey)
 	GlobalProject = newProject.ArchitectEditLink
 	Multiplex.HandleFunc(newProject.ArchitectEditLink, editLinkhandler)
 
