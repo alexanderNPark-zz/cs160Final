@@ -45,7 +45,7 @@ type Client struct{
 
 type ClientProfile struct{
 	Name string `json:"name"`
-	Budget float32 `json:"budget"`
+	Budget float64 `json:"budget"`
 	Area string `json:"area"`
 	Location string `json:"location"`
 	Preferences string `json:"preferences"`
