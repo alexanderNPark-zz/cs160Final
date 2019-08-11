@@ -186,7 +186,7 @@ func GenerateProject(client *Client){
 	newProject:=&Project{TextSoFar:client.Profile.Preferences}
 	architect:=Architects[client.Profile.ArchitectKey]
 	architect.Projects[client.Profile.Name] = newProject
-
+	client.CurrentProject=newProject
 
 	beta:=func(w http.ResponseWriter, r *http.Request){
 		t, err := template.ParseFiles("templates/userView.html")
