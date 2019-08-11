@@ -128,7 +128,7 @@ func ReadProfileUntilReceived(connection *websocket.Conn, response chan string, 
 
 		newProfile := &ClientProfile{}
 		json.Unmarshal(message,newProfile)
-
+		fmt.Println(newProfile)
 
 		client,ok:=UserIDs[address]
 		if(!ok){
