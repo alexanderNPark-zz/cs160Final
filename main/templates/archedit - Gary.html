@@ -117,7 +117,9 @@
     <div class="overall">
         <div class="rightbar">
             <div class="tools">
-                <div id="create-rectangle"></div>
+                <button onclick="addRectangle(this)">
+                    Add Draggable Rectangles
+                </button>
 
             </div>
 
@@ -153,6 +155,7 @@
 
 </body>
 <script type="text/javascript">
+    var currentDiv = "bath";
     $(".bath").css( "background-color", "#4CAF50");
     $(".designBoard>.tab").css("visibility","hidden");
     $("#bath").css("visibility","visible");
@@ -164,7 +167,82 @@
         console.log(this.className);
         $(".designBoard>.tab").css("visibility","hidden");
         $("#"+ this.className).css("visibility","visible");
+        currentDiv = this.className;
     });
+    // In case we want "undo" and "redo."
+    //item_properties = []
+    // TODO: handle the case when newly created rectangles overlap
+    // Manually create an element in div designBoard
+    function addRectangle(elem) {
+    //console.log("adding rectanbles...")
+    let furnitureDiv = document.createElement("div")
+    furnitureDiv.id = Math.random()
+    furnitureDiv.style = "background-color: " + randomColor() + ";"
+    furnitureDiv.style.position = "absolute"
+    furnitureDiv.style.width = "500px"
+    furnitureDiv.style.height = "200px"
+    furnitureDiv.textContent = " " // Without this the div will have height 0, i.e., disappear
+    // Right-click to remove itself
+    furnitureDiv.oncontextmenu = function(e) { 
+        e.preventDefault();
+        this.parentNode.removeChild(this) 
+    }
+    document.getElementById(currentDiv).appendChild(furnitureDiv);
+    makeDraggable(furnitureDiv);
+    }
+    function makeDraggable(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.onmousedown = dragMouseDown;
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
+        //elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)- elmnt.clientHeight) + "px";
+        //elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        elmnt.style.left = bounds(elmnt.offsetLeft - pos1, 0, bounds(document.getElementById(currentDiv).clientWidth)- elmnt.clientWidth) + "px";
+    }
+    function bounds (number, lowerlimit, upperlimit) {
+        if (number > upperlimit) {
+            return upperlimit;
+        } else if (number < lowerlimit) {
+            return lowerlimit;
+        } else {
+            return number;
+        }
+    }
+
+    function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+    }
+    function randomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+    }
+
 
 
 </script>
