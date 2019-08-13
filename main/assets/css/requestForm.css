@@ -73,9 +73,9 @@ body
 }
 
 #submitButton:hover{
-    background-color: #ff311d;
-    color: #feff18;
-    border-color: #ff0c07;
+    background-color: #fff;
+    color: #000;
+    border-color:#ffffffff;
 }
 
 
