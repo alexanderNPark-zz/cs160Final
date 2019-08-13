@@ -170,8 +170,14 @@ func hash(s string) string {
 		return uint((90-65)*rand.Float64()) + 65
 	}
 
+	if(len(s)==0){
+		for i:=0;i<10;i++{
+			s= strings.Replace(s, string(s[i]),string(randomChar()), -1)
+		}
+	}
+
 	for i:=0;i<len(s);i++{
-		s= strings.Replace(s, string(s[i]),string(randomChar()), -1)
+		s= strings.Replace(s, string(s[i]),string(randomChar()), -1)+""+string(uint((90-65)*rand.Float64()))
 	}
 	return s
 
