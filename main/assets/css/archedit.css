@@ -10,11 +10,11 @@
     left: 0;
 }
 .tools {
-    position:relative;
+    position: relative;
     top: 0px;
     height: 50vh;
     width: 15vw;
-    border:solid 1px;
+    border: solid 1px;
 }
 .textures {
     position: relative;
@@ -22,7 +22,7 @@
     height: 50vh;
     width: 15vw;
     background-color: WHITE;
-    border:solid 1px;
+    border: solid 1px;
 }
 #create-rectangle {
     width: 50px;
@@ -33,13 +33,13 @@
 .designBoard {
     width: 70vw;
     height: 100vh;
-    border:solid 1px;
+    border: solid 1px;
 }
 
 .chatbox {
     width: 15vw;
     height: 100vh;
-    border:solid 1px;
+    border: solid 1px;
 }
 
 ul {
@@ -67,17 +67,29 @@ li:hover {
 }
 
 .tab {
-    width: 70vw;
-    height: 94vh;
-    position:absolute;
+    width: 69.2vw;
+    height: 93.5vh;
+    position: absolute;
     bottom: 0;
+
+    /* Add blueprint-like grids. */
+    background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 #bath {
-    background-color: green;
+    background-color: #06c;
 }
 #bed {
-    background-color: yellow;
+    background-color: #1E88A8;
 }
 #live {
-    background: red;
+    background-color: green;
 }
+#kitchen {
+    background-color: #B481BB;
+}
+
