@@ -123,6 +123,7 @@ func ReadProfileUntilReceived(connection *websocket.Conn, response chan string, 
 
 		querySearch:=string(message)
 		if(querySearch=="<Finished>"){
+			fmt.Println("No idea")
 			break;
 		}
 
@@ -169,6 +170,14 @@ func hash(s string) string {
 	randomChar:=func() uint{
 		return uint((90-65)*rand.Float64()) + 65
 	}
+	if(len(s)<5){
+		s=""
+		for i:=0;i<10;i++{
+			s+=string(randomChar())
+		}
+		return s
+	}
+
 
 	for i:=0;i<len(s);i++{
 		s= strings.Replace(s, string(s[i]),string(randomChar()), -1)
