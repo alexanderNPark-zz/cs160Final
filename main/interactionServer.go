@@ -89,7 +89,6 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 
 func interactionWrite(connection *websocket.Conn, message []byte){
 
-
 	writer, err := connection.NextWriter(websocket.TextMessage)
 	if(err!=nil){
 		fmt.Println("Failure in lookup writing")
