@@ -170,7 +170,12 @@ func hash(s string) string {
 	randomChar:=func() uint{
 		return uint((90-65)*rand.Float64()) + 65
 	}
-
+	if(len(s)<5){
+		for i:=0;i<5;i++{
+			s+=string(randomChar())
+		}
+		return s
+	}
 
 
 	for i:=0;i<len(s);i++{
