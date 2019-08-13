@@ -1,98 +1,158 @@
-.overall {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.leftbar {
-    width: 15vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-}
-.tools {
-    position: relative;
-    top: 0px;
-    height: 50vh;
-    width: 15vw;
-    border: solid 1px;
-}
-.textures {
-    position: relative;
-    bottom: 0px;
-    height: 50vh;
-    width: 15vw;
-    background-color: WHITE;
-    border: solid 1px;
-}
 #create-rectangle {
-    width: 50px;
-    height: 50px;
-    background-color: black;
+  width: 50px;
+  height: 50px;
+  background-color: black;
 }
 
 .designBoard {
-    width: 70vw;
-    height: 100vh;
-    border: solid 1px;
+  width: 70vw;
+  height: 100vh;
+  border: solid 1px;
 }
 
 .chatbox {
-    width: 15vw;
-    height: 100vh;
-    border: solid 1px;
+  width: 15vw;
+  height: 100vh;
+  border: solid 1px;
 }
 
 ul {
-    height: 6vh;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  height: 6vh;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
+
 li {
-    height: 6vh;
-    width: 15vw;
-    color: white;
-    font-size: 150%;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  height: 6vh;
+  width: 15vw;
+  color: white;
+  font-size: 150%;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
+
 li:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 .tab {
-    width: 69.4vw;
-    height: 92vh;
-    position: absolute;
-    bottom: 0;
-
-    /* Add blueprint-like grids. */
-    background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
+  width: 69.4vw;
+  height: 92vh;
+  position: absolute;
+  bottom: 0;
+  /* Add blueprint-like grids. */
+  /*background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
     linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 1px),
     linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
     background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
-
-    /* Add support for touchscreen devices using document.onpointer* API. */
-    touch-action: none;
+    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;*/
+  /* Add support for touchscreen devices using document.onpointer* API. */
+  touch-action: none;
 }
+
 #bath {
-    background-color: #06c;
-}
-#bed {
-    background-color: #1E88A8;
-}
-#live {
-    background-color: green;
-}
-#kitchen {
-    background-color: #B481BB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*background-color: green;*/
 }
 
+#bed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#live {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overall {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.chatbox {
+  width: 15vw;
+  height: 100vh;
+  border: solid 1px;
+}
+
+.designBoard {
+  width: 70vw;
+  height: 100vh;
+  border: solid 1px;
+}
+
+.rightbar {
+  width: 15vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.tools {
+  position: relative;
+  top: 0px;
+  height: 50vh;
+  width: 15vw;
+  border: solid 1px;
+}
+
+.textures {
+  position: relative;
+  bottom: 0px;
+  height: 50vh;
+  width: 15vw;
+  background-color: WHITE;
+  border: solid 1px;
+}
+
+#create-rectangle {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+}
+
+ul {
+  height: 6vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+li {
+  height: 6vh;
+  width: 15vw;
+  color: white;
+  font-size: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+li:hover {
+  background-color: #111;
+}
+
+.tab {
+  width: 70vw;
+  height: 94vh;
+  position: absolute;
+  bottom: 0;
+}
