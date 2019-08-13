@@ -93,6 +93,22 @@
 
 </body>
 <script type="text/javascript">
+    /*
+    var connectionMade = false;
+    setInterval(func(){
+        if(connectionMade){
+            connection.send(JSON.stringify({content:"</Alive>"}));
+        }
+    },1000)
+
+
+    var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
+          connection.onopen = function(){
+               connectionMade=true;
+               connection.send(JSON.stringify({content:"server"}));
+          }
+    * */
+
     var currentDiv = "bath";
     $(".bath").css( "background-color", "#4CAF50");
     //$("#bath").prepend("<img id = 'test' src = '/static/floorplan.svg' width = '800px' height = '800px'/>");
@@ -180,17 +196,22 @@
         document.onmousemove = null;
 
         /**
-         var canvas = document.getElementById("myCanvas");
+         var bedPNG = document.getElementById("bed");
+         var bathPNG = document.getElementById("bath");
+         var livePNG = document.getElementById("live");
+         var kitchenPNG = document.getElementById("kitchen");
 
-         var link = document.createElement('a');
-         link.download = "myPainting.png";
-         link.href = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
-         link.click();
-         $input.html("Saved")
-         $input.css("backgroundColor","rgb(211,211,211)");
-         $input.prop('disabled', true);
+         let strings=""
+         strings+=bedPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";
+         strings+=bathPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=livePNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
 
-         * */
+         var packet = {content:strings}
+
+
+
+         **/
     }
     }
     function randomColor() {

@@ -128,6 +128,8 @@ func multiplexers(handleMultiplex *http.ServeMux){
 	handleMultiplex.HandleFunc("/sendPreferences", SendProfile)
 
 	handleMultiplex.HandleFunc("/architectSetup",UserView)
+
+	handleMultiplex.HandleFunc("/commun",InteractionServer)
 	handleMultiplex.HandleFunc("/search", search)
 	handleMultiplex.HandleFunc("/edit", bypass)
 }
