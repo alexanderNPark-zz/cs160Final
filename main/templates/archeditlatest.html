@@ -107,6 +107,12 @@
                connectionMade=true;
                connection.send(JSON.stringify({content:"server"}));
           }
+     connection.onmessage = function(receivedMessage){
+            let packet = JSON.parse(receivedMessage.data)
+            //packet["text"]
+            $("#viewAll").append(packet["text"])
+     }
+
     * */
 
     var currentDiv = "bath";
@@ -208,7 +214,7 @@
          strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
 
          var packet = {content:strings}
-
+         connection.send(packet)
 
 
          **/
