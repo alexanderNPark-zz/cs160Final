@@ -1,12 +1,7 @@
 package main
 
-import (
-	"github.com/gorilla/websocket"
-	"net/http"
-	"fmt"
-
-)
-
+/***File Deprecated. Intended File interactionserver***/
+/*
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  4096,
 	WriteBufferSize: 4096,
@@ -73,7 +68,7 @@ func CharWrite(connection *websocket.Conn){
 }
 
 
-
+*/
 
 
 
