@@ -68,7 +68,8 @@ body
     border-color: #ffffff;
     color:white;
     background-color: #020a01;
-    outline:none
+    outline:none;
+    transition:0.3s;
 
 }
 
