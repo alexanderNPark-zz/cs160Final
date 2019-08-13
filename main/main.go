@@ -81,6 +81,16 @@ func index(w http.ResponseWriter, r *http.Request){
 	t.Execute(w,""); //change when template is generated
 }
 
+func bypass(w http.ResponseWriter, r *http.Request){
+	t, err := template.ParseFiles("templates/archeditlatest.html")
+	if(err!=nil){
+		fmt.Println(err);
+		return
+	}
+
+	t.Execute(w,""); //change when template is generated
+}
+
 func notFound(w http.ResponseWriter, r *http.Request, status int){
 	w.WriteHeader(status)
 	if status == http.StatusNotFound {
@@ -119,6 +129,7 @@ func multiplexers(handleMultiplex *http.ServeMux){
 
 	handleMultiplex.HandleFunc("/architectSetup",UserView)
 	handleMultiplex.HandleFunc("/search", search)
+	handleMultiplex.HandleFunc("/edit", bypass)
 }
 
 var Multiplex *http.ServeMux

@@ -193,9 +193,14 @@ var GlobalProject string = ""//this link is tested for a universal user simply a
 
 func GenerateProject(client *Client){
 	newProject:=&Project{TextSoFar:client.Profile.Preferences}
-	architect:=Architects[client.Profile.ArchitectKey]
-	architect.Projects[client.Profile.Name] = newProject
+	architect,ok:=Architects[client.Profile.ArchitectKey]
 	client.CurrentProject=newProject
+	if(!ok){
+		newProject.UserViewLink = "/search"
+		return
+	}
+	architect.Projects[client.Profile.Name] = newProject
+
 
 	viewLinkHandler :=func(w http.ResponseWriter, r *http.Request){
 		t, err := template.ParseFiles("templates/userView.html")
@@ -212,7 +217,7 @@ func GenerateProject(client *Client){
 
 
 	editLinkhandler :=func(w http.ResponseWriter, r *http.Request){
-		t, err := template.ParseFiles("templates/archedit.html")
+		t, err := template.ParseFiles("templates/archeditlatest.html")
 		if(err!=nil){
 			fmt.Println(err);
 			return
