@@ -123,6 +123,7 @@ func ReadProfileUntilReceived(connection *websocket.Conn, response chan string, 
 
 		querySearch:=string(message)
 		if(querySearch=="<Finished>"){
+			fmt.Println("No idea")
 			break;
 		}
 
