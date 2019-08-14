@@ -8,8 +8,8 @@ import (
 )
 
 var interactionUpgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
+	ReadBufferSize:  4096,
+	WriteBufferSize: 4096,
 }
 
 
@@ -75,9 +75,12 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 			continue;
 		}
 		if(typePerson=="client"){
-			//write to server
+			//write to server new text
+
+			interactionWrite(typePerson,"server",packet.Content)
 		} else{
 			//write to client new links
+			interactionWrite(typePerson,"client",packet.Content)
 		}
 
 
@@ -87,14 +90,39 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 
 }
 
-func interactionWrite(connection *websocket.Conn, message []byte){
+func interactionWrite(sender string, oppositeType string, content string) {
 
-	writer, err := connection.NextWriter(websocket.TextMessage)
-	if(err!=nil){
-		fmt.Println("Failure in lookup writing")
-		return
+
+	packet:=UpdateMessage{Content:content}
+	connection,ok:= oneTimePair[oppositeType]
+	if(!ok){
+		packet.StatusOfOther = "Dead"
+		connectionSender,ok:= oneTimePair[sender]
+		if(!ok){
+			return
+		}
+		writer, err := connectionSender.NextWriter(websocket.TextMessage)
+		if(err!=nil){
+			fmt.Println("Failed 105")
+			return
+		}
+		bytesTosend,err:=json.Marshal(packet)
+		writer.Write(bytesTosend)
+
+
+	}else{
+		packet.StatusOfOther = "Alive"
+		writer, err := connection.NextWriter(websocket.TextMessage)
+		if(err!=nil){
+			fmt.Println("Failure in lookup writing")
+			return
+		}
+		bytesTosend,err:=json.Marshal(packet)
+		writer.Write(bytesTosend)
 	}
-	writer.Write([]byte(message))
+
+
+
 
 }
 
