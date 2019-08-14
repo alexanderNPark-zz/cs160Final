@@ -77,6 +77,12 @@ li:hover {
   align-items: center;
 }
 
+#kitchen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .overall {
   display: flex;
   flex-wrap: nowrap;
