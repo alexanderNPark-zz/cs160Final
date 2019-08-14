@@ -11,16 +11,26 @@
 </head>
 
 <body>
-{{.Profile.Name}}
-{{printf "%.2f" .Profile.Budget}}
-{{.Profile.Area}}
-{{.Profile.Location}}
-{{.CurrentProject.TextSoFar}}
-
 <div class="overall">
     <div class="leftbar">
         <div class="tools">
-            <button onclick="addRectangle(this)"> Add Draggable Rectangles </button>
+            Click to add and drag. Right-click to remove.
+            <hr />
+            <button onclick="addItemImage(this, '008-table')">
+                <img src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
+            </button>
+            <button onclick="addItemImage(this, '014-toilet')">
+                <img src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
+            </button>
+            <button onclick="addItemImage(this, '011-tv-table')">
+                <img src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
+            </button>
+            <button onclick="addItemImage(this, '001-sofa')">
+                <img src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
+            </button>
+            <button onclick="addItemImage(this, '025-bed')">
+                <img src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
+            </button>
         </div>
 
         <div class="textures"></div>
@@ -32,6 +42,13 @@
             <li class="bed">Bedroom</li>
             <li class="live">Living Room</li>
             <li class="kitchen">Kitchen</li>
+            <div class="gear">
+                <div class="center"></div>
+                <div class="tooth"></div>
+                <div class="tooth"></div>
+                <div class="tooth"></div>
+                <div class="tooth"></div>
+            </div>
         </ul>
         <div id = "bath" class = "tab"></div>
         <div id = "bed" class = "tab"></div>
@@ -39,7 +56,15 @@
         <div id = "kitchen" class = "tab"></div>
     </div>
 
-    <div class="chatbox"></div>
+    <div class="chatbox">
+        Client Info:
+        {{.Profile.Name}}
+        {{printf "%.2f" .Profile.Budget}}
+        {{.Profile.Area}}
+        {{.Profile.Location}}
+        <hr />
+        {{.CurrentProject.TextSoFar}}
+    </div>
 </div>
 </body>
 
@@ -61,24 +86,17 @@
   //item_properties = []
 
   // Create elements in div designBoard
-  function addRectangle(elem) {
-    let furnitureDiv = document.createElement("div")
-    furnitureDiv.id = Math.random()
-    furnitureDiv.style = "background-color: " + randomColor() + ";"
-    furnitureDiv.style.position = "absolute"
-    let width = "350px"
-    let height = "200px"
-    //if (Math.random() < 0.5) { [width, height] = [height, width] }
-    furnitureDiv.style.width = width
-    furnitureDiv.style.height = height
-    furnitureDiv.textContent = " " // Without this placeholder the div will have height 0, i.e., disappear
+  function addItemImage(elem, itemName) {
+    var img = new Image(250,250);
+    img.style.position = "absolute";
+    img.src = "/assets/icons/lineral/" + itemName + ".svg";
     // Right-click to remove itself
-    furnitureDiv.oncontextmenu = function(e) { 
+    img.oncontextmenu = function(e) { 
         e.preventDefault();
         this.parentNode.removeChild(this) 
     }
-    document.getElementById(currentDiv).appendChild(furnitureDiv);
-    makeDraggable(furnitureDiv);
+    document.getElementById(currentDiv).appendChild(img);
+    makeDraggable(img);
   }
 
   // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
