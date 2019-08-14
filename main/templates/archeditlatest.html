@@ -71,7 +71,7 @@
         <div class="chatbox">
           <div class = "adjust">
                    Settings
-                              <input type="range" min="-300" max="300" value="0" class="slider" id="scaling">
+                              <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
                               <p>Value: <span id="scale"></span> %</p>
             <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
                               <p>Value: <span id="rotate"></span></p>
@@ -182,7 +182,6 @@
         pos3 = e.clientX;
         pos4 = e.clientY;
         // set the element's new position:
-        console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
         //elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)- elmnt.clientHeight) + "px";
         //elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -218,11 +217,11 @@
   var slider = document.getElementById("scaling");
   var output = document.getElementById("scale");
    output.innerHTML = slider.value;
-
+  var originaldimensen = 250;
   slider.oninput = function() {
     output.innerHTML = this.value;
-    rightclickedobject.width = rightclickedobject.width + rightclickedobject.width * (this.value/100);
-    rightclickedobject.height = rightclickedobject.height * this.value/100;
+    rightclickedobject.width = originaldimensen * (this.value/100);
+    rightclickedobject.height = originaldimensen * (this.value/100);
     console.log(rightclickedobject.width);
 
   }
@@ -231,6 +230,8 @@
   var output1 = document.getElementById("rotate");
   output1.innerHTML = slider1.value;
   slider1.oninput = function () {
+    console.log(rightclickedobject.style);
+    rightclickedobject.style.transform = "rotate(" +this.value + "deg)";
     output1.innerHTML = this.value;
   }
   
