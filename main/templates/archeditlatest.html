@@ -57,7 +57,7 @@
         <div class="designBoard">
             <ul>
                 
-                <li class="bath">Bathroom</li>
+                
                 <li class="bed">Bedroom</li>
                 <li class="live">Living Room</li>
                 <li class="kitchen">Kitchen</li>
@@ -75,7 +75,12 @@
                               <p>Value: <span id="scale"></span> %</p>
             <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
                               <p>Value: <span id="rotate"></span></p>
-
+              <button onclick="deselect()">
+                        Deselect
+                    </button>
+            <button onclick="deleteObject()">
+                        Delete
+                    </button>
                 </div>
           <div class = "chat">
           </div>
@@ -113,15 +118,16 @@
 
     * */
 
-    var currentDiv = "bath";
-    $(".bath").css( "background-color", "#4CAF50");
-    //$("#bath").prepend("<img id = 'test' src = '/static/floorplan.svg' width = '800px' height = '800px'/>");
-    //$("#bed").prepend("<img id = 'test' src = '/static/floorplan.svg' width = '800px' height = '800px'/>");
-    //$("#live").prepend("<img id = 'test' src = '/static/floorplan.svg' width = '800px' height = '800px'/>");
+ 
+    var currentDiv = "bed";
+
+    $(".bed").css( "background-color", "#4CAF50");
+    $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+    $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
+    $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
     $(".designBoard>.tab").css("visibility","hidden");
-    $("#bath").css("visibility","visible");
-
-
+    $("#bed").css("visibility","visible");
+  
     $("ul>li").click(function() {
         $("ul>li").css( "background-color", "#333");
         $(this).css( "background-color", "#4CAF50");
@@ -153,11 +159,21 @@
 //         e.preventDefault();
 //         this.parentNode.removeChild(this) 
       e.preventDefault();
+      if (rightclickedobject != null) {
+        rightclickedobject.style.outline = "none";
+      } 
       rightclickedobject = this;
+      rightclickedobject.style.outline = "5px solid red";
       console.log(this);
       
     }
     document.getElementById(currentDiv).appendChild(img);
+    
+    if (rightclickedobject != null) {
+        rightclickedobject.style.outline = "none";
+      } 
+      rightclickedobject = img;
+      rightclickedobject.style.outline = "5px solid red";
     makeDraggable(img);
     }
     function makeDraggable(elmnt) {
@@ -182,9 +198,7 @@
         pos3 = e.clientX;
         pos4 = e.clientY;
         // set the element's new position:
-        //elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)- elmnt.clientHeight) + "px";
-        //elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
         elmnt.style.left = bounds(elmnt.offsetLeft - pos1, 0, bounds(document.getElementById(currentDiv).clientWidth)- elmnt.clientWidth) + "px";
     }
     function bounds (number, lowerlimit, upperlimit) {
@@ -250,9 +264,26 @@
   var output1 = document.getElementById("rotate");
   output1.innerHTML = slider1.value;
   slider1.oninput = function () {
-    console.log(rightclickedobject.style);
     rightclickedobject.style.transform = "rotate(" +this.value + "deg)";
     output1.innerHTML = this.value;
+  }
+  
+//   $(".tab").click(function() {
+//     if (rightclickedobject != null) {
+//         rightclickedobject.style.outline = "none";
+//       } 
+//   });
+  
+  function deselect() {
+    if (rightclickedobject != null) {
+      rightclickedobject.style.outline = "none";
+    }
+  }
+  
+  function deleteObject() {
+    if (rightclickedobject != null) {
+      rightclickedobject.parentNode.removeChild(rightclickedobject);
+    }
   }
   
   
