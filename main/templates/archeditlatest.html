@@ -56,10 +56,7 @@
 
         <div class="designBoard">
             <ul>
-                <div class = "adjust">
-                   Settings
-                  
-                </div>
+                
                 <li class="bath">Bathroom</li>
                 <li class="bed">Bedroom</li>
                 <li class="live">Living Room</li>
@@ -72,16 +69,17 @@
         </div>
 
         <div class="chatbox">
-            <div id="budget">
-                {{printf "%.2f" .Profile.Budget}}
-            </div>
-            <textarea id="viewAll">
+          <div class = "adjust">
+                   Settings
+                              <input type="range" min="-300" max="300" value="0" class="slider" id="scaling">
+                              <p>Value: <span id="scale"></span> %</p>
+            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+                              <p>Value: <span id="rotate"></span></p>
 
-            </textarea>
-
+                </div>
+          <div class = "chat">
+          </div>
         </div>
-
-
     </div>
 
 
@@ -130,8 +128,12 @@
     img.src = "/assets/icons/lineral/" + item + ".svg";
 
     img.oncontextmenu = function(e) { 
-        e.preventDefault();
-        this.parentNode.removeChild(this) 
+//         e.preventDefault();
+//         this.parentNode.removeChild(this) 
+      e.preventDefault();
+      rightclickedobject = this;
+      console.log(this);
+      
     }
     document.getElementById(currentDiv).appendChild(img);
     makeDraggable(img);
@@ -178,19 +180,6 @@
         /* stop moving when mouse button is released:*/
         document.onmouseup = null;
         document.onmousemove = null;
-
-        /**
-         var canvas = document.getElementById("myCanvas");
-
-         var link = document.createElement('a');
-         link.download = "myPainting.png";
-         link.href = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
-         link.click();
-         $input.html("Saved")
-         $input.css("backgroundColor","rgb(211,211,211)");
-         $input.prop('disabled', true);
-
-         * */
     }
     }
     function randomColor() {
@@ -201,6 +190,29 @@
     }
     return color;
     }
+  
+  var rightclickedobject = null;
+  
+  var slider = document.getElementById("scaling");
+  var output = document.getElementById("scale");
+   output.innerHTML = slider.value;
+
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+    rightclickedobject.width = rightclickedobject.width + rightclickedobject.width * (this.value/100);
+    rightclickedobject.height = rightclickedobject.height * this.value/100;
+    console.log(rightclickedobject.width);
+
+  }
+  
+  var slider1 = document.getElementById("rotating");
+  var output1 = document.getElementById("rotate");
+  output1.innerHTML = slider1.value;
+  slider1.oninput = function () {
+    output1.innerHTML = this.value;
+  }
+  
+  
 
     
 
