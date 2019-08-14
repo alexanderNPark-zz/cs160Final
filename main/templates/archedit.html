@@ -69,24 +69,34 @@
 </body>
 
 <script>
-  var currentDiv = "bath";
-  $(".bath").css( "background-color", "#4CAF50");
-  $(".designBoard>.tab").css("visibility","hidden");
-  $("#bath").css("visibility","visible");
-  $("ul>li").click(function() {
-      $("ul>li").css( "background-color", "#333");
-      $(this).css( "background-color", "#4CAF50");
-      console.log(this.className);
-      $(".designBoard>.tab").css("visibility","hidden");
-      $("#"+ this.className).css("visibility","visible");
-      currentDiv = this.className;
-  });
+    // Add floorplan images as the background
+    $(".bath").css( "background-color", "#4CAF50");
+    $("#bath").prepend("<img id = 'bath_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+    $("#bed").prepend("<img id = 'bed_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+    $("#live").prepend("<img id = 'live_floorplan' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
+    $("#kitchen").prepend("<img id = 'kitchen_floorplan' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
+    $(".designBoard>.tab").css("visibility","hidden");
+    $("#bath").css("visibility","visible");
 
-  // In case we want "undo" and "redo."
-  //item_properties = []
+    // Tabs that can be toggled
+    var currentDiv = "bath";
+    $(".bath").css( "background-color", "#4CAF50");
+    $(".designBoard>.tab").css("visibility","hidden");
+    $("#bath").css("visibility","visible");
+    $("ul>li").click(function() {
+        $("ul>li").css( "background-color", "#333");
+        $(this).css( "background-color", "#4CAF50");
+        console.log(this.className);
+        $(".designBoard>.tab").css("visibility","hidden");
+        $("#"+ this.className).css("visibility","visible");
+        currentDiv = this.className;
+    });
 
-  // Create elements in div designBoard
-  function addItemImage(elem, itemName) {
+    // In case we want "undo" and "redo."
+    //item_properties = []
+
+    // Create elements in div designBoard
+    function addItemImage(elem, itemName) {
     var img = new Image(250,250);
     img.style.position = "absolute";
     img.src = "/assets/icons/lineral/" + itemName + ".svg";
@@ -97,10 +107,10 @@
     }
     document.getElementById(currentDiv).appendChild(img);
     makeDraggable(img);
-  }
+    }
 
-  // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
-  function makeDraggable(elmnt) {
+    // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
+    function makeDraggable(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     elmnt.onmousedown = dragMouseDown;
     elmnt.onpointerdown = dragMouseDown;
@@ -145,16 +155,16 @@
         document.onmousemove = null;
         document.onpointermove = null;
     }
-  }
+    }
 
-  function randomColor() {
+    function randomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+    }
 </script>
 
 </html>
