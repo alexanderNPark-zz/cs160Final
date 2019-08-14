@@ -201,3 +201,51 @@ li:hover {
   background: #4CAF50;
   cursor: pointer;
 }
+
+/* Gear with 8 teeth. Ref: codepen.io/sketchbookkeeper/pen/jrmYXm. */
+.gear{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  background: #fff;
+  border-radius: 50%;
+  animation-name: spin;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.gear .center{
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  background: #198;
+  border-radius: 50%;
+}
+
+.tooth{
+  position: absolute;
+  top: -25px;
+  left: 75px;
+  z-index: 1;
+  width: 45px;
+  height: 250px;
+  background:#fff;
+}
+
+.tooth:nth-child(2){
+  transform: rotate(45deg);
+}
+
+.tooth:nth-child(3){
+  transform: rotate(90deg);
+}
+
+.tooth:nth-child(4){
+  transform: rotate(135deg);
+}
+/* Enf of gear with 8 teeth. */
