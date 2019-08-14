@@ -91,6 +91,28 @@
 
 </body>
 <script type="text/javascript">
+    /*
+    var connectionMade = false;
+    setInterval(func(){
+        if(connectionMade){
+            connection.send(JSON.stringify({content:"</Alive>"}));
+        }
+    },1000)
+
+
+    var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
+          connection.onopen = function(){
+               connectionMade=true;
+               connection.send(JSON.stringify({content:"server"}));
+          }
+     connection.onmessage = function(receivedMessage){
+            let packet = JSON.parse(receivedMessage.data)
+            //packet["text"]
+            $("#viewAll").append(packet["text"])
+     }
+
+    * */
+
     var currentDiv = "bath";
     $(".bath").css( "background-color", "#4CAF50");
     //$("#bath").prepend("<img id = 'test' src = '/static/floorplan.svg' width = '800px' height = '800px'/>");
@@ -180,6 +202,26 @@
         /* stop moving when mouse button is released:*/
         document.onmouseup = null;
         document.onmousemove = null;
+
+
+        /**
+         var bedPNG = document.getElementById("bed");
+         var bathPNG = document.getElementById("bath");
+         var livePNG = document.getElementById("live");
+         var kitchenPNG = document.getElementById("kitchen");
+
+         let strings=""
+         strings+=bedPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";
+         strings+=bathPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=livePNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
+
+         var packet = {content:strings}
+         connection.send(packet)
+
+
+         **/
+
     }
     }
     function randomColor() {
