@@ -221,7 +221,7 @@
     var slider = document.getElementById("scaling");
     var output = document.getElementById("scale");
     output.innerHTML = slider.value;
-    var originaldimensen = 250;
+    var originaldimensen = 80;
     slider.oninput = function() {
         output.innerHTML = this.value;
         rightclickeditem.width = originaldimensen * (this.value/100);
