@@ -26,7 +26,7 @@ type UpdateMessage struct{
 	Content string `json:"content"`
 }
 
-var oneTimePair map[string]*websocket.Conn
+var oneTimePair map[string]*websocket.Conn = make(map[string]*websocket.Conn)
 
 func InteractionServer(w http.ResponseWriter, r *http.Request, ){
 	interactionUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
