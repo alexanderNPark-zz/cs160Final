@@ -14,7 +14,7 @@ func main(){
 
 var LATEST string = "templates/archedit.html"
 
-
+var TEST_CLIENT Client = Client{&Project{TextSoFar:"Hey"},&ClientProfile{Name:"Bob",Budget:1000, Location:"Hell", Area:"4000", ArchitectKey:"Ted Mosby"}}
 func search(w http.ResponseWriter, r *http.Request){
 	t, err := template.ParseFiles("templates/search.html")
 	if(err!=nil){
@@ -79,7 +79,8 @@ func index(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	t.Execute(w,""); //change when template is generated
+	err=t.Execute(w,""); //change when template is generated
+
 }
 
 func bypass(w http.ResponseWriter, r *http.Request){
@@ -89,7 +90,10 @@ func bypass(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	t.Execute(w,""); //change when template is generated
+	err=t.Execute(w,TEST_CLIENT); //change when template is generated
+	if(err!=nil){
+
+	}
 }
 
 func notFound(w http.ResponseWriter, r *http.Request, status int){

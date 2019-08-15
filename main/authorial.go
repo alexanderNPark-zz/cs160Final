@@ -37,7 +37,6 @@ var UserIDs= make(map[string]*Client)
 var Architects = make(map[string]*Architect)
 
 type Client struct{
-	ChatLine *websocket.Conn
 	CurrentProject *Project
 	Profile *ClientProfile
 }
