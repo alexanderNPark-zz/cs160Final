@@ -80,12 +80,12 @@
 
 
     // Add floorplan images as the background
-   $(".bath").css( "background-color", "#4CAF50");
+   $(".bath").css( "background-color", "#020a01");
    $(".designBoard>.tab").css("visibility","hidden");
    $("#bath").css("visibility","visible");
    $("ul>li").click(function() {
-       $("ul>li").css( "background-color", "#333");
-       $(this).css( "background-color", "#4CAF50");
+       $("ul>li").css( "background-color", "#c1c1c1");
+       $(this).css( "background-color", "#020a01");
        console.log(this.className);
        $(".designBoard>.tab").css("visibility","hidden");
        $("#"+ this.className).css("visibility","visible");
@@ -93,7 +93,7 @@
    });
 
    // Add floorplan images as the background
-   $(".bath").css( "background-color", "#4CAF50");
+   $(".bath").css( "background-color", "#020a01");
    $("#bath").prepend("<img id = 'bath_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
    $("#bed").prepend("<img id = 'bed_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
    $("#live").prepend("<img id = 'live_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
