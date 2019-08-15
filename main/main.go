@@ -12,7 +12,7 @@ func main(){
 	Initialize()
 }
 
-var LATEST string = "templates/archeditlatest.html"
+var LATEST string = "templates/archedit.html"
 
 
 func search(w http.ResponseWriter, r *http.Request){
