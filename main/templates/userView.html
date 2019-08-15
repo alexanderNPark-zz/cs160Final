@@ -52,9 +52,9 @@
 </body>
 
 <script>
-    /*
+
    var connectionMade = false;
-   setInterval(func(){
+   setInterval(function(){
        if(connectionMade){
            connection.send(JSON.stringify({content:"</Alive>"}));
        }
@@ -64,7 +64,7 @@
    var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
          connection.onopen = function(){
               connectionMade=true;
-              connection.send(JSON.stringify({content:"client"}));
+              connection.send("client");
          }
     connection.onmessage = function(receivedMessage){
            let packet = JSON.parse(receivedMessage.data)
@@ -77,7 +77,7 @@
 
     }
 
-   * */
+
 
     // Add floorplan images as the background
     $(".bath").css( "background-color", "#4CAF50");

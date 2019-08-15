@@ -87,6 +87,30 @@
 </body>
 
 <script>
+
+   var connectionMade = false;
+   setInterval(function(){
+       if(connectionMade){
+           connection.send(JSON.stringify({content:"</Alive>"}));
+       }
+   },1000)
+
+
+   var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
+         connection.onopen = function(){
+              connectionMade=true;
+              connection.send("server");
+         }
+    connection.onmessage = function(receivedMessage){
+           let packet = JSON.parse(receivedMessage.data)
+           //packet["text"]
+           $("#viewAll").append(packet["text"])
+    }
+
+
+
+
+
     // In case we want "undo" and "redo."
     //item_properties = []
 
