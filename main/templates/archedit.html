@@ -58,11 +58,13 @@
 
     <div class="chatbox">
         <div class = "adjust">
-            Drag to scale and rotate
-            <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
+            <h5> Item properties: </h5>
+            Selected item is circled red.
             <p>Zoom: <span id="scale"></span> %</p>
-            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+            <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
             <p>Rotation: <span id="rotate"></span> deg</p>
+            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+
             <button onclick="deselectItem()">
                 Deselect
             </button>
