@@ -14,7 +14,7 @@
 <div class="overall">
     <div class="leftbar">
         <div class="tools">
-            Click to add and drag. Right-click to remove.
+            Click to add and drag. Right-click to select (see the right bar).
             <hr />
             <button onclick="addItemImage(this, '008-table')">
                 <img src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
@@ -22,14 +22,14 @@
             <button onclick="addItemImage(this, '014-toilet')">
                 <img src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
             </button>
-            <button onclick="addItemImage(this, '011-tv-table')">
-                <img src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
-            </button>
             <button onclick="addItemImage(this, '001-sofa')">
                 <img src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
             </button>
             <button onclick="addItemImage(this, '025-bed')">
                 <img src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
+            </button>
+            <button onclick="addItemImage(this, '011-tv-table')">
+                <img src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
             </button>
         </div>
 
@@ -57,29 +57,43 @@
     </div>
 
     <div class="chatbox">
-        Client Info:
-        {{.Profile.Name}}
-        {{printf "%.2f" .Profile.Budget}}
-        {{.Profile.Area}}
-        {{.Profile.Location}}
-        <hr />
-        {{.CurrentProject.TextSoFar}}
+        <div class = "adjust">
+            Drag to scale and rotate
+            <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
+            <p>Zoom: <span id="scale"></span> %</p>
+            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+            <p>Rotation: <span id="rotate"></span> deg</p>
+            <button onclick="deselect()">
+                Deselect
+            </button>
+            <button onclick="deleteObject()">
+                Delete
+            </button>
+        </div>
+        <div class = "chat">
+            Client Info:
+            {{.Profile.Name}}
+            {{printf "%.2f" .Profile.Budget}}
+            {{.Profile.Area}}
+            {{.Profile.Location}}
+            <hr />
+            {{.CurrentProject.TextSoFar}}
+        </div>
     </div>
 </div>
 </body>
 
 <script>
-    // Add floorplan images as the background
-    $(".bath").css( "background-color", "#4CAF50");
-    $("#bath").prepend("<img id = 'bath_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
-    $("#bed").prepend("<img id = 'bed_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
-    $("#live").prepend("<img id = 'live_floorplan' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
-    $("#kitchen").prepend("<img id = 'kitchen_floorplan' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
-    $(".designBoard>.tab").css("visibility","hidden");
-    $("#bath").css("visibility","visible");
+    // In case we want "undo" and "redo."
+    //item_properties = []
+
+    // Gary's scaling+rotating. See archeditlatest.html for its history.
+    var rightclickedobject = null;
 
     // Tabs that can be toggled
     var currentDiv = "bath";
+
+    // Deal with tabs.
     $(".bath").css( "background-color", "#4CAF50");
     $(".designBoard>.tab").css("visibility","hidden");
     $("#bath").css("visibility","visible");
@@ -92,78 +106,144 @@
         currentDiv = this.className;
     });
 
-    // In case we want "undo" and "redo."
-    //item_properties = []
+    // Add floorplan images as the background
+    $(".bath").css( "background-color", "#4CAF50");
+    $("#bath").prepend("<img id = 'bath_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+    $("#bed").prepend("<img id = 'bed_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+    $("#live").prepend("<img id = 'live_floorplan' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
+    $("#kitchen").prepend("<img id = 'kitchen_floorplan' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
+    $(".designBoard>.tab").css("visibility","hidden");
+    $("#bath").css("visibility","visible");
 
     // Create elements in div designBoard
     function addItemImage(elem, itemName) {
-    var img = new Image(250,250);
-    img.style.position = "absolute";
-    img.src = "/assets/icons/lineral/" + itemName + ".svg";
-    // Right-click to remove itself
-    img.oncontextmenu = function(e) { 
-        e.preventDefault();
-        this.parentNode.removeChild(this) 
-    }
-    document.getElementById(currentDiv).appendChild(img);
-    makeDraggable(img);
+        // TODO: rename this function to 'addItem'
+        // TODO: select the item right after adding item.
+        // TODO: merge the following statement into a function for selecting an item.
+        // Clear previous selection.
+        if (rightclickedobject != null) { 
+            rightclickedobject.style.outline = "none";
+        } 
+        var img = new Image(250,250);
+        img.style.position = "absolute";
+        img.src = "/assets/icons/lineral/" + itemName + ".svg";
+
+        // Right-click to select itself for scale & rotate.
+        img.oncontextmenu = function(e) { 
+            e.preventDefault();
+            // Search this global var for its usage.
+            rightclickedobject = this;
+            //console.log(this);
+            // Clear previous selection.
+            if (rightclickedobject != null) { 
+                rightclickedobject.style.outline = "none";
+            } 
+            rightclickedobject.style.outline = "5px solid red";
+        }
+        document.getElementById(currentDiv).appendChild(img);
+        makeDraggable(img);
+        // TODO: merge the following two lines into a function for selecting an item.
+        rightclickedobject = img;
+        rightclickedobject.style.outline = "5px solid red";
     }
 
     // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
     function makeDraggable(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    elmnt.onmousedown = dragMouseDown;
-    elmnt.onpointerdown = dragMouseDown;
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        document.onpointerup = closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
-        document.onpointermove = elementDrag;
-    }
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // Gary: set the element's new position:
-        //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
-        elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)- elmnt.clientHeight) + "px";
-        elmnt.style.left = bounds(elmnt.offsetLeft - pos1, 0, bounds(document.getElementById(currentDiv).clientWidth)- elmnt.clientWidth) + "px";
-    }
-    function bounds (number, lowerlimit, upperlimit) {
-        if (number > upperlimit) {
-            return upperlimit;
-        } else if (number < lowerlimit) {
-            return lowerlimit;
-        } else {
-            return number;
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        elmnt.onmousedown = dragMouseDown;
+        elmnt.onpointerdown = dragMouseDown;
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onpointerup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+            document.onpointermove = elementDrag;
         }
-    }
-    function closeDragElement() {
-        /* stop moving when mouse button is released:*/
-        document.onmouseup = null;
-        document.onpointerend = null;
-        document.onmousemove = null;
-        document.onpointermove = null;
-    }
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // Gary: set the element's new position:
+            //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
+            elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)- elmnt.clientHeight) + "px";
+            elmnt.style.left = bounds(elmnt.offsetLeft - pos1, 0, bounds(document.getElementById(currentDiv).clientWidth)- elmnt.clientWidth) + "px";
+        }
+        function bounds (number, lowerlimit, upperlimit) {
+            if (number > upperlimit) {
+                return upperlimit;
+            } else if (number < lowerlimit) {
+                return lowerlimit;
+            } else {
+                return number;
+            }
+        }
+        function closeDragElement() {
+            /* stop moving when mouse button is released:*/
+            document.onmouseup = null;
+            document.onpointerend = null;
+            document.onmousemove = null;
+            document.onpointermove = null;
+        }
     }
 
     function randomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
-    return color;
+
+    // Gary's scaling+rotating. See archeditlatest.html for its history
+    var slider = document.getElementById("scaling");
+    var output = document.getElementById("scale");
+    output.innerHTML = slider.value;
+    var originaldimensen = 250;
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+        rightclickedobject.width = originaldimensen * (this.value/100);
+        rightclickedobject.height = originaldimensen * (this.value/100);
+        console.log(rightclickedobject.width);
+
+    }
+    
+    var slider1 = document.getElementById("rotating");
+    var output1 = document.getElementById("rotate");
+    output1.innerHTML = slider1.value;
+    slider1.oninput = function () {
+        rightclickedobject.style.transform = "rotate(" +this.value + "deg)";
+        output1.innerHTML = this.value;
+    }
+    
+    //   $(".tab").click(function() {
+    //     if (rightclickedobject != null) {
+    //         rightclickedobject.style.outline = "none";
+    //       } 
+    //   });
+    
+    function deselect() {
+        if (rightclickedobject != null) {
+            // Cleanup after deselecting an item.
+            //document.getElementById("scale").innerHTML = '0';
+            //document.getElementById("rotate").innerHTML = '0';
+            rightclickedobject.style.outline = "none";
+        }
+    }
+    
+    function deleteObject() {
+        if (rightclickedobject != null) {
+        rightclickedobject.parentNode.removeChild(rightclickedobject);
+        }
     }
 </script>
 
