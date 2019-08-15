@@ -12,6 +12,7 @@ func main(){
 	Initialize()
 }
 
+var LATEST string = "templates/archeditlatest.html"
 
 
 func search(w http.ResponseWriter, r *http.Request){
@@ -82,7 +83,7 @@ func index(w http.ResponseWriter, r *http.Request){
 }
 
 func bypass(w http.ResponseWriter, r *http.Request){
-	t, err := template.ParseFiles("templates/archeditlatest.html")
+	t, err := template.ParseFiles(LATEST)
 	if(err!=nil){
 		fmt.Println(err);
 		return

@@ -217,7 +217,7 @@ func GenerateProject(client *Client){
 
 
 	editLinkhandler :=func(w http.ResponseWriter, r *http.Request){
-		t, err := template.ParseFiles("templates/archeditlatest.html")
+		t, err := template.ParseFiles(LATEST)
 		if(err!=nil){
 			fmt.Println(err);
 			return
