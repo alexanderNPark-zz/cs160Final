@@ -83,7 +83,14 @@
    $(".bath").css( "background-color", "#4CAF50");
    $(".designBoard>.tab").css("visibility","hidden");
    $("#bath").css("visibility","visible");
-
+   $("ul>li").click(function() {
+       $("ul>li").css( "background-color", "#333");
+       $(this).css( "background-color", "#4CAF50");
+       console.log(this.className);
+       $(".designBoard>.tab").css("visibility","hidden");
+       $("#"+ this.className).css("visibility","visible");
+       currentDiv = this.className;
+   });
 
    // Add floorplan images as the background
    $(".bath").css( "background-color", "#4CAF50");
