@@ -164,9 +164,8 @@ li:hover {
 }
 
 .adjust {
-  position:absolute;
-  width: 250px;
-  height: 200px;
+  position:relative;
+  height : 50vh;
   background-color:grey;
 }
 
