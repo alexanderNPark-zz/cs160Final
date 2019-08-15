@@ -80,28 +80,19 @@
 
 
     // Add floorplan images as the background
-    $(".bath").css( "background-color", "#4CAF50");
-    $("#bath").prepend("<img id = 'bath_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
-    $("#bed").prepend("<img id = 'bed_floorplan' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
-    $("#live").prepend("<img id = 'live_floorplan' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
-    $("#kitchen").prepend("<img id = 'kitchen_floorplan' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
-    $(".designBoard>.tab").css("visibility","hidden");
-    $("#bath").css("visibility","visible");
+   $(".bath").css( "background-color", "#4CAF50");
+   $(".designBoard>.tab").css("visibility","hidden");
+   $("#bath").css("visibility","visible");
 
-    // Tabs that can be toggled
-    var currentDiv = "bath";
-    $(".bath").css( "background-color", "#4CAF50");
-    $(".designBoard>.tab").css("visibility","hidden");
-    $("#bath").css("visibility","visible");
-    $("ul>li").click(function() {
-        $("ul>li").css( "background-color", "#333");
-        $(this).css( "background-color", "#4CAF50");
-        console.log(this.className);
-        $(".designBoard>.tab").css("visibility","hidden");
-        $("#"+ this.className).css("visibility","visible");
-        currentDiv = this.className;
-    });
 
+   // Add floorplan images as the background
+   $(".bath").css( "background-color", "#4CAF50");
+   $("#bath").prepend("<img id = 'bath_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+   $("#bed").prepend("<img id = 'bed_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
+   $("#live").prepend("<img id = 'live_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
+   $("#kitchen").prepend("<img id = 'kitchen_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
+   $(".designBoard>.tab").css("visibility","hidden");
+   $("#bath").css("visibility","visible");
 
 
 </script>
