@@ -119,6 +119,11 @@
     function addItemImage(elem, itemName) {
         // TODO: rename this function to 'addItem'
         // TODO: select the item right after adding item.
+        // TODO: merge the following statement into a function for selecting an item.
+        // Clear previous selection.
+        if (rightclickedobject != null) { 
+            rightclickedobject.style.outline = "none";
+        } 
         var img = new Image(250,250);
         img.style.position = "absolute";
         img.src = "/assets/icons/lineral/" + itemName + ".svg";
@@ -129,10 +134,17 @@
             // Search this global var for its usage.
             rightclickedobject = this;
             //console.log(this);
+            // Clear previous selection.
+            if (rightclickedobject != null) { 
+                rightclickedobject.style.outline = "none";
+            } 
+            rightclickedobject.style.outline = "5px solid red";
         }
         document.getElementById(currentDiv).appendChild(img);
         makeDraggable(img);
+        // TODO: merge the following two lines into a function for selecting an item.
         rightclickedobject = img;
+        rightclickedobject.style.outline = "5px solid red";
     }
 
     // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
