@@ -84,7 +84,7 @@ func index(w http.ResponseWriter, r *http.Request){
 }
 
 func bypass(w http.ResponseWriter, r *http.Request){
-	t, err := template.ParseFiles("templates/archedit.html")
+	t, err := template.ParseFiles(LATEST)
 	if(err!=nil){
 		fmt.Println(err);
 		return
