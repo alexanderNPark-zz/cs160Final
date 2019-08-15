@@ -28,25 +28,6 @@
 <body>
 <div class="overall">
     <div class="leftbar">
-        <div class="tools">
-            Click to add and drag. Right-click to remove.
-            <hr />
-            <button onclick="addItemImage(this, '008-table')">
-                <img src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
-            </button>
-            <button onclick="addItemImage(this, '014-toilet')">
-                <img src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
-            </button>
-            <button onclick="addItemImage(this, '011-tv-table')">
-                <img src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
-            </button>
-            <button onclick="addItemImage(this, '001-sofa')">
-                <img src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
-            </button>
-            <button onclick="addItemImage(this, '025-bed')">
-                <img src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
-            </button>
-        </div>
 
         <div class="textures"></div>
     </div>
@@ -90,8 +71,9 @@
            //packet["text"]
            if(packet["statusOfOther"]=="dead"){
            }else{
-                packet["content"]
+                let arrayOfLinks=packet["content"].split(",")
            }
+
 
     }
 
