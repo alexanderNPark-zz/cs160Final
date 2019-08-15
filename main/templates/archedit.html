@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-4.3.1/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="/assets/css/archedit.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -58,15 +59,17 @@
 
     <div class="chatbox">
         <div class = "adjust">
-            Drag to scale and rotate
-            <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
+            <h5> Item properties: </h5>
+            Selected item is circled red.
             <p>Zoom: <span id="scale"></span> %</p>
-            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+            <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
             <p>Rotation: <span id="rotate"></span> deg</p>
+            <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
+
             <button onclick="deselectItem()">
                 Deselect
             </button>
-            <button onclick="deleteObject()">
+            <button onclick="deleteItem()">
                 Delete
             </button>
         </div>
@@ -88,7 +91,7 @@
     //item_properties = []
 
     // Gary's scaling+rotating. See archeditlatest.html for its history.
-    var rightclickedobject = null;
+    var rightclickeditem = null;
 
     // Tabs that can be toggled
     var currentDiv = "bath";
@@ -197,9 +200,9 @@
     var originaldimensen = 250;
     slider.oninput = function() {
         output.innerHTML = this.value;
-        rightclickedobject.width = originaldimensen * (this.value/100);
-        rightclickedobject.height = originaldimensen * (this.value/100);
-        console.log(rightclickedobject.width);
+        rightclickeditem.width = originaldimensen * (this.value/100);
+        rightclickeditem.height = originaldimensen * (this.value/100);
+        console.log(rightclickeditem.width);
 
     }
     
@@ -207,16 +210,16 @@
     var output1 = document.getElementById("rotate");
     output1.innerHTML = slider1.value;
     slider1.oninput = function () {
-        rightclickedobject.style.transform = "rotate(" +this.value + "deg)";
+        rightclickeditem.style.transform = "rotate(" +this.value + "deg)";
         output1.innerHTML = this.value;
     }
     
     function selectItem(elem) {
-        // Search the global var, rightclickedobject, for its usage.
+        // Search the global var, rightclickeditem, for its usage.
         // Clear previous selection.
         deselectItem();
-        rightclickedobject = elem;
-        rightclickedobject.style.outline = "5px solid red";
+        rightclickeditem = elem;
+        rightclickeditem.style.outline = "5px solid red";
     }
 
     function deselectItem() {
@@ -225,20 +228,20 @@
         document.getElementById("scaling").value = "100"; // Default to 100%
         document.getElementById("rotate").innerHTML = "0";
         document.getElementById("rotating").value = "0"
-        if (rightclickedobject != null) {
+        if (rightclickeditem != null) {
             // Cleanup after deselecting an item.
-            rightclickedobject.style.outline = "none";
+            rightclickeditem.style.outline = "none";
         }
     }
     
-    // Deselect on tab switch.
-    //$(".tab").click(function() {
-    //    deselectItem();
-    //});
+    // Deselect when tab is switched.
+    $(".bath, .bed, .live, .kitchen").click(function() {
+        deselectItem();
+    });
     
-    function deleteObject() {
-        if (rightclickedobject != null) {
-        rightclickedobject.parentNode.removeChild(rightclickedobject);
+    function deleteItem() {
+        if (rightclickeditem != null) {
+        rightclickeditem.parentNode.removeChild(rightclickeditem);
         }
     }
 </script>

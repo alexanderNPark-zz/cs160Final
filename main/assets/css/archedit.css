@@ -150,6 +150,7 @@ li {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  -webkit-user-select: none;
 }
 
 li:hover {
@@ -208,6 +209,7 @@ li:hover {
 }
 
 .floorplanImg {
+  height: 80vh;
   width: 50vw;
-  height: 50vw;
 }
+
