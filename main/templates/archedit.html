@@ -63,7 +63,7 @@
             <p>Zoom: <span id="scale"></span> %</p>
             <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
             <p>Rotation: <span id="rotate"></span> deg</p>
-            <button onclick="deselect()">
+            <button onclick="deselectItem()">
                 Deselect
             </button>
             <button onclick="deleteObject()">
@@ -214,12 +214,12 @@
     function selectItem(elem) {
         // Search the global var, rightclickedobject, for its usage.
         // Clear previous selection.
-        deselect();
+        deselectItem();
         rightclickedobject = elem;
         rightclickedobject.style.outline = "5px solid red";
     }
 
-    function deselect() {
+    function deselectItem() {
         // Reset everything.
         document.getElementById("scale").innerHTML = "0";
         document.getElementById("scaling").value = "100"; // Default to 100%
@@ -233,7 +233,7 @@
     
     // Deselect on tab switch.
     //$(".tab").click(function() {
-    //    deselect();
+    //    deselectItem();
     //});
     
     function deleteObject() {
