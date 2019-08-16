@@ -143,7 +143,7 @@ li:hover {
   height: 3vw;
   background-color : #35AEDD;
   border:none;
-  border:radius: 15px;
+  border-radius: 15px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -339,7 +339,7 @@ li:hover {
 .setting-buttons {
   background-color : #35AEDD;
   border:none;
-  border:radius: 15px;
+  border-radius: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
