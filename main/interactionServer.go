@@ -62,15 +62,23 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 	}
 	defer close()
 
+	work:=make(chan []byte)
+	activeRead:=func(connection *websocket.Conn){
+		for{
+			_, message, err := connection.ReadMessage()
+			work<-message
+			if(err!=nil){
+				fmt.Println("Failure in interaction read" ,err)
+				return
+			}
+		}
+	}
+	go activeRead(connection)
 	packet:=&PacketMessage{}
 	for{
 
-		_, message, err := connection.ReadMessage()
-		if(err!=nil){
-			fmt.Println("Failure in interaction read" ,err)
-			return
-		}
-		json.Unmarshal(message,packet)
+
+		json.Unmarshal(<-work,packet)
 		if(packet.Content==aliveStatus){
 			fmt.Println(typePerson+" "+aliveStatus)
 			continue;
@@ -123,7 +131,7 @@ func interactionWrite(sender string, oppositeType string, content string) {
 		}
 		bytesTosend,err:=json.Marshal(packet)
 		writer.Write(bytesTosend)
-		fmt.Println("Packet sent to Server"+content)
+		fmt.Println("Packet sent to"+oppositeType+content)
 	}
 
 
