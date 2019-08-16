@@ -19,7 +19,12 @@ connection.onmessage = function(receivedMessage){
     }else{
         let tokens = packet["content"].split("</Delimiter>")
 
-        location.href = tokens[0]
+
+
+        var link = document.createElement('a');
+        link.download = "myPainting.png";
+        link.href = tokens[0].replace("</Delimiter>","")
+        link.click();
 
     }
 
