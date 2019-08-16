@@ -360,10 +360,11 @@
 
          var strings = "";
          strings+=toImage(bedPNG)+","
+        console.log("string1",strings)
          strings+=toImage(bathPNG)+","
          strings+=toImage(livePNG)+","
          strings+=toImage(kitchenPNG)
-        console.log("message "+strings)
+
         var packet = {content:strings}
         connection.send(packet)
 
