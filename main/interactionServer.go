@@ -67,7 +67,7 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 
 		_, message, err := connection.ReadMessage()
 		if(err!=nil){
-			fmt.Println("Failure in interaction read")
+			fmt.Println("Failure in interaction read" ,err)
 			return
 		}
 		json.Unmarshal(message,packet)
@@ -79,7 +79,7 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 			//write to server new text
 
 			interactionWrite(typePerson,"server",packet.Content)
-			fmt.Println(packet.Content)
+			fmt.Println("packet rec:"+packet.Content)
 			GlobalProject.TextSoFar+="\n"+packet.Content;
 
 		} else{
@@ -123,7 +123,7 @@ func interactionWrite(sender string, oppositeType string, content string) {
 		}
 		bytesTosend,err:=json.Marshal(packet)
 		writer.Write(bytesTosend)
-		fmt.Println(content)
+		fmt.Println("Packet sent to Server"+content)
 	}
 
 
