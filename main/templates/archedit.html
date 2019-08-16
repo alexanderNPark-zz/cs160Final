@@ -51,7 +51,7 @@
             <div id = "budget"> Budget: 
               <div class = "remain-budget"> 10000</div>
             </div>
-             <button class = "btns"  onclick="addItemImage(this, '015-sink.svg', 200)">
+             <button class = "btns"  onclick="addItemImage(this, '015-sink', 200)">
                 <img class = "item-img" src="/assets/icons/lineral/015-sink.svg" alt="Table.svg">  Sink </img>
                 <div id = "item1"> $200</div>
             </button>
@@ -465,10 +465,16 @@
 
 
         return (html2canvas(elem).then((canvas) => {
-
+            globalLoad+=1
             console.log("then")
-            //console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
-            stack.push(canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"));
+            console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
+            message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delimter>"
+            if(globalLoad%=4){
+               var packet = {content:message}
+               connection.send(JSON.stringify(packet))
+               message=""
+            }
+           
         }).catch(err => {
             console.error(err);
         }));
@@ -494,10 +500,8 @@
          //strings+=toImage(livePNG)+",";
          //strings+=toImage(kitchenPNG)
 
-        var packet = {content:message}
-
-        connection.send(packet)
-        message=""
+      
+        
 
     }
     function deductBudget(val) {
