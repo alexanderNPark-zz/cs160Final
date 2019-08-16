@@ -94,7 +94,6 @@
             <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
             <p>Rotation: <span id="rotate"></span> deg</p>
             <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
-
             <button onclick="deselectItem()">
                 Deselect
             </button>
@@ -118,15 +117,12 @@
 </body>
 
 <script>
-
    var connectionMade = false;
    setInterval(function(){
        if(connectionMade){
            connection.send(JSON.stringify({content:"</Alive>"}));
        }
    },1000)
-
-
    var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
          connection.onopen = function(){
               connectionMade=true;
@@ -136,18 +132,22 @@
              console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-           
-         $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
-
+        if(packet["content"]==""){
+            return
+        }
+        else{
+            $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
+        }
            
     }
-
-
+   connection.onclose = function(){
+       console.log("closed")
+       connection.close()
+       connectionMade=false;
+   }
    connection.onerror = function(){
              console.log("failed")
    }
-
-
    $("#chatBoxMessage").css("width","100%")
    $("#chatBoxMessage").css("height","50%")
    $("#chatBoxMessage").css("resize","none");
@@ -155,13 +155,8 @@
    $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:\n{{.CurrentProject.TextSoFar}}");
    $("#chatBoxMessage").css("background-color","#000")
    $("#chatBoxMessage").css("color","#fff")
-
-
-
-
     // In case we want "undo" and "redo."
     //item_properties = []
-
     // Gary's scaling+rotating. See archeditlatest.html for its history.
     var rightclickeditem = null;
     // Add floorplan images as the background
@@ -172,7 +167,6 @@
     var img_dimensions = document.getElementById("bed").clientHeight * 0.9;
     $(".bed").css("background-color", highlight);
     $("#bath").prepend("<img id = 'bath-room' src = '/assets/imgs/floorplans/bathroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
-
     $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/bedroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
     $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/livingroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
     $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/kitchen-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
@@ -182,7 +176,6 @@
     console.log(item_dimensions);
     $(".item-img").css("width", item_dimensions + "px");
     $(".item-img").css("height", item_dimensions + "px");
-
   
     $("ul>li").click(function() {
         $("." + currentDiv).css("background-color", "");
@@ -191,26 +184,21 @@
         $("#" + this.className).css("visibility", "visible");
         currentDiv = this.className;
     });
-
-
     // Create elements in div designBoard
     function addItemImage(elem, itemName) {
         // TODO: rename this function to 'addItem'
         var img = new Image(80,80);
         img.style.position = "absolute";
         img.src = "/assets/icons/lineral/" + itemName + ".svg";
-
         // Right-click to select itself for scale & rotate.
         img.oncontextmenu = function(e) { 
             e.preventDefault();
             selectItem(this);
         }
-
         document.getElementById(currentDiv).appendChild(img);
         makeDraggable(img);
         selectItem(img);
     }
-
     // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
     function makeDraggable(elmnt) {
       resetItemProperties();
@@ -242,7 +230,7 @@
             
             console.log("pos3: " + document.getElementById(currentDiv).clientWidth);
             //pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
-            pos4 = bounds(pos4, screen.height - document.getElementById(currentDiv).offsetHeight , document.getElementById(currentDiv).offsetHeight);
+            pos4 = bounds(pos4, screen.height - document.getElementById(currentDiv).clientHeight , document.getElementById(currentDiv).clientHeight);
             pos3 = bounds(pos3, (screen.width - document.getElementById(currentDiv).clientWidth)/2 , (screen.width - document.getElementById(currentDiv).clientWidth)/2 +  document.getElementById(currentDiv).clientWidth);
             // Gary: set the element's new position:
             //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
@@ -266,7 +254,6 @@
             document.onpointermove = null;
         }
     }
-
     function randomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -275,7 +262,6 @@
         }
         return color;
     }
-
     // Gary's scaling+rotating. See archeditlatest.html for its history
     var slider = document.getElementById("scaling");
     var output = document.getElementById("scale");
@@ -286,7 +272,6 @@
         rightclickeditem.width = originaldimensen * (this.value/100);
         rightclickeditem.height = originaldimensen * (this.value/100);
         console.log(rightclickeditem.width);
-
     }
     
     var slider1 = document.getElementById("rotating");
@@ -305,8 +290,6 @@
         rightclickeditem.style.outline = "5px solid red";
     }
   
-
-
     function deselectItem() {
         // Reset everything.
 //         document.getElementById("scale").innerHTML = "0";
@@ -334,6 +317,21 @@
         if (rightclickeditem != null) {
         rightclickeditem.parentNode.removeChild(rightclickeditem);
         }
+    }
+    function transmit(){
+        /**
+         var bedPNG = document.getElementById("bed");
+         var bathPNG = document.getElementById("bath");
+         var livePNG = document.getElementById("live");
+         var kitchenPNG = document.getElementById("kitchen");
+         let strings=""
+         strings+=bedPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";
+         strings+=bathPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=livePNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
+         strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
+         var packet = {content:strings}
+         connection.send(packet)
+         **/
     }
 </script>
 
