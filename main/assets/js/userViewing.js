@@ -44,7 +44,7 @@ $("#textToSend").keypress(function(e){
         packet = {content:textToSend}
         connection.send(JSON.stringify(packet))
         $("#userTextSoFar").append("\n"+textToSend)
-
+        console.log($("#userTextSoFar").val())
         $(this).val("")
         return false
     }
