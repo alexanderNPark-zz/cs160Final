@@ -23,9 +23,18 @@ connection.onmessage = function(receivedMessage){
 
 
 }
+$("#chatBoxText").css("width","100%")
+$("#chatBoxText").css("height","10%")
+$("#chatBoxText").css("font-size","1vw")
 
 $("#textToSend").css("width","100%")
-$("#textToSend").css("height","50%")
+$("#textToSend").css("height","40%")
+
+$("#textToSend").attr("placeholder", "Type here and hit enter to send to Architect");
+$("#textToSend").css("resize","none");
+$("#textToSend").attr("rows","1");
+$("#textToSend").attr("cols","1");
+
 $("#textToSend").keypress(function(e){
 
     if(e.keyCode===13){

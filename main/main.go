@@ -116,10 +116,10 @@ func clientWebServer(w http.ResponseWriter, r *http.Request){
 }
 
 func architectEdit(w http.ResponseWriter, r *http.Request){
-	if(GlobalProject==""){
+	if(GlobalProject==nil){
 		fmt.Fprintln(w,"Faliure. No Architects have a project yet");
 	}else{
-		http.Redirect(w,r,GlobalProject,http.StatusSeeOther)
+		http.Redirect(w,r,GlobalProject.ArchitectEditLink,http.StatusSeeOther)
 	}
 }
 

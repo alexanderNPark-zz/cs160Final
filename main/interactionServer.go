@@ -67,17 +67,20 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 
 		_, message, err := connection.ReadMessage()
 		if(err!=nil){
-			fmt.Println("Failure in lookup reading")
+			fmt.Println("Failure in interaction read")
 			return
 		}
 		json.Unmarshal(message,packet)
 		if(packet.Content==aliveStatus){
+			fmt.Println(typePerson+" "+aliveStatus)
 			continue;
 		}
 		if(typePerson=="client"){
 			//write to server new text
 
 			interactionWrite(typePerson,"server",packet.Content)
+			GlobalProject.TextSoFar+="\n"+packet.Content;
+
 		} else{
 			//write to client new links
 			interactionWrite(typePerson,"client",packet.Content)

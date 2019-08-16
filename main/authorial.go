@@ -188,7 +188,8 @@ func hash(s string) string {
 
 
 
-var GlobalProject string = ""//this link is tested for a universal user simply a test
+var GlobalProject *Project = nil//this link is tested for a universal user simply a test
+
 
 func GenerateProject(client *Client){
 	newProject:=&Project{TextSoFar:client.Profile.Preferences}
@@ -224,8 +225,7 @@ func GenerateProject(client *Client){
 		t.Execute(w,client); //change when template is generated
 	}
 	newProject.ArchitectEditLink = "/"+hash(client.Profile.Name+client.Profile.ArchitectKey)
-	GlobalProject = newProject.ArchitectEditLink
-	fmt.Println(GlobalProject)
+	GlobalProject = newProject
 	Multiplex.HandleFunc(newProject.ArchitectEditLink, editLinkhandler)
 
 }
