@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Edit-{{.Profile.Name}}</title>
 
-    <script src="/assets/vendor/jquery-1.10.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-4.3.1/bootstrap.min.css">
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.css">
 
     <link rel="stylesheet" type="text/css" href="/assets/css/archedit.css">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -364,9 +364,9 @@
             pos4 = e.clientY;
             
 
-            //pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
+            // These two lines have no real effect.
+            pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
             pos4 = bounds(pos4, screen.height/100 * 6 , document.getElementById(currentDiv).clientHeight);
-            pos3 = bounds(pos3, (screen.width - document.getElementById(currentDiv).clientWidth)/2 , (screen.width - document.getElementById(currentDiv).clientWidth)/2 +  document.getElementById(currentDiv).clientWidth);
             // Gary: set the element's new position:
             //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
             elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, document.getElementById(currentDiv).clientHeight - elmnt.clientHeight) + "px";
@@ -460,13 +460,19 @@
 
     var globalLoad = 0;
     var message = ""
+    var stack = []
     function toImage(elem){
 
-        return html2canvas(elem, {
 
-        }).then((canvas) => {
-            return canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
-        });
+        return (html2canvas(elem).then((canvas) => {
+
+            console.log("then")
+            //console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
+            stack.push(canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"));
+        }).catch(err => {
+            console.error(err);
+        }));
+
     }
 
     function transmit() {
@@ -477,13 +483,21 @@
          var kitchenPNG = document.getElementById("kitchen");
 
          var strings = "";
-         strings+=toImage(bedPNG)+","
-         strings+=toImage(bathPNG)+","
-         strings+=toImage(livePNG)+","
-         strings+=toImage(kitchenPNG)
 
-        var packet = {content:strings}
+        console.log("enter")
+        toImage(bedPNG)
+        toImage(bathPNG)
+        toImage(livePNG)
+        toImage(kitchenPNG)
+        console.log("done")
+         //strings+=toImage(bathPNG)+",";
+         //strings+=toImage(livePNG)+",";
+         //strings+=toImage(kitchenPNG)
+
+        var packet = {content:message}
+
         connection.send(packet)
+        message=""
 
     }
     function deductBudget(val) {

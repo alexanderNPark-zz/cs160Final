@@ -205,6 +205,9 @@ li:hover {
 
 
 .tab {
+  /* Add support for touchscreen devices using document.onpointer* API. */
+  touch-action: none;
+  
   width: 70vw;
   height: 94vh;
   background-color: #F4F4F4;
