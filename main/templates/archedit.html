@@ -359,12 +359,13 @@
          var kitchenPNG = document.getElementById("kitchen");
 
          var strings = "";
+        console.log("enter")
          strings+=toImage(bedPNG)+","
 
          strings+=toImage(bathPNG)+","
          strings+=toImage(livePNG)+","
          strings+=toImage(kitchenPNG)
-        console.log(message)
+        console.log("Pass by")
         var packet = {content:message}
         connection.send(packet)
 
