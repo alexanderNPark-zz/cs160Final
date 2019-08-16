@@ -140,6 +140,11 @@
     }
 
 
+   connection.onerror = function(){
+             console.log("failed")
+   }
+
+
    $("#chatBoxMessage").css("width","100%")
    $("#chatBoxMessage").css("height","50%")
    $("#chatBoxMessage").css("resize","none");
