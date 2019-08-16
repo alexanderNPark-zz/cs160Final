@@ -18,7 +18,7 @@ connection.onmessage = function(receivedMessage){
         console.log("dead on the other side")
     }else{
         console.log(packet["content"])
-        let arrayOfLinks=packet["content"].split(",")
+
 
 
     }
