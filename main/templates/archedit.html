@@ -427,10 +427,7 @@
     function toImage(elem){
 
         return (html2canvas(elem).then((canvas) => {
-            globalLoad+=1
-            if(globalLoad%4==0){
 
-            }
             console.log("then")
             console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
             message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delim>";
@@ -448,12 +445,12 @@
 
          var strings = "";
         console.log("enter")
-         strings+=toImage(bedPNG)+","
+         strings+=toImage(bedPNG)+",";
 
-         strings+=toImage(bathPNG)+","
-         strings+=toImage(livePNG)+","
+         strings+=toImage(bathPNG)+",";
+         strings+=toImage(livePNG)+",";
          strings+=toImage(kitchenPNG)
-        console.log("Pass by")
+        console.log(strings)
         var packet = {content:message}
         connection.send(packet)
 
