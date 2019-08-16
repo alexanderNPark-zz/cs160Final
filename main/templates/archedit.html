@@ -464,7 +464,7 @@
     function toImage(elem){
 
 
-        return (html2canvas(elem).then((canvas) => {
+        return (html2canvas(elem,{allowTaint:true}).then((canvas) => {
             globalLoad+=1
             console.log("then")
 
