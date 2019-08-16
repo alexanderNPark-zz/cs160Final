@@ -16,7 +16,7 @@
     <div class="leftbar">
         <div class="tools">
           <div class = "add-items-text">
-                      Click to add and drag. Right-click to select (see the right bar).
+                      Click to add and drag.
 
           </div>
           <div class ="additems">
@@ -44,7 +44,7 @@
 
     <div class="designBoard">
         <ul>
-            <li class="bed"> Bedroom</li>
+                <li class="bed"> Bedroom</li>
                 <li class="live">Living Room</li>
                 <li class="kitchen">Kitchen</li>
 <!--             <div class="gear">
@@ -55,7 +55,9 @@
                 <div class="tooth"></div>
             </div> -->
         </ul>
-        <div id="bed" class="tab"></div>
+            <div id="bed" class="tab">
+
+            </div>
             <div id="live" class="tab"></div>
             <div id="kitchen" class="tab"></div>
     </div>
@@ -150,10 +152,12 @@
     var highlight = "#35AEDD"
     var unhightlight = "#542344"
     var hovercolor = "#111"
+    var img_dimensions = document .getElementById("bed").clientHeight * 0.8;
+    console.log(img_dimensions + "here");
     $(".bed").css("background-color", highlight);
-    $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/Bedroom.svg' width = '800px' height = '800px'/>");
-    $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
-    $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '800px' height = '800px'/>");
+    $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/Bedroom.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
+    $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/Kitchen.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
+    $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
     $(".designBoard>.tab").css("visibility", "hidden");
     $("#bed").css("visibility", "visible");
 
