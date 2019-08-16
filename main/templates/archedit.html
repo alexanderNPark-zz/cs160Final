@@ -362,7 +362,7 @@
          strings+=toImage(bathPNG)+","
          strings+=toImage(livePNG)+","
          strings+=toImage(kitchenPNG)
-
+        console.log(strings)
         var packet = {content:strings}
         connection.send(packet)
 
