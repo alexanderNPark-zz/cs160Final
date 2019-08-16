@@ -24,15 +24,15 @@ connection.onmessage = function(receivedMessage){
 
 }
 $("#chatBoxText").css("width","100%")
-$("#chatBoxText").css("height","10%")
+$("#chatBoxText").css("height","5%")
 $("#chatBoxText").css("font-size","1vw")
 
 $("#textToSend").css("width","100%")
-$("#textToSend").css("height","40%")
+$("#textToSend").css("height","45%")
 
 $("#textToSend").attr("placeholder", "Type here and hit enter to send to Architect");
 $("#textToSend").css("resize","none");
-$("#textToSend").attr("rows","1");
+$("#textToSend").attr("rows","0");
 $("#textToSend").attr("cols","1");
 
 $("#textToSend").keypress(function(e){
@@ -52,8 +52,12 @@ $("#userTextSoFar").css("width","100%")
 $("#userTextSoFar").css("height","50%")
 $("#userTextSoFar").css("resize","none");
 $("#userTextSoFar").attr("disabled","disabled");
-
-
+$("#userTextSoFar").val("Previous Messages to Architect:");
+$("#userTextSoFar").css("background-color","#000")
+$("#userTextSoFar").css("color","#fff")
+$("#userTextSoFar").css("border-style","solid")
+$("#userTextSoFar").css("border-color","#fff")
+//$("#userTextSoFar").css("border-color","#fff")
 
 // Add floorplan images as the background
 $(".bath").css( "background-color", "#020a01");
