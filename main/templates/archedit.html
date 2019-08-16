@@ -100,7 +100,9 @@
             {{.Profile.Area}}
             {{.Profile.Location}}
             <hr />
+            <textarea id="chatBoxMessage">
             {{.CurrentProject.TextSoFar}}
+            </textarea>
         </div>
     </div>
 </div>
@@ -124,7 +126,7 @@
     connection.onmessage = function(receivedMessage){
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-           $("#viewAll").append(packet["text"])
+           $("#chatBoxMessage").val($("#chatBoxMessage").val()+(packet["content"]))
     }
 
 

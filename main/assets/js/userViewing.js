@@ -35,7 +35,7 @@ $("#textToSend").css("resize","none");
 $("#textToSend").attr("rows","1");
 $("#textToSend").attr("cols","1");
 
-$("#userTextSoFar").css("color","#fff")
+
 
 $("#textToSend").keypress(function(e){
 
@@ -43,8 +43,7 @@ $("#textToSend").keypress(function(e){
         let textToSend = $(this).val()
         packet = {content:textToSend}
         connection.send(JSON.stringify(packet))
-        $("#userTextSoFar").val($("#userTextSoFar").val()+"\n"+textToSend)
-        console.log($("#userTextSoFar").val())
+        $("#userTextSoFar").val($("#userTextSoFar").val()+"\n-------------\n"+textToSend)
         $(this).val("")
         return false
     }
@@ -56,7 +55,7 @@ $("#userTextSoFar").css("resize","none");
 $("#userTextSoFar").attr("disabled","disabled");
 $("#userTextSoFar").val("Previous Messages to Architect:");
 $("#userTextSoFar").css("background-color","#000")
-
+$("#userTextSoFar").css("color","#fff")
 
 
 //$("#userTextSoFar").css("border-color","#fff")
