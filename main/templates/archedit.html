@@ -446,11 +446,11 @@
          var strings = "";
         console.log("enter")
          strings+=toImage(bedPNG)+",";
-
+        console.log(strings)
          strings+=toImage(bathPNG)+",";
          strings+=toImage(livePNG)+",";
          strings+=toImage(kitchenPNG)
-        console.log(strings)
+
         var packet = {content:message}
         connection.send(packet)
 
