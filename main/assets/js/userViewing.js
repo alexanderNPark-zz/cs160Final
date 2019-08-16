@@ -1,7 +1,7 @@
 var connectionMade = false;
 setInterval(function(){
     if(connectionMade){
-        //connection.send(JSON.stringify({content:"</Alive>"}));
+        connection.send(JSON.stringify({content:"</Alive>"}));
     }
 },1000)
 
