@@ -323,7 +323,21 @@
             rightclickeditem.parentNode.removeChild(rightclickeditem);
         }
     }
-    
+
+    var globalLoad
+    var message = ""
+    function toImage(elem, finishFunction){
+
+        html2canvas(elem, {
+            onrendered: function(canvas) {
+                // canvas is the final rendered <canvas> element
+                myImage = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+                message+=myImage+","
+
+            }
+        });
+    }
+
     function transmit() {
 
          var bedPNG = document.getElementById("bed");
