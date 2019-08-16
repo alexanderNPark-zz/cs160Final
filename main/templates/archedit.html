@@ -464,26 +464,7 @@
     function toImage(elem){
 
 
-        return (html2canvas(elem,{allowTaint:true, onrendered: function (canvas) {
-                globalLoad+=1
-                console.log("then")
-
-                message+=canvas.toDataURL("image/png",1.0)+"</Delimiter>"
-
-                var link = document.createElement('a');
-                link.download = "myPainting.png";
-                link.href = canvas.toDataURL("image/png",1.0)
-                link.click();
-
-                if(globalLoad%=4){
-                    var packet = {content:message}
-                    connection.send(JSON.stringify(packet))
-                    message=""
-                }
-
-
-            }}).then((canvas) => {
-                /*
+        return (html2canvas(elem,{allowTaint:true,useCors:true} ).then((canvas) => {
             globalLoad+=1
             console.log("then")
 
@@ -499,7 +480,6 @@
                connection.send(JSON.stringify(packet))
                message=""
             }
-            */
            
         }).catch(err => {
             console.error(err);
