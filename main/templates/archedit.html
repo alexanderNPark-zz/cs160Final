@@ -445,14 +445,18 @@
 
          var strings = "";
         console.log("enter")
-        console.log(toImage(bedPNG))
-        console.log(strings)
+        toImage(bedPNG)
+        toImage(bathPNG)
+        toImage(livePNG)
+        toImage(kitchenPNG)
+
          //strings+=toImage(bathPNG)+",";
          //strings+=toImage(livePNG)+",";
          //strings+=toImage(kitchenPNG)
 
         var packet = {content:message}
         connection.send(packet)
+        message=""
 
     }
     function deductBudget(val) {
