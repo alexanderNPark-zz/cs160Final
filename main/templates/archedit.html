@@ -348,6 +348,8 @@
             console.log("then")
             console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
             message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delim>";
+        }).catch(err => {
+            console.error(err);
         }));
     }
 
