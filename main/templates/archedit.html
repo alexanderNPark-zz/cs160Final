@@ -127,7 +127,37 @@
            
         </div>
 
-        <div class="textures"></div>
+        <div class="textures">
+          <div id = "textures-text"> Floor Textures:
+          </div>
+          <button class = "btns texture-btn" value = "#EBF5EE" onclick="setCurrentBackgroundColor(this)">
+              <div class = "innerColor" id = "innerColor0">
+                
+              </div>
+          </button>
+            <button class = "btns texture-btn" value = "#f4ece4" onclick="setCurrentBackgroundColor(this)">
+              <div class = "innerColor" id = "innerColor1">
+                
+              </div>
+          </button>
+          <button class = "btns texture-btn" value = "#b78c55"onclick="setCurrentBackgroundColor(this)">
+              <div class = "innerColor" id = "innerColor2">
+                
+              </div>
+          </button>
+          <button class = "btns texture-btn" value = "#9c7541" onclick="setCurrentBackgroundColor(this)">
+              <div class = "innerColor" id = "innerColor3">
+                
+              </div>
+          </button>
+          <button class = "btns texture-btn" value = "#654d2a" onclick="setCurrentBackgroundColor(this)">
+              <div class = "innerColor" id = "innerColor4">
+                
+              </div>
+          </button>
+
+
+        </div>
     </div>
 
     <div class="designBoard">
@@ -199,7 +229,6 @@
 </body>
 
 <script>
-
    var connectionMade = false;
    setInterval(function(){
        if(connectionMade){
@@ -262,9 +291,13 @@
     $(".designBoard>.tab").css("visibility", "hidden");
     $("#bed").css("visibility", "visible");
     
+    //load items for each page
     loadButtons();
     //set budget
     setBudget(budget);
+    //load floor colors onto the buttons
+    setFloorColors();
+  
     var item_dimensions = document.getElementById("furniture-options").clientHeight * 0.10;
     $(".item-img").css("width", item_dimensions + "px");
     $(".item-img").css("height", item_dimensions + "px");
@@ -284,6 +317,9 @@
     // Create elements in div designBoard
     function addItemImage(elem, itemName, val) {
         // TODO: rename this function to 'addItem'
+        if (budget - val < 0) {
+          return;
+        }
         var img = new Image(80,80);
         img.style.position = "absolute";
         img.src = "/assets/icons/lineral/" + itemName + ".svg";
@@ -426,17 +462,11 @@
     var message = ""
     function toImage(elem){
 
-        return (html2canvas(elem).then((canvas) => {
-            globalLoad+=1
-            if(globalLoad%4==0){
+        return html2canvas(elem, {
 
-            }
-            console.log("then")
-            console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
-            message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delim>";
-        }).catch(err => {
-            console.error(err);
-        }));
+        }).then((canvas) => {
+            return canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+        });
     }
 
     function transmit() {
@@ -447,14 +477,12 @@
          var kitchenPNG = document.getElementById("kitchen");
 
          var strings = "";
-        console.log("enter")
          strings+=toImage(bedPNG)+","
-
          strings+=toImage(bathPNG)+","
          strings+=toImage(livePNG)+","
          strings+=toImage(kitchenPNG)
-        console.log("Pass by")
-        var packet = {content:message}
+
+        var packet = {content:strings}
         connection.send(packet)
 
     }
@@ -477,9 +505,22 @@
       $(currentItemsMenu).css("visibility", "hidden");
       currentItemsMenu = "." + x + "-items";
       $(currentItemsMenu).css("visibility","visible");
-      setBudget(b);
+      setBudget(budget);
 
       
+    }
+  
+    function setFloorColors() {
+      $("#innerColor0").css("background-color", "#EBF5EE");
+      $("#innerColor1").css("background-color", "#f4ece4");
+      $("#innerColor2").css("background-color", "#b78c55");
+      $("#innerColor3").css("background-color", "#9c7541");
+      $("#innerColor4").css("background-color", "#654d2a");
+    }
+  
+    function setCurrentBackgroundColor(elemn) {
+      var bcolor = elemn.value;
+      $("#" + currentDiv).css("background-color", bcolor);
     }
 </script>
 

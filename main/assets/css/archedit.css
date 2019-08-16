@@ -150,12 +150,35 @@ li:hover {
   color: black;
 }
 
+
+
+.btns:focus {
+      outline:none;
+}
+
+.innerColor {
+  width: 80%;
+  height: 3.5vh;
+  border-radius: 10px;
+  background-color: white;
+}
+
 #budget {
   width: 13vw;
   font-size: 1vw;
   padding: 1vw;
   display:flex;
   justify-content:space-evenly;
+}
+
+#textures-text {
+  width: 13vw;
+  font-size: 1vw;
+  padding: 1vw;
+  displace: flex;
+  justify-content: space-evenly;
+  text-align:center;
+  color:white;
 }
 
 .textures {
@@ -165,6 +188,11 @@ li:hover {
   width: 15vw;
   background-color: #542344;
 
+  display: flex;
+  flex-wrap:wrap;
+  align-content:flex-start ;
+  justify-content: center;
+  
   border: solid 2px #FFFFFF;
 }
 
