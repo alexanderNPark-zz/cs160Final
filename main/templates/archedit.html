@@ -347,7 +347,7 @@
         return (html2canvas(elem).then((canvas) => {
             console.log("then")
             console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
-            return canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+            message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delim>";
         }));
     }
 
@@ -360,12 +360,12 @@
 
          var strings = "";
          strings+=toImage(bedPNG)+","
-        console.log("string1",strings)
+
          strings+=toImage(bathPNG)+","
          strings+=toImage(livePNG)+","
          strings+=toImage(kitchenPNG)
-
-        var packet = {content:strings}
+        console.log(message)
+        var packet = {content:message}
         connection.send(packet)
 
     }
