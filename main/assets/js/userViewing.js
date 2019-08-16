@@ -57,8 +57,8 @@ $("#userTextSoFar").attr("disabled","disabled");
 $("#userTextSoFar").val("Previous Messages to Architect:");
 $("#userTextSoFar").css("background-color","#000")
 
-$("#userTextSoFar").css("border-style","solid")
-$("#userTextSoFar").css("border-color","#fff")
+
+
 //$("#userTextSoFar").css("border-color","#fff")
 
 // Add floorplan images as the background
