@@ -140,6 +140,9 @@
 
    connection.onclose = function(){
        console.log("closed")
+       connection.close()
+       connectionMade=false;
+
    }
 
    connection.onerror = function(){
