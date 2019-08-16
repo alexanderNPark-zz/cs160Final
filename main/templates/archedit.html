@@ -209,6 +209,8 @@
             e.preventDefault();
             selectItem(this);
         }
+        img.value = val;
+        //console.log("image val: " + img.value);
         document.getElementById(currentDiv).appendChild(img);
         makeDraggable(img);
         selectItem(img);
@@ -287,7 +289,6 @@
         output.innerHTML = this.value;
         rightclickeditem.width = originaldimensen * (this.value/100);
         rightclickeditem.height = originaldimensen * (this.value/100);
-        console.log(rightclickeditem.width);
     }
     
     var slider1 = document.getElementById("rotating");
@@ -334,6 +335,8 @@
         if (rightclickeditem != null) {
             rightclickeditem.parentNode.removeChild(rightclickeditem);
         }
+        budget = budget + rightclickeditem.value;
+        $("#remain-budget").text(budget);
     }
 
     var globalLoad = 0;
@@ -348,7 +351,6 @@
     }
 
     function transmit() {
-
 
          var bedPNG = document.getElementById("bed");
          var bathPNG = document.getElementById("bath");
