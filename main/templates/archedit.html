@@ -128,6 +128,7 @@
     connection.onmessage = function(receivedMessage){
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
+            console.log("Pcket:"+packet["content"])
            $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
 
     }
