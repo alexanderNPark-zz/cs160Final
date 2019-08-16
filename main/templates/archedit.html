@@ -121,10 +121,10 @@
 
 
    var connection = new WebSocket('ws://final160-alexanderpark.codeanyapp.com:2323/commun');
-     connection.onopen = function(){
-          connectionMade=true;
-          connection.send("server");
-     }
+         connection.onopen = function(){
+              connectionMade=true;
+              connection.send("server");
+         }
     connection.onmessage = function(receivedMessage){
              console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
