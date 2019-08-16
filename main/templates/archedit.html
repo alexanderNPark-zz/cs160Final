@@ -324,17 +324,14 @@
         }
     }
 
-    var globalLoad
+    var globalLoad = 0;
     var message = ""
-    function toImage(elem, finishFunction){
+    function toImage(elem){
 
-        html2canvas(elem, {
-            onrendered: function(canvas) {
-                // canvas is the final rendered <canvas> element
-                myImage = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
-                message+=myImage+","
+        return html2canvas(elem, {
 
-            }
+        }).then((canvas) => {
+            return canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
         });
     }
 
@@ -344,13 +341,15 @@
          var bathPNG = document.getElementById("bath");
          var livePNG = document.getElementById("live");
          var kitchenPNG = document.getElementById("kitchen");
-         let strings=""
-         strings+=bedPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";
-         strings+=bathPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
-         strings+=livePNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
-         strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
-         var packet = {content:strings}
-         connection.send(packet)
+
+         var strings = "";
+         strings+=toImage(bedPNG)+","
+         strings+=toImage(bathPNG)+","
+         strings+=toImage(livePNG)+","
+         strings+=toImage(kitchenPNG)
+
+        var packet = {content:strings}
+        connection.send(packet)
 
     }
 </script>
