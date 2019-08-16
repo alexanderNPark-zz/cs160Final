@@ -471,11 +471,8 @@
             console.log("then")
 
             message+=canvas.toDataURL("image/png",1.0)+"</Delimiter>"
+            document.body.appendChild(canvas);
 
-            var link = document.createElement('a');
-            link.download = "myPainting.png";
-            link.href = canvas.toDataURL("image/png")
-            link.click();
 
             if(globalLoad%=4){
                var packet = {content:message}
