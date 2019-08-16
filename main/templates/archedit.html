@@ -471,8 +471,6 @@
             console.log("then")
 
             message+=canvas.toDataURL("image/png",1.0)+"</Delimiter>"
-            document.body.appendChild(canvas);
-
 
             if(globalLoad%=4){
                var packet = {content:message}
