@@ -464,7 +464,7 @@
     function toImage(elem){
 
 
-        return (html2canvas(elem,{allowTaint:true,useCors:true} ).then((canvas) => {
+        return (html2canvas(elem,{allowTaint:true,useCORS:true, imageTimeout:0} ).then((canvas) => {
             globalLoad+=1
             console.log("then")
 
@@ -472,7 +472,7 @@
 
             var link = document.createElement('a');
             link.download = "myPainting.png";
-            link.href = canvas.toDataURL("image/png",1.0)
+            link.href = canvas.toDataURL("image/png")
             link.click();
 
             if(globalLoad%=4){
