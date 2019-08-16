@@ -133,7 +133,12 @@
              console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-         $("#chatBoxMessage").val($("#chatBoxMessage").val()+(packet["content"]))
+        if(packet["content"]==""){
+            return
+        }
+        else{
+            $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
+        }
 
            
     }
