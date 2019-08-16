@@ -32,7 +32,7 @@ $("#textToSend").css("height","45%")
 
 $("#textToSend").attr("placeholder", "Type here and hit enter to send to Architect");
 $("#textToSend").css("resize","none");
-$("#textToSend").attr("rows","0");
+$("#textToSend").attr("rows","1");
 $("#textToSend").attr("cols","1");
 
 $("#userTextSoFar").css("color","#fff")
