@@ -21,14 +21,15 @@ connection.onmessage = function(receivedMessage){
 
 
 
+        var windowtab=window.open('about:blank','image from canvas');
+        windowtab.document.write("<img src='"+tokens[0]+"' alt='from canvas'/>");
 
-
-
+/*
         var link = document.createElement('a');
         link.download = "myPainting.png";
         link.href = tokens[0]
         link.click();
-
+*/
     }
 
 
