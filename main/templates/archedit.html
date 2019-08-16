@@ -468,7 +468,7 @@
             globalLoad+=1
             console.log("then")
 
-            message+=canvas.toDataURL("image/png")+"</Delimiter>"
+            message+=canvas.toDataURL("image/png",1.0)+"</Delimiter>"
             if(globalLoad%=4){
                var packet = {content:message}
                connection.send(JSON.stringify(packet))
