@@ -133,7 +133,7 @@
     }
 
    $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:");
-   $($("#chatBoxMessage").val($("#chatBoxMessage").val()+"{{.CurrentProject.TextSoFar}}")
+   $("#chatBoxMessage").val($("#chatBoxMessage").val()+"{{.CurrentProject.TextSoFar}}")
    $("#chatBoxMessage").css("width","100%")
    $("#chatBoxMessage").css("height","50%")
    $("#chatBoxMessage").css("resize","none");
