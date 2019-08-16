@@ -126,12 +126,19 @@
     connection.onmessage = function(receivedMessage){
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-           $("#chatBoxMessage").val($("#chatBoxMessage").val()+(packet["content"]))
+           $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
+
     }
 
 
 
-
+   $("#chatBoxMessage").css("width","100%")
+   $("#chatBoxMessage").css("height","50%")
+   $("#chatBoxMessage").css("resize","none");
+   $("#chatBoxMessage").attr("disabled","disabled");
+   $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:");
+   $("#chatBoxMessage").css("background-color","#000")
+   $("#chatBoxMessage").css("color","#fff")
 
     // In case we want "undo" and "redo."
     //item_properties = []
