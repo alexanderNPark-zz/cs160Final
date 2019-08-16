@@ -37,8 +37,9 @@ func InteractionServer(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 
-	go interactionRead(connection,statusActivate(connection))
-
+	clientSendChannel :=make(chan string)
+	go interactionRead(connection,statusActivate(connection),clientSendChannel)
+	go interactionWrite(statusActivate(connection),clientSendChannel)
 
 
 }
@@ -55,7 +56,7 @@ func statusActivate(connection *websocket.Conn) string{
 
 }
 
-func interactionRead(connection *websocket.Conn, typePerson string){
+func interactionRead(connection *websocket.Conn, typePerson string, content chan string){
 	close:=func(){
 		delete(oneTimePair,typePerson)
 		connection.Close()
@@ -77,14 +78,14 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 		}
 		if(typePerson=="client"){
 			//write to server new text
+			content<-packet.Content
 
-			go interactionWrite(typePerson,"server",packet.Content)
 			fmt.Println("packet rec:"+packet.Content)
 			GlobalProject.TextSoFar+="\n"+packet.Content;
 
 		} else{
 			//write to client new links
-			interactionWrite(typePerson,"client",packet.Content)
+			//interactionWrite(typePerson,"client",packet.Content)
 		}
 
 
@@ -94,37 +95,47 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 
 }
 
-func interactionWrite(sender string, oppositeType string, content string) {
+func interactionWrite(sender string, content chan string) {
 
-
-	packet:=UpdateMessage{Content:content}
-	connection,ok:= oneTimePair[oppositeType]
-	if(!ok){
-		packet.StatusOfOther = "Dead"
-		connectionSender,ok:= oneTimePair[sender]
-		if(!ok){
-			return
-		}
-		writer, err := connectionSender.NextWriter(websocket.TextMessage)
-		if(err!=nil){
-			fmt.Println("Failed 105")
-			return
-		}
-		bytesTosend,err:=json.Marshal(packet)
-		writer.Write(bytesTosend)
-
-
+	oppositeType:=""
+	if(sender=="client"){
+		oppositeType = "server"
 	}else{
-		packet.StatusOfOther = "Alive"
-		writer, err := connection.NextWriter(websocket.TextMessage)
-		if(err!=nil){
-			fmt.Println("Failure in interaction writing")
-			return
-		}
-		bytesTosend,err:=json.Marshal(packet)
-		writer.Write(bytesTosend)
-		fmt.Println("Packet sent to Server"+content)
+		oppositeType="client"
 	}
+
+
+	for{
+		packet:=UpdateMessage{Content:<-content}
+		connection,ok:= oneTimePair[oppositeType]
+		if(!ok){
+			packet.StatusOfOther = "Dead"
+			connectionSender,ok:= oneTimePair[sender]
+			if(!ok){
+				return
+			}
+			writer, err := connectionSender.NextWriter(websocket.TextMessage)
+			if(err!=nil){
+				fmt.Println("Failed 105")
+				return
+			}
+			bytesTosend,err:=json.Marshal(packet)
+			writer.Write(bytesTosend)
+
+
+		}else{
+			packet.StatusOfOther = "Alive"
+			writer, err := connection.NextWriter(websocket.TextMessage)
+			if(err!=nil){
+				fmt.Println("Failure in interaction writing")
+				return
+			}
+			bytesTosend,err:=json.Marshal(packet)
+			writer.Write(bytesTosend)
+			fmt.Println("Packet sent to Server"+packet.Content)
+		}
+	}
+
 
 
 
