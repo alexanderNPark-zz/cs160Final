@@ -131,7 +131,7 @@ li:hover {
   height: 7.5vw;
   background-color : #35AEDD;
   border:none;
-  border:radius: 15px;
+  border-radius: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -140,6 +140,7 @@ li:hover {
   color: #EBF5EE;
   border-radius: 10px;
   font-size: 1vw;
+  outline:none;
 }
 .btns:hover{
   background-color: #35AEDD;
@@ -285,7 +286,7 @@ li:hover {
 .setting-buttons {
   background-color : #35AEDD;
   border:none;
-  border:radius: 15px;
+  border-radius: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -295,6 +296,7 @@ li:hover {
   color: #EBF5EE;
   border-radius: 10px;
   font-size: 1vw;
+  outline:none;
 }
 .setting-buttons:hover {
   background-color: #FFFFFF;
