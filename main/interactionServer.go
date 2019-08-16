@@ -78,7 +78,7 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 		if(typePerson=="client"){
 			//write to server new text
 
-			interactionWrite(typePerson,"server",packet.Content)
+			go interactionWrite(typePerson,"server",packet.Content)
 			GlobalProject.TextSoFar+="\n"+packet.Content;
 
 		} else{
