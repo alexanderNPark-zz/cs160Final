@@ -9,7 +9,7 @@ import (
 
 var interactionUpgrader = websocket.Upgrader{
 	ReadBufferSize:  4096,
-	WriteBufferSize: 4096,
+	WriteBufferSize: 1024,
 }
 
 var interaction2Upgrader = websocket.Upgrader{
