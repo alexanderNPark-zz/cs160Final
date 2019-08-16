@@ -35,6 +35,8 @@ $("#textToSend").css("resize","none");
 $("#textToSend").attr("rows","0");
 $("#textToSend").attr("cols","1");
 
+$("#userTextSoFar").css("color","#fff")
+
 $("#textToSend").keypress(function(e){
 
     if(e.keyCode===13){
@@ -44,7 +46,7 @@ $("#textToSend").keypress(function(e){
         $("#userTextSoFar").append("\n"+textToSend)
 
         $(this).val("")
-        return
+        return false
     }
 });
 
@@ -54,7 +56,7 @@ $("#userTextSoFar").css("resize","none");
 $("#userTextSoFar").attr("disabled","disabled");
 $("#userTextSoFar").val("Previous Messages to Architect:");
 $("#userTextSoFar").css("background-color","#000")
-$("#userTextSoFar").css("color","#fff")
+
 $("#userTextSoFar").css("border-style","solid")
 $("#userTextSoFar").css("border-color","#fff")
 //$("#userTextSoFar").css("border-color","#fff")
