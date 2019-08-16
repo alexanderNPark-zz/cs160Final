@@ -467,8 +467,8 @@
         return (html2canvas(elem).then((canvas) => {
             globalLoad+=1
             console.log("then")
-            console.log(""+canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream"))
-            message+=canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+"</Delimiter>"
+            console.log(""+canvas.toDataURL("image/png"))
+            message+=canvas.toDataURL("image/png")+"</Delimiter>"
             if(globalLoad%=4){
                var packet = {content:message}
                connection.send(JSON.stringify(packet))
@@ -491,6 +491,7 @@
          var strings = "";
 
         console.log("enter")
+
         toImage(bedPNG)
         toImage(bathPNG)
         toImage(livePNG)
