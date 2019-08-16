@@ -22,23 +22,28 @@
 
           </div>
           <div class ="additems" id = "furniture-options">
-            <div id = "budget"> Remaining Budget:
-              <span id = "budget-value"></span>
+            <div id = "budget"> Budget: 
+              <div id = "remain-budget"> 10000</div>
             </div>
-             <button class = "btns" onclick="addItemImage(this, '008-table')">
+             <button class = "btns"  onclick="addItemImage(this, '008-table', 500)">
                 <img class = "item-img" src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
+                <div id = "item1"> $500</div>
             </button>
-            <button class = "btns" onclick="addItemImage(this, '014-toilet')">
+            <button class = "btns"  onclick="addItemImage(this, '014-toilet', 400)">
                 <img class = "item-img"  src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
+                <div id = "item2"> $400</div>
             </button>
-            <button class = "btns" onclick="addItemImage(this, '001-sofa')">
+            <button class = "btns" onclick="addItemImage(this, '001-sofa', 1000)">
                 <img class = "item-img" src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
+                <div id = "item3" > $1000</div>
             </button>
-            <button class = "btns" onclick="addItemImage(this, '025-bed')">
+            <button class = "btns" onclick="addItemImage(this, '025-bed', 800)">
                 <img class = "item-img" src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
+                <div id = "item4" > $800</div>
             </button>
-            <button class = "btns" onclick="addItemImage(this, '011-tv-table')">
+            <button class = "btns" onclick="addItemImage(this, '011-tv-table', 1500)">
                 <img class = "item-img" src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
+                 <div id = "item5" > $1500</div>
             </button>
           </div>
            
@@ -167,6 +172,9 @@
     var unhightlight = "#542344";
     var hovercolor = "#111";
     var img_dimensions = document.getElementById("bed").clientHeight * 0.9;
+  
+    var budget = {{printf "%.2f" .Profile.Budget}};
+  
     $(".bed").css("background-color", highlight);
     $("#bath").prepend("<img id = 'bath-room' src = '/assets/imgs/floorplans/bathroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
     $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/bedroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
@@ -174,8 +182,11 @@
     $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/kitchen-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
     $(".designBoard>.tab").css("visibility", "hidden");
     $("#bed").css("visibility", "visible");
+    
+    //set budget
+    //document.getElementById("budget-value").value = {{printf "%.2f" .Profile.Budget}};
+    $("#remain-budget").text(budget) ;
     var item_dimensions = document.getElementById("furniture-options").clientHeight * 0.10;
-    console.log(item_dimensions);
     $(".item-img").css("width", item_dimensions + "px");
     $(".item-img").css("height", item_dimensions + "px");
   
@@ -188,7 +199,7 @@
     });
 
     // Create elements in div designBoard
-    function addItemImage(elem, itemName) {
+    function addItemImage(elem, itemName, val) {
         // TODO: rename this function to 'addItem'
         var img = new Image(80,80);
         img.style.position = "absolute";
@@ -201,6 +212,7 @@
         document.getElementById(currentDiv).appendChild(img);
         makeDraggable(img);
         selectItem(img);
+        deductBudget(val);
     }
     // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
     function makeDraggable(elmnt) {
@@ -255,7 +267,6 @@
             document.onpointerend = null;
             document.onmousemove = null;
             document.onpointermove = null;
-            transmit()
         }
     }
     function randomColor() {
@@ -351,6 +362,10 @@
         var packet = {content:strings}
         connection.send(packet)
 
+    }
+    function deductBudget(val) {
+      budget = budget - val;
+      $("#remain-budget").text(budget);
     }
 </script>
 
