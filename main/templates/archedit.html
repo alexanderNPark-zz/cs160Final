@@ -464,11 +464,11 @@
     function toImage(elem){
 
 
-        return (html2canvas(elem,{useCORS: true}).then((canvas) => {
+        return (html2canvas(elem).then((canvas) => {
             globalLoad+=1
             console.log("then")
 
-            message+=canvas.toDataURL("image/png")+"</Delimiter>"
+            message+=canvas.toDataURL("image/jpg")+"</Delimiter>"
             if(globalLoad%=4){
                var packet = {content:message}
                connection.send(JSON.stringify(packet))
