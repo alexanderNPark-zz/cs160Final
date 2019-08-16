@@ -78,7 +78,7 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 		if(typePerson=="client"){
 			//write to server new text
 
-			interactionWrite(typePerson,"server",packet.Content)
+			go interactionWrite(typePerson,"server",packet.Content)
 			fmt.Println("packet rec:"+packet.Content)
 			GlobalProject.TextSoFar+="\n"+packet.Content;
 
@@ -118,7 +118,7 @@ func interactionWrite(sender string, oppositeType string, content string) {
 		packet.StatusOfOther = "Alive"
 		writer, err := connection.NextWriter(websocket.TextMessage)
 		if(err!=nil){
-			fmt.Println("Failure in lookup writing")
+			fmt.Println("Failure in interaction writing")
 			return
 		}
 		bytesTosend,err:=json.Marshal(packet)
