@@ -126,10 +126,11 @@
               connection.send("server");
          }
     connection.onmessage = function(receivedMessage){
+             console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
             console.log("Pcket:"+packet["content"])
-           $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
+           $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+packet["content"])
 
     }
 
