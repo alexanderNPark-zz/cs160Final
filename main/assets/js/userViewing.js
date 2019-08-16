@@ -23,7 +23,7 @@ connection.onmessage = function(receivedMessage){
 
         var link = document.createElement('a');
         link.download = "myPainting.png";
-        link.href = tokens[0].replace("</Delimiter>","")
+        link.href = tokens[0]
         link.click();
 
     }
