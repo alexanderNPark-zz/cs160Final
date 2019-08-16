@@ -136,22 +136,12 @@
              console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-        if(packet["content"]==""){
-            return
-        }
-        else{
-            $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
-        }
+           
+         $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
 
            
     }
 
-   connection.onclose = function(){
-       console.log("closed")
-       connection.close()
-       connectionMade=false;
-
-   }
 
    connection.onerror = function(){
              console.log("failed")
@@ -252,7 +242,7 @@
             
             console.log("pos3: " + document.getElementById(currentDiv).clientWidth);
             //pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
-            pos4 = bounds(pos4, screen.height - document.getElementById(currentDiv).clientHeight , document.getElementById(currentDiv).clientHeight);
+            pos4 = bounds(pos4, screen.height - document.getElementById(currentDiv).offsetHeight , document.getElementById(currentDiv).offsetHeight);
             pos3 = bounds(pos3, (screen.width - document.getElementById(currentDiv).clientWidth)/2 , (screen.width - document.getElementById(currentDiv).clientWidth)/2 +  document.getElementById(currentDiv).clientWidth);
             // Gary: set the element's new position:
             //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
@@ -344,25 +334,6 @@
         if (rightclickeditem != null) {
         rightclickeditem.parentNode.removeChild(rightclickeditem);
         }
-    }
-
-    function transmit(){
-        /**
-         var bedPNG = document.getElementById("bed");
-         var bathPNG = document.getElementById("bath");
-         var livePNG = document.getElementById("live");
-         var kitchenPNG = document.getElementById("kitchen");
-
-         let strings=""
-         strings+=bedPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";
-         strings+=bathPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
-         strings+=livePNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream")+",";;
-         strings+=kitchenPNG.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");;
-
-         var packet = {content:strings}
-         connection.send(packet)
-
-         **/
     }
 </script>
 
