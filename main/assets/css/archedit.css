@@ -14,12 +14,11 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: solid 2px #FFFFFF;
 
 }
 
 li {
-  height: 5.7vh;
+  height: 6vh;
   width: 15vw;
   color: #EBF5EE;
   font-size: 150%;
@@ -88,7 +87,6 @@ li:hover {
   background-color: #542344;
   top: 0;
   left: 0;
-  border: solid 2px #FFFFFF;
 
 }
 .leftbar {
@@ -111,27 +109,29 @@ li:hover {
 .add-items-text {
   width:15vw;
   height:6vh;
-  border: solid 2px #FFFFFF;
   text-align:center;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  
 }
 .additems {
-  border: solid 2px #FFFFFF;
-
-  postion: absolute;
+  outline: solid 2px #FFFFFF;
   width: 15vw;
   height: 49vh;
   display: flex;
   flex-wrap:wrap;
-  align-content:flex-start ;
+  align-content:center ;
   justify-content: center;
 }
 .btns {
-  margin: 5px;
-  width: 6vw;
-  height: 7.5vw;
+  margin-top: 10px;
+  margin-bot: 10px;
+  width: 13vw;
+  height: 3vw;
   background-color : #35AEDD;
   border:none;
-  border-radius: 15px;
+  border:radius: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -140,7 +140,6 @@ li:hover {
   color: #EBF5EE;
   border-radius: 10px;
   font-size: 1vw;
-  outline:none;
 }
 .btns:hover{
   background-color: #35AEDD;
@@ -179,7 +178,6 @@ li:hover {
   height : 50vh;
   background-color: #542344;
   padding: 1vw;
-  border: solid 2px #FFFFFF;
 
 }
 
@@ -187,7 +185,7 @@ li:hover {
   position:relative;
   height : 50vh;
   background-color: #542344;
-  border: solid 2px #FFFFFF;
+  outline: solid 2px #FFFFFF;
 
 }
 
@@ -286,7 +284,7 @@ li:hover {
 .setting-buttons {
   background-color : #35AEDD;
   border:none;
-  border-radius: 15px;
+  border:radius: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -296,7 +294,6 @@ li:hover {
   color: #EBF5EE;
   border-radius: 10px;
   font-size: 1vw;
-  outline:none;
 }
 .setting-buttons:hover {
   background-color: #FFFFFF;

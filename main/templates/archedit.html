@@ -16,24 +16,27 @@
     <div class="leftbar">
         <div class="tools">
           <div class = "add-items-text">
-                      Click to add and drag.
+            <div >
+                                    Click to add and drag.
+
+            </div>
 
           </div>
-          <div class ="additems">
+          <div class ="additems" id = "furniture-options">
              <button class = "btns" onclick="addItemImage(this, '008-table')">
-                <img src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
+                <img class = "item-img" src="/assets/icons/lineral/008-table.svg" alt="Table.svg"> Add Table </img>
             </button>
             <button class = "btns" onclick="addItemImage(this, '014-toilet')">
-                <img src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
+                <img class = "item-img"  src="/assets/icons/lineral/014-toilet.svg" alt="Toilet.svg"> Add Toilet </img>
             </button>
             <button class = "btns" onclick="addItemImage(this, '001-sofa')">
-                <img src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
+                <img class = "item-img" src="/assets/icons/lineral/001-sofa.svg" alt="Sofa.svg"> Add Sofa </img>
             </button>
             <button class = "btns" onclick="addItemImage(this, '025-bed')">
-                <img src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
+                <img class = "item-img" src="/assets/icons/lineral/025-bed.svg" alt="Bed.svg"> Add Bed </img>
             </button>
             <button class = "btns" onclick="addItemImage(this, '011-tv-table')">
-                <img src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
+                <img class = "item-img" src="/assets/icons/lineral/011-tv-table.svg" alt="TV.svg"> Add TV </img>
             </button>
           </div>
            
@@ -44,6 +47,7 @@
 
     <div class="designBoard">
         <ul>
+                <li class="bath"> Bathroom</li>
                 <li class="bed"> Bedroom</li>
                 <li class="live">Living Room</li>
                 <li class="kitchen">Kitchen</li>
@@ -55,9 +59,9 @@
                 <div class="tooth"></div>
             </div> -->
         </ul>
-            <div id="bed" class="tab">
+                  <div id="bath" class="tab"></div>
 
-            </div>
+            <div id="bed" class="tab"></div>
             <div id="live" class="tab"></div>
             <div id="kitchen" class="tab"></div>
     </div>
@@ -67,8 +71,8 @@
                 <div id="setting-text">
                     Item properties:
                 </div>
-                <input type="range" min="0" max="200" value="100" class="slider" id="scaling">
-                <p class="input-text">Zoom: <span id="scale"></span> %</p>
+                <input type="range" min="0" max="300" value="100" class="slider" id="scaling">
+                <p class="input-text">Scale: <span id="scale"></span> %</p>
                 <input type="range" min="-180" max="180" value="0" class="slider" id="rotating">
                 <p class="input-text">Rotation: <span id="rotate"></span> deg</p>
                 <div id="setting-button">
@@ -102,9 +106,7 @@
             {{.Profile.Area}}
             {{.Profile.Location}}
             <hr />
-            <textarea id="chatBoxMessage">
             {{.CurrentProject.TextSoFar}}
-            </textarea>
         </div>
     </div>
 </div>
@@ -128,19 +130,12 @@
     connection.onmessage = function(receivedMessage){
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
-           $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
-
+           $("#viewAll").append(packet["text"])
     }
 
 
 
-   $("#chatBoxMessage").css("width","100%")
-   $("#chatBoxMessage").css("height","50%")
-   $("#chatBoxMessage").css("resize","none");
-   $("#chatBoxMessage").attr("disabled","disabled");
-   $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:");
-   $("#chatBoxMessage").css("background-color","#000")
-   $("#chatBoxMessage").css("color","#fff")
+
 
     // In case we want "undo" and "redo."
     //item_properties = []
@@ -152,15 +147,21 @@
     var highlight = "#35AEDD"
     var unhightlight = "#542344"
     var hovercolor = "#111"
-    var img_dimensions = document .getElementById("bed").clientHeight * 0.8;
-    console.log(img_dimensions + "here");
+    var img_dimensions = document.getElementById("bed").clientHeight * 0.9;
     $(".bed").css("background-color", highlight);
-    $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/Bedroom.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
-    $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/Kitchen.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
-    $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/LivingRoom.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
+    $("#bath").prepend("<img id = 'bath-room' src = '/assets/imgs/floorplans/bathroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
+
+    $("#bed").prepend("<img id = 'bed-room' src = '/assets/imgs/floorplans/bedroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px' />");
+    $("#live").prepend("<img id = 'living-room' src = '/assets/imgs/floorplans/livingroom-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
+    $("#kitchen").prepend("<img id = 'kitch-room' src = '/assets/imgs/floorplans/kitchen-floorplan.svg' width = '"+ img_dimensions +"px' height = '"+ img_dimensions +"px'/>");
     $(".designBoard>.tab").css("visibility", "hidden");
     $("#bed").css("visibility", "visible");
+    var item_dimensions = document.getElementById("furniture-options").clientHeight * 0.10;
+    console.log(item_dimensions);
+    $(".item-img").css("width", item_dimensions + "px");
+    $(".item-img").css("height", item_dimensions + "px");
 
+  
     $("ul>li").click(function() {
         $("." + currentDiv).css("background-color", "");
         $(this).css("background-color", highlight);
@@ -190,6 +191,7 @@
 
     // Largely borrowed from w3schools.com/howto/howto_js_draggable.asp
     function makeDraggable(elmnt) {
+      resetItemProperties();
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         elmnt.onmousedown = dragMouseDown;
         elmnt.onpointerdown = dragMouseDown;
@@ -204,6 +206,7 @@
             // call a function whenever the cursor moves:
             document.onmousemove = elementDrag;
             document.onpointermove = elementDrag;
+            
             selectItem(elmnt);
         }
         function elementDrag(e) {
@@ -274,19 +277,27 @@
         rightclickeditem = elem;
         rightclickeditem.style.outline = "5px solid red";
     }
+  
+
 
     function deselectItem() {
         // Reset everything.
-        document.getElementById("scale").innerHTML = "0";
-        document.getElementById("scaling").value = "100"; // Default to 100%
-        document.getElementById("rotate").innerHTML = "0";
-        document.getElementById("rotating").value = "0"
+//         document.getElementById("scale").innerHTML = "0";
+//         document.getElementById("scaling").value = "100"; // Default to 100%
+//         document.getElementById("rotate").innerHTML = "0";
+//         document.getElementById("rotating").value = "0"
         if (rightclickeditem != null) {
             // Cleanup after deselecting an item.
             rightclickeditem.style.outline = "none";
         }
     }
     
+  function resetItemProperties() {
+        document.getElementById("scale").innerHTML = "100";
+        document.getElementById("scaling").value = "100"; // Default to 100%
+        document.getElementById("rotate").innerHTML = "0";
+        document.getElementById("rotating").value = "0"
+  }
     // Deselect when tab is switched.
     $(".bath, .bed, .live, .kitchen").click(function() {
         deselectItem();
