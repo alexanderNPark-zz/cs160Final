@@ -37,7 +37,7 @@ func InteractionServer(w http.ResponseWriter, r *http.Request, ){
 		return
 	}
 
-	interactionRead(connection,statusActivate(connection))
+	go interactionRead(connection,statusActivate(connection))
 
 
 

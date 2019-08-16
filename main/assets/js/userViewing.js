@@ -24,6 +24,26 @@ connection.onmessage = function(receivedMessage){
 
 }
 
+$("#textToSend").css("width","100%")
+$("#textToSend").css("height","50%")
+$("#textToSend").keypress(function(e){
+
+    if(e.keyCode===13){
+        let textToSend = $(this).val()
+        packet = {content:textToSend}
+        connection.send(JSON.stringify(packet))
+        $("#userTextSoFar").append("\n"+textToSend)
+
+        $(this).val("")
+        return
+    }
+});
+
+$("#userTextSoFar").css("width","100%")
+$("#userTextSoFar").css("height","50%")
+$("#userTextSoFar").css("resize","none");
+$("#userTextSoFar").attr("disabled","disabled");
+
 
 
 // Add floorplan images as the background
@@ -47,6 +67,8 @@ $("#live").prepend("<img id = 'live_floorplan' class='floorplanImg' src = '/asse
 $("#kitchen").prepend("<img id = 'kitchen_floorplan' class='floorplanImg' src = '/assets/imgs/floorplans/Kitchen.svg' width = '800px' height = '800px'/>");
 $(".designBoard>.tab").css("visibility","hidden");
 $("#bath").css("visibility","visible");
+
+
 
 
 
