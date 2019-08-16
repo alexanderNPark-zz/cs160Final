@@ -78,7 +78,8 @@ func interactionRead(connection *websocket.Conn, typePerson string){
 		if(typePerson=="client"){
 			//write to server new text
 
-			go interactionWrite(typePerson,"server",packet.Content)
+			interactionWrite(typePerson,"server",packet.Content)
+			fmt.Println(packet.Content)
 			GlobalProject.TextSoFar+="\n"+packet.Content;
 
 		} else{
@@ -122,6 +123,7 @@ func interactionWrite(sender string, oppositeType string, content string) {
 		}
 		bytesTosend,err:=json.Marshal(packet)
 		writer.Write(bytesTosend)
+		fmt.Println(content)
 	}
 
 
