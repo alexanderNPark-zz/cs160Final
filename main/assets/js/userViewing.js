@@ -15,10 +15,11 @@ connection.onmessage = function(receivedMessage){
     let packet = JSON.parse(receivedMessage.data)
     //packet["text"]
     if(packet["statusOfOther"]=="dead"){
+        console.log("dead on the other side")
     }else{
         let arrayOfLinks=packet["content"].split(",")
 
-        "<img src='"+arrayOfLinks[0]+"'"
+
     }
 
 

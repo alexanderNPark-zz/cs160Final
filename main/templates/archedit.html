@@ -106,7 +106,9 @@
             {{.Profile.Area}}
             {{.Profile.Location}}
             <hr />
+
             {{.CurrentProject.TextSoFar}}
+
         </div>
     </div>
 </div>
@@ -128,10 +130,13 @@
               connection.send("server");
          }
     connection.onmessage = function(receivedMessage){
+             console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
+
            $("#viewAll").append(packet["text"])
     }
+
 
 
 
