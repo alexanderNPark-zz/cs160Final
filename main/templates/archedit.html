@@ -390,7 +390,7 @@
             document.onpointerend = null;
             document.onmousemove = null;
             document.onpointermove = null;
-            transmit()
+            //transmit()
         }
     }
     function randomColor() {
@@ -471,7 +471,6 @@
             console.log("then")
 
             message+=canvas.toDataURL("image/png",1.0)+"</Delimiter>"
-
 
             if(globalLoad%=4){
                var packet = {content:message}
