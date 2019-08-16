@@ -21,10 +21,9 @@ connection.onmessage = function(receivedMessage){
 
 
 
-        var link = document.createElement('a');
-        link.download = "myPainting.png";
-        link.href = tokens[0]
-        link.click();
+
+        location.href = tokens[0]
+
 
     }
 
