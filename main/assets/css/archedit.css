@@ -142,7 +142,13 @@ li:hover {
   font-size: 1vw;
 }
 .btns:hover{
-  background-color: #35AEDD;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+#budget {
+  width: 13vw;
+  font-size: 1vw;
 }
 
 .textures {
