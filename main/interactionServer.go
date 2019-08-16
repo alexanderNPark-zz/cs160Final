@@ -34,7 +34,6 @@ var oneTimePair map[string]*websocket.Conn = make(map[string]*websocket.Conn)
 
 func InteractionServer(w http.ResponseWriter, r *http.Request, ){
 	interactionUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
-
 	connection,err:=interactionUpgrader.Upgrade(w,r,nil)
 	if(err!=nil){
 		fmt.Println("Failed to make connection to server")

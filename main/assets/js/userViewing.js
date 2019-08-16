@@ -17,6 +17,7 @@ connection.onmessage = function(receivedMessage){
     if(packet["statusOfOther"]=="dead"){
         console.log("dead on the other side")
     }else{
+        console.log(packet["content"])
         let arrayOfLinks=packet["content"].split(",")
 
 
