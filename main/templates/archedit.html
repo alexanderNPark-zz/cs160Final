@@ -106,8 +106,10 @@
             {{.Profile.Area}}
             {{.Profile.Location}}
             <hr />
+            <textarea id="chatBoxMessage">
 
-            {{.CurrentProject.TextSoFar}}
+            </textarea>
+
 
         </div>
     </div>
@@ -130,15 +132,21 @@
               connection.send("server");
          }
     connection.onmessage = function(receivedMessage){
-             console.log("received antthing")
+        console.log("received antthing")
            let packet = JSON.parse(receivedMessage.data)
            //packet["text"]
+        $("#chatBoxMessage").val($("#chatBoxMessage").val()+"\n"+(packet["content"]))
 
-           $("#viewAll").append(packet["text"])
     }
 
 
-
+   $("#chatBoxMessage").css("width","100%")
+   $("#chatBoxMessage").css("height","50%")
+   $("#chatBoxMessage").css("resize","none");
+   $("#chatBoxMessage").attr("disabled","disabled");
+   $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:\n{{.CurrentProject.TextSoFar}}");
+   $("#chatBoxMessage").css("background-color","#000")
+   $("#chatBoxMessage").css("color","#fff")
 
 
 
