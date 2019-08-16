@@ -116,6 +116,7 @@ li:hover {
   
 }
 .additems {
+  position:absolute;
   outline: solid 2px #FFFFFF;
   width: 15vw;
   height: 49vh;
