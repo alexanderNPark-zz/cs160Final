@@ -12,8 +12,12 @@ var interactionUpgrader = websocket.Upgrader{
 	WriteBufferSize: 4096,
 }
 
+var interaction2Upgrader = websocket.Upgrader{
+	ReadBufferSize:  4096,
+	WriteBufferSize: 4096,
+}
 
-
+var protect chan int = make(chan int)
 
 var aliveStatus string = "</Alive>"
 
@@ -30,6 +34,7 @@ var oneTimePair map[string]*websocket.Conn = make(map[string]*websocket.Conn)
 
 func InteractionServer(w http.ResponseWriter, r *http.Request, ){
 	interactionUpgrader.CheckOrigin = func(r *http.Request) bool { return true } //allow all hosts
+
 	connection,err:=interactionUpgrader.Upgrade(w,r,nil)
 	if(err!=nil){
 		fmt.Println("Failed to make connection to server")
