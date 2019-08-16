@@ -328,9 +328,9 @@
             pos4 = e.clientY;
             
 
-            //pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
+            // These two lines have no real effect.
+            pos3 = bounds(pos3, 0, document.getElementById(currentDiv).clientWidth);
             pos4 = bounds(pos4, screen.height/100 * 6 , document.getElementById(currentDiv).clientHeight);
-            pos3 = bounds(pos3, (screen.width - document.getElementById(currentDiv).clientWidth)/2 , (screen.width - document.getElementById(currentDiv).clientWidth)/2 +  document.getElementById(currentDiv).clientWidth);
             // Gary: set the element's new position:
             //console.log(bounds(elmnt.offsetTop - pos2, 0, bounds(document.getElementById(currentDiv).clientHeight)));
             elmnt.style.top = bounds(elmnt.offsetTop - pos2, 0, document.getElementById(currentDiv).clientHeight - elmnt.clientHeight) + "px";
