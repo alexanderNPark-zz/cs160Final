@@ -103,7 +103,7 @@
             {{.Profile.Location}}
             <hr />
             <textarea id="chatBoxMessage">
-            {{.CurrentProject.TextSoFar}}
+
             </textarea>
         </div>
     </div>
@@ -132,13 +132,13 @@
 
     }
 
-
-
+   $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:");
+   $($("#chatBoxMessage").val($("#chatBoxMessage").val()+"{{.CurrentProject.TextSoFar}}")
    $("#chatBoxMessage").css("width","100%")
    $("#chatBoxMessage").css("height","50%")
    $("#chatBoxMessage").css("resize","none");
    $("#chatBoxMessage").attr("disabled","disabled");
-   $("#chatBoxMessage").val("Messages from {{.Profile.Name}}:");
+
    $("#chatBoxMessage").css("background-color","#000")
    $("#chatBoxMessage").css("color","#fff")
 
