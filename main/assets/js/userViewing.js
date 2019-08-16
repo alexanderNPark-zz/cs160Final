@@ -1,7 +1,7 @@
 var connectionMade = false;
 setInterval(function(){
     if(connectionMade){
-        connection.send(JSON.stringify({content:"</Alive>"}));
+        //connection.send(JSON.stringify({content:"</Alive>"}));
     }
 },1000)
 
@@ -45,6 +45,7 @@ $("#textToSend").keypress(function(e){
         let textToSend = $(this).val()
         packet = {content:textToSend}
         connection.send(JSON.stringify(packet))
+        connection.send(JSON.stringify({content:"</Alive>"}));
         $("#userTextSoFar").val($("#userTextSoFar").val()+"\n-------------\n"+textToSend)
         $(this).val("")
         return false
